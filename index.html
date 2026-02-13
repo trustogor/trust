@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trust Ogor| Portfolio</title>
+  <title>Trust Ogor | Talent Leader</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -35,14 +35,12 @@
       font-family: Inter, sans-serif;
       background: var(--bg);
       color: var(--fg);
-      line-height: 1.6;
       padding-top: 80px;
       transition: background 0.3s, color 0.3s;
     }
 
     a { text-decoration: none; color: inherit; }
 
-    /* NAVBAR */
     .nav {
       position: fixed;
       top: 0;
@@ -58,14 +56,11 @@
       margin: auto;
       padding: 16px 20px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
 
-    .logo {
-      font-weight: 600;
-      font-size: 15px;
-    }
+    .logo { font-weight: 600; font-size: 15px; }
 
     .nav-links {
       display: flex;
@@ -76,11 +71,8 @@
     .nav-link {
       color: var(--muted);
       font-size: 14px;
-      transition: color 0.2s;
-      position: relative;
     }
 
-    .nav-link:hover { color: var(--primary); }
     .nav-link.active { color: var(--fg); }
 
     .nav-indicator {
@@ -92,68 +84,37 @@
       transition: all 0.3s ease;
     }
 
-    /* RIGHT SIDE */
-    .nav-right {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-    }
+    .nav-right { display: flex; gap: 14px; }
 
-    .toggle {
-      cursor: pointer;
-      font-size: 18px;
-    }
+    .toggle { cursor: pointer; font-size: 18px; }
+    .hamburger { display: none; cursor: pointer; }
 
-    .hamburger {
-      display: none;
-      font-size: 22px;
-      cursor: pointer;
-    }
+    .container { max-width: 1000px; margin: auto; padding: 0 20px 60px; }
 
-    /* MOBILE MENU */
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      padding: 10px 20px 20px;
-      gap: 10px;
-    }
-
-    .mobile-menu a {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    /* HERO */
     .hero {
       background: linear-gradient(135deg, #4f46e5, #7c3aed);
       color: white;
       border-radius: 24px;
       padding: 60px 40px;
-      margin-bottom: 60px;
     }
 
-    .hero h1 { font-size: 40px; margin: 0; }
-    .hero p { opacity: 0.9; max-width: 600px; }
+    .hero h1 { font-size: 42px; margin: 0; }
+    .hero p { opacity: 0.95; max-width: 700px; }
 
     .buttons { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
 
     .button {
-      padding: 10px 16px;
-      border-radius: 999px;
       background: white;
       color: #111;
+      padding: 10px 16px;
+      border-radius: 999px;
       font-size: 14px;
       font-weight: 500;
     }
 
-    /* LAYOUT */
-    .container { max-width: 1000px; margin: auto; padding: 0 20px 60px; }
-    .section { margin-top: 60px; }
+    .section { margin-top: 70px; }
 
-    .grid {
-      display: grid;
-      gap: 20px;
-    }
+    .grid { display: grid; gap: 20px; }
 
     @media(min-width: 768px) {
       .grid-2 { grid-template-columns: repeat(2, 1fr); }
@@ -162,11 +123,11 @@
     .card {
       background: var(--card-bg);
       border-radius: 18px;
-      padding: 20px;
+      padding: 22px;
       border: 1px solid var(--border);
-      transition: transform 0.25s ease, opacity 0.6s ease;
       opacity: 0;
       transform: translateY(20px);
+      transition: 0.5s ease;
     }
 
     .card.in-view {
@@ -174,17 +135,11 @@
       transform: translateY(0);
     }
 
-    .card:hover { transform: translateY(-6px); }
-
     .muted { color: var(--muted); font-size: 14px; }
 
-    /* MOBILE */
     @media(max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
-      .mobile-menu.show { display: flex; }
-      .hero { padding: 40px 24px; }
-      .hero h1 { font-size: 32px; }
     }
   </style>
 </head>
@@ -205,15 +160,8 @@
 
     <div class="nav-right">
       <div class="toggle" id="themeToggle">🌙</div>
-      <div class="hamburger" id="hamburger">☰</div>
+      <div class="hamburger">☰</div>
     </div>
-  </div>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#thinking">Thinking</a>
   </div>
 </nav>
 
@@ -221,48 +169,94 @@
 
   <section class="hero" id="about">
     <h1>Trust Ogor, MBA</h1>
-    <p>Talent Leader · AI & Business Strategy</p>
-    <p>I work at the intersection of talent, technology, and business strategy — helping organizations design scalable hiring systems, improve decision quality, and navigate growth in technology-driven environments.</p>
+    <p>Senior Talent Leader · MBA (AI) · Startup & Technical Hiring Architect</p>
+
+    <p>
+      I build 0→1 and scale-ready recruiting engines for engineering, machine learning, product,
+      and GTM teams. I partner closely with founders and technical leadership to design hiring
+      systems that combine speed, signal quality, and long-term organizational leverage.
+    </p>
+
+    <p>
+      My background across GitLab, Andela, On Deck, and venture-backed startup ecosystems has
+      centered on designing high-velocity recruiting architectures, data-led decision systems,
+      and interviewer enablement frameworks.
+    </p>
 
     <div class="buttons">
       <a href="/assets/resume.pdf" target="_blank" class="button">View Resume</a>
-      <a href="https://linkedin.com/in/togor" target="_blank" class="button">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/togor/" target="_blank" class="button">LinkedIn</a>
       <a href="mailto:trustogor@gmail.com" class="button">Contact</a>
     </div>
   </section>
 
   <section id="projects" class="section grid grid-2">
-    <div class="card"><h3>Global Talent & Scaling Initiatives</h3><p class="muted">Partnered with founders and leadership teams to design hiring systems and recruiting strategies across distributed environments.</p></div>
-    <div class="card"><h3>AI & Business Exploration</h3><p class="muted">Research and exploration into AI-driven products, decision systems, and organizational leverage.</p></div>
-    <div class="card"><h3>Systems & Process Design</h3><p class="muted">Designed structured workflows and evaluation frameworks to improve decision quality.</p></div>
-    <div class="card"><h3>Entrepreneurial Themes</h3><p class="muted">Strong interest in asymmetric opportunities, tech-enabled models, and value creation.</p></div>
+    <div class="card">
+      <h3>LocalLinked (MBA Venture Project)</h3>
+      <p class="muted">
+        Led end-to-end GTM strategy, onboarding 85% of a 2,000-student target in week one and
+        securing 36 commercial partnerships pre-launch via a data-driven commission model.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Recruiting Systems & Talent Architecture</h3>
+      <p class="muted">
+        Designed structured hiring blueprints, interviewer frameworks, and recruiting operating
+        systems for distributed, high-growth technology environments.
+      </p>
+    </div>
   </section>
 
   <section id="experience" class="section grid grid-2">
-    <div class="card"><h3>Andela</h3><p class="muted">Led and supported hiring initiatives within globally distributed technical environments.</p></div>
-    <div class="card"><h3>GitLab</h3><p class="muted">Operated within a remote-first organization across global collaboration models.</p></div>
-    <div class="card"><h3>On Deck</h3><p class="muted">Participated in community-driven and network-centric professional ecosystems.</p></div>
-    <div class="card"><h3>Global Tech Ecosystems</h3><p class="muted">Partnered with founders and executives on hiring strategy and systems thinking.</p></div>
+    <div class="card">
+      <h3>On Deck · Senior Talent Partner</h3>
+      <p class="muted">
+        Built technical hiring framework from 0→1. Reduced time-to-hire by 48%, doubled outbound
+        performance, and maintained 100% offer acceptance across critical technical roles.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>StackShift · Senior Talent Manager</h3>
+      <p class="muted">
+        Built talent function from ground up, scaling internal recruiting team 2→6 and driving
+        founder-led growth through structured hiring systems and operating cadence.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>GitLab · Technical Recruiter</h3>
+      <p class="muted">
+        Eliminated six-month hiring backlog in under 90 days, supported 220% engineering growth,
+        and built diversity hiring framework increasing representation to 30% of hires.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Andela</h3>
+      <p class="muted">
+        Partnered within globally distributed technical environments, supporting hiring strategy,
+        evaluation rigor, and recruiting operations.
+      </p>
+    </div>
   </section>
 
   <section id="thinking" class="section grid grid-2">
-    <div class="card"><p class="muted">How AI reshapes managerial leverage and decision systems.</p></div>
-    <div class="card"><p class="muted">Designing high-signal hiring and evaluation architectures.</p></div>
-    <div class="card"><p class="muted">The changing economics of expertise and knowledge work.</p></div>
-    <div class="card"><p class="muted">Unconventional paths to value creation in tech markets.</p></div>
+    <div class="card"><p class="muted">AI & managerial leverage</p></div>
+    <div class="card"><p class="muted">High-signal hiring systems</p></div>
+    <div class="card"><p class="muted">Decision architectures & talent markets</p></div>
+    <div class="card"><p class="muted">Technology-driven value creation</p></div>
   </section>
 
 </div>
 
 <script>
   const toggle = document.getElementById("themeToggle");
-  const hamburger = document.getElementById("hamburger");
-  const mobileMenu = document.getElementById("mobileMenu");
   const cards = document.querySelectorAll(".card");
   const links = document.querySelectorAll(".nav-link");
   const indicator = document.querySelector(".nav-indicator");
 
-  /* Theme persistence */
   if(localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
     toggle.textContent = "☀️";
@@ -275,34 +269,12 @@
     localStorage.setItem("theme", dark ? "dark" : "light");
   };
 
-  /* Mobile menu */
-  hamburger.onclick = () => mobileMenu.classList.toggle("show");
-
-  /* Navbar indicator */
   function moveIndicator(el) {
     indicator.style.width = `${el.offsetWidth}px`;
     indicator.style.left = `${el.offsetLeft}px`;
   }
   moveIndicator(document.querySelector(".nav-link.active"));
 
-  /* Scroll spy */
-  window.addEventListener("scroll", () => {
-    let current = "";
-    document.querySelectorAll("section").forEach(section => {
-      const top = section.offsetTop - 120;
-      if(pageYOffset >= top) current = section.id;
-    });
-
-    links.forEach(link => {
-      link.classList.remove("active");
-      if(link.getAttribute("href") === `#${current}`) {
-        link.classList.add("active");
-        moveIndicator(link);
-      }
-    });
-  });
-
-  /* Card animations */
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if(entry.isIntersecting) entry.target.classList.add("in-view");
