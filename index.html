@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trust Ogor | Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --fg: #111;
+      --muted: #555;
+      --card-bg: white;
+      --primary: #4f46e5;
+      --border: rgba(0,0,0,0.06);
+      --nav-bg: rgba(255,255,255,0.7);
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --fg: #e5e7eb;
+      --muted: #94a3b8;
+      --card-bg: #111827;
+      --border: rgba(255,255,255,0.08);
+      --nav-bg: rgba(15,23,42,0.7);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      padding-top: 80px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      backdrop-filter: blur(12px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    .nav-inner {
+      max-width: 1000px;
+      margin: auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      position: relative;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-link:hover { color: var(--primary); }
+    .nav-link.active { color: var(--fg); }
+
+    .nav-indicator {
+      position: absolute;
+      bottom: -6px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+
+    /* RIGHT SIDE */
+    .nav-right {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .toggle {
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      padding: 10px 20px 20px;
+      gap: 10px;
+    }
+
+    .mobile-menu a {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      border-radius: 24px;
+      padding: 60px 40px;
+      margin-bottom: 60px;
+    }
+
+    .hero h1 { font-size: 40px; margin: 0; }
+    .hero p { opacity: 0.9; max-width: 600px; }
+
+    .buttons { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .button {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: white;
+      color: #111;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* LAYOUT */
+    .container { max-width: 1000px; margin: auto; padding: 0 20px 60px; }
+    .section { margin-top: 60px; }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    @media(min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      transition: transform 0.25s ease, opacity 0.6s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .card.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover { transform: translateY(-6px); }
+
+    .muted { color: var(--muted); font-size: 14px; }
+
+    /* MOBILE */
+    @media(max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .mobile-menu.show { display: flex; }
+      .hero { padding: 40px 24px; }
+      .hero h1 { font-size: 32px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">Trust Ogor</div>
+
+    <div class="nav-links">
+      <a href="#about" class="nav-link active">About</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#thinking" class="nav-link">Thinking</a>
+      <span class="nav-indicator"></span>
+    </div>
+
+    <div class="nav-right">
+      <div class="toggle" id="themeToggle">🌙</div>
+      <div class="hamburger" id="hamburger">☰</div>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#thinking">Thinking</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <section class="hero" id="about">
+    <h1>Trust Ogor</h1>
+    <p>Talent Leader · MBA Candidate · AI & Business Strategy</p>
+    <p>I work at the intersection of talent, technology, and business strategy — helping organizations design scalable hiring systems, improve decision quality, and navigate growth in technology-driven environments.</p>
+
+    <div class="buttons">
+      <a href="/assets/resume.pdf" target="_blank" class="button">View Resume</a>
+      <a href="https://linkedin.com/in/togor" target="_blank" class="button">LinkedIn</a>
+      <a href="mailto:your-trustogor@gmail.com" class="button">Contact</a>
+    </div>
+  </section>
+
+  <section id="projects" class="section grid grid-2">
+    <div class="card"><h3>Global Talent & Scaling Initiatives</h3><p class="muted">Partnered with founders and leadership teams to design hiring systems and recruiting strategies across distributed environments.</p></div>
+    <div class="card"><h3>AI & Business Exploration</h3><p class="muted">Research and exploration into AI-driven products, decision systems, and organizational leverage.</p></div>
+    <div class="card"><h3>Systems & Process Design</h3><p class="muted">Designed structured workflows and evaluation frameworks to improve decision quality.</p></div>
+    <div class="card"><h3>Entrepreneurial Themes</h3><p class="muted">Strong interest in asymmetric opportunities, tech-enabled models, and value creation.</p></div>
+  </section>
+
+  <section id="experience" class="section grid grid-2">
+    <div class="card"><h3>Andela</h3><p class="muted">Led and supported hiring initiatives within globally distributed technical environments.</p></div>
+    <div class="card"><h3>GitLab</h3><p class="muted">Operated within a remote-first organization across global collaboration models.</p></div>
+    <div class="card"><h3>On Deck</h3><p class="muted">Participated in community-driven and network-centric professional ecosystems.</p></div>
+    <div class="card"><h3>Global Tech Ecosystems</h3><p class="muted">Partnered with founders and executives on hiring strategy and systems thinking.</p></div>
+  </section>
+
+  <section id="thinking" class="section grid grid-2">
+    <div class="card"><p class="muted">How AI reshapes managerial leverage and decision systems.</p></div>
+    <div class="card"><p class="muted">Designing high-signal hiring and evaluation architectures.</p></div>
+    <div class="card"><p class="muted">The changing economics of expertise and knowledge work.</p></div>
+    <div class="card"><p class="muted">Unconventional paths to value creation in tech markets.</p></div>
+  </section>
+
+</div>
+
+<script>
+  const toggle = document.getElementById("themeToggle");
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const cards = document.querySelectorAll(".card");
+  const links = document.querySelectorAll(".nav-link");
+  const indicator = document.querySelector(".nav-indicator");
+
+  /* Theme persistence */
+  if(localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    toggle.textContent = "☀️";
+  }
+
+  toggle.onclick = () => {
+    document.body.classList.toggle("dark");
+    const dark = document.body.classList.contains("dark");
+    toggle.textContent = dark ? "☀️" : "🌙";
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  };
+
+  /* Mobile menu */
+  hamburger.onclick = () => mobileMenu.classList.toggle("show");
+
+  /* Navbar indicator */
+  function moveIndicator(el) {
+    indicator.style.width = `${el.offsetWidth}px`;
+    indicator.style.left = `${el.offsetLeft}px`;
+  }
+  moveIndicator(document.querySelector(".nav-link.active"));
+
+  /* Scroll spy */
+  window.addEventListener("scroll", () => {
+    let current = "";
+    document.querySelectorAll("section").forEach(section => {
+      const top = section.offsetTop - 120;
+      if(pageYOffset >= top) current = section.id;
+    });
+
+    links.forEach(link => {
+      link.classList.remove("active");
+      if(link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+        moveIndicator(link);
+      }
+    });
+  });
+
+  /* Card animations */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add("in-view");
+    });
+  }, { threshold: 0.15 });
+
+  cards.forEach(card => observer.observe(card));
+</script>
+
+</body>
+</html>
