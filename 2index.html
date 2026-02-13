@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trust Ogor | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #f9f9f9;
+      --foreground: #1a1a1a;
+      --muted: #555555;
+      --primary: #4f46e5;
+      --primary-hover: #3730a3;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 0, 0, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--card-bg);
+      box-shadow: 0 2px 8px var(--card-shadow);
+      z-index: 100;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
+    nav a {
+      font-weight: 500;
+      color: var(--foreground);
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    nav a.active { background-color: var(--primary); color: #fff; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 100px 20px 40px; }
+
+    h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 2rem; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+
+    p { margin-bottom: 1rem; }
+
+    .text-muted { color: var(--muted); }
+
+    .button {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      margin-right: 0.5rem;
+      border-radius: 9999px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .button-primary { background-color: var(--primary); color: #fff; border: none; }
+    .button-primary:hover { background-color: var(--primary-hover); }
+    .button-outline { border: 1px solid var(--primary); color: var(--primary); background: none; }
+    .button-outline:hover { background-color: var(--primary); color: #fff; }
+    .button-ghost { background: none; border: none; color: var(--foreground); }
+    .button-ghost:hover { color: var(--primary); }
+
+    .section { margin-top: 60px; scroll-margin-top: 100px; }
+    .grid { display: grid; gap: 20px; }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Card style */
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px var(--card-shadow);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-top 0.3s ease, opacity 0.6s ease;
+      opacity: 0; /* start hidden for animation */
+      transform: translateY(20px); /* start below */
+    }
+    .card.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px var(--card-shadow);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 100%;
+      background-color: var(--primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .card:hover::before { transform: scaleX(1); }
+
+    .flex { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#thinking">Thinking</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <!-- Hero Section -->
+    <section id="hero">
+      <h1>Trust Ogor</h1>
+      <p class="text-muted">Talent Leader · MBA Candidate · AI & Business Strategy</p>
+      <p>I work at the intersection of talent, technology, and business strategy — helping organizations design scalable hiring systems, improve decision quality, and navigate growth in technology-driven environments. My background spans global technology companies, high-growth startups, and community-driven ecosystems.</p>
+      <div class="flex">
+        <a href="/assets/resume.pdf" target="_blank" class="button button-primary">View Resume</a>
+        <a href="https://linkedin.com/in/your-link" target="_blank" class="button button-outline">LinkedIn</a>
+        <a href="mailto:your-email@example.com" class="button button-ghost">Contact</a>
+      </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section id="experience" class="section">
+      <h2>Professional Experience</h2>
+      <div class="grid grid-2">
+        <div class="card"> <h3>Andela</h3> <p class="text-muted">Led and supported hiring initiatives...</p> </div>
+        <div class="card"> <h3>GitLab</h3> <p class="text-muted">Contributed to talent and ecosystem-oriented initiatives...</p> </div>
+        <div class="card"> <h3>On Deck</h3> <p class="text-muted">Participated in community-driven and network-centric programs...</p> </div>
+        <div class="card"> <h3>Global Tech & Startup Ecosystems</h3> <p class="text-muted">Partnered with founders, executives, and technical leaders...</p> </div>
+      </div>
+    </section>
+
+    <!-- Projects & Ventures -->
+    <section id="projects" class="section grid grid-2">
+      <div class="card"> <h3>Global Talent & Scaling Initiatives</h3> <p class="text-muted">Partnered with founders and leadership teams...</p> </div>
+      <div class="card"> <h3>AI & Business Exploration</h3> <p class="text-muted">Research and ongoing exploration into AI-driven products...</p> </div>
+      <div class="card"> <h3>Systems & Process Design</h3> <p class="text-muted">Designed structured workflows and decision frameworks...</p> </div>
+      <div class="card"> <h3>Entrepreneurial & Venture Themes</h3> <p class="text-muted">Strong interest in asymmetric opportunities...</p> </div>
+    </section>
+
+    <!-- Current Thinking -->
+    <section id="thinking" class="section grid grid-2">
+      <div class="card"> <h3>Current Thinking</h3> <p class="text-muted">How AI reshapes managerial leverage and decision systems.</p> </div>
+      <div class="card"> <p class="text-muted">Designing high-signal hiring and evaluation architectures.</p> </div>
+      <div class="card"> <p class="text-muted">The changing economics of expertise and knowledge work.</p> </div>
+      <div class="card"> <p class="text-muted">Unconventional paths to value creation in tech markets.</p> </div>
+    </section>
+  </div>
+
+  <!-- Scroll-Spy & Card Animation Script -->
+  <script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+    const cards = document.querySelectorAll(".card");
+
+    // Scroll-spy for navbar
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (pageYOffset >= sectionTop) current = section.getAttribute("id");
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) link.classList.add("active");
+      });
+    });
+
+    // IntersectionObserver for card animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add("in-view");
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(card => observer.observe(card));
+  </script>
+
+</body>
+</html>
