@@ -3,43 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Trust Ogor</title>
 
-  <!-- Font (modern startup standard) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-   .nav {
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 40px;
-}
+    :root {
+      --bg: #0f172a;
+      --fg: #e5e7eb;
+      --muted: #94a3b8;
+      --card: #111827;
+      --border: rgba(255,255,255,0.08);
+      --primary: #6366f1;
+      --button-bg: rgba(255,255,255,0.06);
+      --button-hover: rgba(255,255,255,0.12);
+    }
 
-.nav-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 14px;
-}
+    * { box-sizing: border-box; }
 
-.logo {
-  font-weight: 600;
-  font-size: 14px;
-}
+    body {
+      margin: 0;
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
 
-.nav-links {
-  display: flex;
-  gap: 20px;
-  font-size: 14px;
-  color: var(--muted);
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.nav-links a:hover {
-  color: var(--primary);
-}
+    /* NAVBAR */
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid var(--border);
+    }
 
+    .nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--fg);
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    section {
+      margin-bottom: 80px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    /* SOFT BUTTONS */
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      background: var(--button-bg);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      color: var(--fg);
+      border: 1px solid var(--border);
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      background: var(--button-hover);
+      transform: translateY(-1px);
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 14px;
+    }
+
+    .muted-small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      text-align: center;
+    }
+
+    @media(max-width: 768px) {
+      h1 { font-size: 34px; }
+    }
   </style>
 </head>
 
@@ -50,18 +159,109 @@
       <div class="logo">Trust Ogor</div>
 
       <div class="nav-links">
+        <a href="#home">Home</a>
         <a href="#about">About</a>
-        <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
       </div>
     </div>
   </nav>
 
   <div class="container">
-    <h1>Trust Ogor</h1>
-    <p>Building a modern GitHub Pages portfolio.</p>
+
+    <!-- HOME -->
+    <section id="home">
+      <h1>Trust Ogor</h1>
+      <p>Senior Talent Leader · MBA (AI) · Startup & Technical Hiring Architect</p>
+
+      <p>
+        I design and scale high-signal recruiting systems for technology companies,
+        partnering with founders and leadership teams to build teams, decision frameworks,
+        and growth-ready hiring architectures.
+      </p>
+
+      <div class="buttons">
+        <a href="/assets/resume.pdf" target="_blank" class="button">View Resume</a>
+        <a href="mailto:trustogor@gmail.com" class="button">Contact</a>
+        <a href="https://www.linkedin.com/in/togor/" target="_blank" class="button">LinkedIn</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About</h2>
+
+      <p>
+        My work focuses on the intersection of talent, systems thinking, and business strategy.
+        I specialize in designing recruiting engines and evaluation frameworks that combine speed,
+        rigor, and long-term organizational leverage.
+      </p>
+
+      <p>
+        Across GitLab, Andela, On Deck, and venture-backed startup ecosystems, I’ve partnered
+        with technical leadership to solve complex hiring, scaling, and organizational design challenges.
+      </p>
+
+      <!-- EDUCATION -->
+      <h2>Education</h2>
+
+      <div class="card">
+        <h3>MBA (Artificial Intelligence)</h3>
+        <div class="muted-small">Coventry University · United Kingdom</div>
+        <div class="muted-small">
+          Focused on AI, decision systems, business strategy, and technology-driven operating models.
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Bachelor’s Degree — Electrical & Electronics Engineering</h3>
+        <div class="muted-small">Republic of Ireland</div>
+        <div class="muted-small">
+          Engineering foundation emphasizing analytical thinking, systems reasoning, and problem solving.
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2>Experience</h2>
+
+      <div class="card">
+        <h3>On Deck · Senior Talent Partner</h3>
+        <p>
+          Built technical hiring frameworks from 0→1, reduced time-to-hire by 48%,
+          doubled outbound performance, and maintained 100% offer acceptance across key roles.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>StackShift · Senior Talent Manager</h3>
+        <p>
+          Built talent function from ground up, scaled recruiting team, and partnered with founders
+          to establish structured hiring systems and operating cadence.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>GitLab · Technical Recruiter</h3>
+        <p>
+          Eliminated hiring backlog in under 90 days, supported rapid engineering growth,
+          and built diversity hiring frameworks improving representation across hires.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Andela</h3>
+        <p>
+          Supported hiring strategy and evaluation within globally distributed technical environments.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Trust Ogor. All rights reserved.
+    </footer>
+
   </div>
 
 </body>
-
 </html>
