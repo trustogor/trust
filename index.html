@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trust Ogor</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,22 +12,27 @@
       --bg: #0f172a;
       --fg: #e5e7eb;
       --muted: #94a3b8;
-      --card: #111827;
-      --border: rgba(255,255,255,0.08);
+      --card: rgba(17, 24, 39, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+
       --primary: #6366f1;
-      --button-bg: rgba(255,255,255,0.06);
-      --button-hover: rgba(255,255,255,0.12);
+      --header-bg: rgba(56, 189, 248, 0.85);
+
+      --button-bg: linear-gradient(135deg, #f59e0b, #ef4444);
+      --button-hover: linear-gradient(135deg, #fbbf24, #f87171);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
       font-family: Inter, sans-serif;
-      background: var(--bg);
+      background: radial-gradient(circle at top, #1e293b, #0f172a);
       color: var(--fg);
       line-height: 1.6;
-      padding-top: 80px;
+      padding-top: 110px;
     }
 
     a {
@@ -35,23 +40,35 @@
       color: inherit;
     }
 
-    /* NAVBAR */
+    /* HEADER */
     .nav {
       position: fixed;
-      top: 0;
-      width: 100%;
-      backdrop-filter: blur(10px);
-      background: rgba(15, 23, 42, 0.85);
-      border-bottom: 1px solid var(--border);
+      top: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
     }
 
     .nav-inner {
-      max-width: 900px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: 920px;
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 20px;
+      color: #0f172a;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      transition: 0.3s ease;
+    }
+
+    .nav.scrolled .nav-inner {
+      transform: translateY(-4px) scale(0.98);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.35);
     }
 
     .logo {
@@ -63,101 +80,151 @@
       display: flex;
       gap: 22px;
       font-size: 14px;
-      color: var(--muted);
+      font-weight: 500;
     }
 
     .nav-links a:hover {
-      color: var(--fg);
+      opacity: 0.7;
     }
 
     /* LAYOUT */
     .container {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
-      padding: 0 20px 60px;
+      padding: 0 20px 80px;
     }
 
     section {
-      margin-bottom: 80px;
+      margin-bottom: 90px;
     }
 
     h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
+      font-size: 46px;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
     }
 
     h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    h3 {
-      font-size: 16px;
-      margin-bottom: 6px;
+      font-size: 26px;
+      margin-bottom: 14px;
     }
 
     p {
       color: var(--muted);
+      max-width: 680px;
     }
 
-    /* SOFT BUTTONS */
+    /* BUTTONS */
     .buttons {
       display: flex;
-      gap: 10px;
-      margin-top: 20px;
+      gap: 12px;
+      margin-top: 26px;
       flex-wrap: wrap;
     }
 
     .button {
       background: var(--button-bg);
-      padding: 10px 16px;
+      padding: 11px 20px;
       border-radius: 999px;
       font-size: 14px;
-      color: var(--fg);
-      border: 1px solid var(--border);
-      transition: 0.2s ease;
+      color: white;
+      font-weight: 500;
+      transition: 0.25s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      position: relative;
     }
 
     .button:hover {
       background: var(--button-hover);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(239, 68, 68, 0.35);
+    }
+
+    .button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      opacity: 0;
+      transition: 0.25s ease;
+      box-shadow: 0 0 18px rgba(251, 191, 36, 0.6);
+    }
+
+    .button:hover::after {
+      opacity: 1;
     }
 
     /* CARDS */
     .card {
       background: var(--card);
+      backdrop-filter: blur(10px);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
+      border-radius: 18px;
+      padding: 20px;
       margin-top: 14px;
+      transition: 0.25s ease;
     }
 
-    .muted-small {
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    /* TAGS */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      max-width: 760px;
+    }
+
+    .tag {
+      padding: 8px 14px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 999px;
       font-size: 13px;
-      color: var(--muted);
+      color: #c7d2fe;
+    }
+
+    /* EXPERIENCE */
+    .role {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .role img {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      margin-top: 3px;
+      background: white;
+      object-fit: contain;
     }
 
     footer {
-      margin-top: 40px;
+      margin-top: 60px;
       font-size: 13px;
       color: var(--muted);
       border-top: 1px solid var(--border);
-      padding-top: 20px;
+      padding-top: 24px;
       text-align: center;
     }
 
-    @media(max-width: 768px) {
-      h1 { font-size: 34px; }
+    @media (max-width: 768px) {
+      h1 { font-size: 36px; }
+      h2 { font-size: 22px; }
     }
   </style>
 </head>
 
 <body>
 
-  <nav class="nav">
+  <nav class="nav" id="nav">
     <div class="nav-inner">
       <div class="logo">Trust Ogor</div>
-
       <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#about">About</a>
@@ -168,15 +235,13 @@
 
   <div class="container">
 
-    <!-- HOME -->
     <section id="home">
       <h1>Trust Ogor</h1>
-      <p>Senior Talent Leader · MBA (AI) · Startup & Technical Hiring Architect</p>
+      <p>Senior Talent Leader · MBA (Artificial Intelligence)</p>
 
       <p>
-        I design and scale high-signal recruiting systems for technology companies,
-        partnering with founders and leadership teams to build teams, decision frameworks,
-        and growth-ready hiring architectures.
+        I design scalable recruiting systems, decision frameworks, and hiring architectures
+        for technology companies operating in high-growth and distributed environments.
       </p>
 
       <div class="buttons">
@@ -186,75 +251,73 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about">
       <h2>About</h2>
-
       <p>
-        My work focuses on the intersection of talent, systems thinking, and business strategy.
-        I specialize in designing recruiting engines and evaluation frameworks that combine speed,
-        rigor, and long-term organizational leverage.
+        My work sits at the intersection of talent strategy, systems design, and business thinking.
+        I specialize in helping startups and scaling organizations build high-signal recruiting engines.
       </p>
 
-      <p>
-        Across GitLab, Andela, On Deck, and venture-backed startup ecosystems, I’ve partnered
-        with technical leadership to solve complex hiring, scaling, and organizational design challenges.
-      </p>
-
-      <!-- EDUCATION -->
       <h2>Education</h2>
 
       <div class="card">
-        <h3>MBA (Artificial Intelligence)</h3>
-        <div class="muted-small">Coventry University · United Kingdom</div>
-        <div class="muted-small">
-          Focused on AI, decision systems, business strategy, and technology-driven operating models.
-        </div>
+        <strong>MBA (Artificial Intelligence)</strong><br>
+        <span style="color: var(--muted); font-size: 13px;">University of Portsmouth · United Kingdom</span>
       </div>
 
       <div class="card">
-        <h3>Bachelor’s Degree — Electrical & Electronics Engineering</h3>
-        <div class="muted-small">Republic of Ireland</div>
-        <div class="muted-small">
-          Engineering foundation emphasizing analytical thinking, systems reasoning, and problem solving.
-        </div>
+        <strong>BTech — Electrical & Electronics Engineering</strong><br>
+        <span style="color: var(--muted); font-size: 13px;">Griffith College Dublin · Republic of Ireland</span>
+      </div>
+
+      <h2>Skills</h2>
+      <div class="tags">
+        <div class="tag">Technical & Executive Recruiting</div>
+        <div class="tag">Talent Strategy</div>
+        <div class="tag">Workforce Planning</div>
+        <div class="tag">Stakeholder Partnership</div>
+        <div class="tag">Interview Systems Design</div>
+        <div class="tag">Hiring Process Architecture</div>
+      </div>
+
+      <h2>Tech Stack</h2>
+      <div class="tags">
+        <div class="tag">Greenhouse / ATS Systems</div>
+        <div class="tag">LinkedIn Recruiter</div>
+        <div class="tag">Market Mapping</div>
+        <div class="tag">Remote Hiring Systems</div>
+        <div class="tag">Recruiting Analytics</div>
+        <div class="tag">Structured Evaluation</div>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
     <section id="experience">
       <h2>Experience</h2>
 
-      <div class="card">
-        <h3>On Deck · Senior Talent Partner</h3>
-        <p>
-          Built technical hiring frameworks from 0→1, reduced time-to-hire by 48%,
-          doubled outbound performance, and maintained 100% offer acceptance across key roles.
-        </p>
+      <div class="card role">
+        <img src="https://logo.clearbit.com/ondeck.com" />
+        <div>
+          <strong>On Deck · Senior Talent Partner</strong>
+          <p>Built hiring systems and reduced time-to-hire while maintaining perfect offer acceptance.</p>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>StackShift · Senior Talent Manager</h3>
-        <p>
-          Built talent function from ground up, scaled recruiting team, and partnered with founders
-          to establish structured hiring systems and operating cadence.
-        </p>
+      <div class="card role">
+        <img src="https://logo.clearbit.com/gitlab.com" />
+        <div>
+          <strong>GitLab · Technical Recruiter</strong>
+          <p>Supported distributed engineering growth and eliminated hiring backlog.</p>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>GitLab · Technical Recruiter</h3>
-        <p>
-          Eliminated hiring backlog in under 90 days, supported rapid engineering growth,
-          and built diversity hiring frameworks improving representation across hires.
-        </p>
+      <div class="card role">
+        <img src="https://logo.clearbit.com/andela.com" />
+        <div>
+          <strong>Andela</strong>
+          <p>Contributed to hiring strategy within globally distributed technical environments.</p>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>Andela</h3>
-        <p>
-          Supported hiring strategy and evaluation within globally distributed technical environments.
-        </p>
-      </div>
     </section>
 
     <footer>
@@ -262,6 +325,14 @@
     </footer>
 
   </div>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  </script>
 
 </body>
 </html>
