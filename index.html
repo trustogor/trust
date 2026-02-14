@@ -32,7 +32,6 @@
       background: radial-gradient(circle at top, #1e293b, #0f172a);
       color: var(--fg);
       line-height: 1.6;
-      padding-top: 110px;
     }
 
     a {
@@ -40,35 +39,27 @@
       color: inherit;
     }
 
-    /* HEADER */
+    /* HERO BANNER (Header + Home Combined) */
+    .hero-banner {
+      background: var(--header-bg);
+      color: #0f172a;
+      padding: 30px 20px 80px;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
     .nav {
-      position: fixed;
-      top: 20px;
-      left: 0;
-      right: 0;
       display: flex;
       justify-content: center;
-      z-index: 1000;
+      margin-bottom: 50px;
     }
 
     .nav-inner {
       width: 100%;
       max-width: 920px;
-      background: var(--header-bg);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: #0f172a;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      transition: 0.3s ease;
-    }
-
-    .nav.scrolled .nav-inner {
-      transform: translateY(-4px) scale(0.98);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.35);
     }
 
     .logo {
@@ -87,15 +78,9 @@
       opacity: 0.7;
     }
 
-    /* LAYOUT */
-    .container {
+    .hero-content {
       max-width: 920px;
       margin: 0 auto;
-      padding: 0 20px 80px;
-    }
-
-    section {
-      margin-bottom: 90px;
     }
 
     h1 {
@@ -112,6 +97,17 @@
     p {
       color: var(--muted);
       max-width: 680px;
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    section {
+      margin-bottom: 90px;
     }
 
     /* BUTTONS */
@@ -217,25 +213,27 @@
       h1 { font-size: 36px; }
       h2 { font-size: 22px; }
     }
+
   </style>
 </head>
 
 <body>
 
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <div class="logo">Trust Ogor</div>
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
+  <!-- HERO SECTION -->
+  <section class="hero-banner">
+
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="logo">Trust Ogor</div>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <div class="container">
-
-    <section id="home">
+    <div class="hero-content" id="home">
       <h1>Trust Ogor</h1>
       <p>Senior Talent Leader · MBA (Artificial Intelligence)</p>
 
@@ -249,7 +247,11 @@
         <a href="mailto:trustogor@gmail.com" class="button">Contact</a>
         <a href="https://www.linkedin.com/in/togor/" target="_blank" class="button">LinkedIn</a>
       </div>
-    </section>
+    </div>
+
+  </section>
+
+  <div class="container">
 
     <section id="about">
       <h2>About</h2>
@@ -325,14 +327,6 @@
     </footer>
 
   </div>
-
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 10) nav.classList.add('scrolled');
-      else nav.classList.remove('scrolled');
-    });
-  </script>
 
 </body>
 </html>
