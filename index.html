@@ -10,48 +10,58 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #f9fafb;
-      --fg: #111111;
-      --muted: #555555;
-      --border: rgba(0,0,0,0.06);
-      --primary: #4f46e5;
-    }
+   .nav {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 40px;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+}
 
-    body {
-      margin: 0;
-      font-family: Inter, sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      padding: 40px 20px;
-    }
+.logo {
+  font-weight: 600;
+  font-size: 14px;
+}
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+.nav-links {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: var(--muted);
+}
 
-    h1 {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
+.nav-links a:hover {
+  color: var(--primary);
+}
 
-    p {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.6;
-    }
   </style>
 </head>
 
 <body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="logo">Trust Ogor</div>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+      </div>
+    </div>
+  </nav>
+
   <div class="container">
     <h1>Trust Ogor</h1>
-    <p>Building Communities of Talent.</p>
+    <p>Building a modern GitHub Pages portfolio.</p>
   </div>
+
 </body>
+
 </html>
