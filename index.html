@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trust Ogor</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,26 +12,22 @@
       --bg: #0f172a;
       --fg: #e5e7eb;
       --muted: #94a3b8;
-      --card: rgba(17, 24, 39, 0.7);
-      --border: rgba(255, 255, 255, 0.08);
-
+      --card: #111827;
+      --border: rgba(255,255,255,0.08);
       --primary: #6366f1;
-
-      --button-bg: linear-gradient(135deg, #f59e0b, #ef4444);
-      --button-hover: linear-gradient(135deg, #fbbf24, #f87171);
+      --button-bg: rgba(255,255,255,0.06);
+      --button-hover: rgba(255,255,255,0.12);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Inter, sans-serif;
-      background: radial-gradient(circle at top, #1e293b, #0f172a);
+      background: var(--bg);
       color: var(--fg);
       line-height: 1.6;
-      padding-top: 100px;
+      padding-top: 80px;
     }
 
     a {
@@ -39,33 +35,23 @@
       color: inherit;
     }
 
-    /* HEADER */
+    /* NAVBAR */
     .nav {
       position: fixed;
-      top: 20px;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      z-index: 1000;
+      top: 0;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav-inner {
-      width: 100%;
-      max-width: 920px;
-      background: rgba(17, 24, 39, 0.85);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      padding: 14px 20px;
+      max-width: 900px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      transition: 0.3s ease;
-    }
-
-    .nav-inner:hover {
-      box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+      padding: 18px 20px;
     }
 
     .logo {
@@ -77,131 +63,92 @@
       display: flex;
       gap: 22px;
       font-size: 14px;
-      font-weight: 500;
+      color: var(--muted);
     }
 
     .nav-links a:hover {
-      opacity: 0.7;
+      color: var(--fg);
     }
 
     /* LAYOUT */
     .container {
-      max-width: 920px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 0 20px 80px;
+      padding: 0 20px 60px;
     }
 
     section {
-      margin-bottom: 90px;
+      margin-bottom: 80px;
     }
 
     h1 {
-      font-size: 46px;
-      margin-bottom: 6px;
-      letter-spacing: -0.5px;
+      font-size: 42px;
+      margin-bottom: 10px;
     }
 
     h2 {
-      font-size: 26px;
-      margin-bottom: 14px;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
     }
 
     p {
       color: var(--muted);
-      max-width: 680px;
     }
 
-    /* BUTTONS */
+    /* SOFT BUTTONS */
     .buttons {
       display: flex;
-      gap: 12px;
-      margin-top: 26px;
+      gap: 10px;
+      margin-top: 20px;
       flex-wrap: wrap;
     }
 
     .button {
       background: var(--button-bg);
-      padding: 11px 20px;
+      padding: 10px 16px;
       border-radius: 999px;
       font-size: 14px;
-      color: white;
-      font-weight: 500;
-      transition: 0.25s ease;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-      position: relative;
+      color: var(--fg);
+      border: 1px solid var(--border);
+      transition: 0.2s ease;
     }
 
     .button:hover {
       background: var(--button-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 26px rgba(239, 68, 68, 0.35);
+      transform: translateY(-1px);
     }
 
     /* CARDS */
     .card {
       background: var(--card);
-      backdrop-filter: blur(10px);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 18px;
       margin-top: 14px;
-      transition: 0.25s ease;
     }
 
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(99, 102, 241, 0.35);
-    }
-
-    /* EXPERIENCE */
-    .role {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .role img {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: white;
-      object-fit: contain;
-      padding: 4px;
+    .muted-small {
+      font-size: 13px;
+      color: var(--muted);
     }
 
     footer {
-      margin-top: 60px;
+      margin-top: 40px;
       font-size: 13px;
       color: var(--muted);
       border-top: 1px solid var(--border);
-      padding-top: 24px;
+      padding-top: 20px;
       text-align: center;
     }
 
-    /* MOBILE */
-    @media (max-width: 600px) {
-      h1 { font-size: 30px; }
-
-      .nav-inner {
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .buttons {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .button {
-        width: 100%;
-        text-align: center;
-      }
-
-      .role {
-        flex-direction: column;
-      }
+    @media(max-width: 768px) {
+      h1 { font-size: 34px; }
     }
-
   </style>
 </head>
 
@@ -210,6 +157,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <div class="logo">Trust Ogor</div>
+
       <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#about">About</a>
@@ -220,13 +168,15 @@
 
   <div class="container">
 
+    <!-- HOME -->
     <section id="home">
       <h1>Trust Ogor</h1>
-      <p>Senior Talent Leader · MBA (Artificial Intelligence)</p>
+      <p>Senior Talent Leader · MBA (AI) · Startup & Technical Hiring Architect</p>
 
       <p>
-        I design scalable recruiting systems, decision frameworks, and hiring architectures
-        for technology companies operating in high-growth and distributed environments.
+        I design and scale high-signal recruiting systems for technology companies,
+        partnering with founders and leadership teams to build teams, decision frameworks,
+        and growth-ready hiring architectures.
       </p>
 
       <div class="buttons">
@@ -236,33 +186,75 @@
       </div>
     </section>
 
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About</h2>
+
+      <p>
+        My work focuses on the intersection of talent, systems thinking, and business strategy.
+        I specialize in designing recruiting engines and evaluation frameworks that combine speed,
+        rigor, and long-term organizational leverage.
+      </p>
+
+      <p>
+        Across GitLab, Andela, On Deck, and venture-backed startup ecosystems, I’ve partnered
+        with technical leadership to solve complex hiring, scaling, and organizational design challenges.
+      </p>
+
+      <!-- EDUCATION -->
+      <h2>Education</h2>
+
+      <div class="card">
+        <h3>MBA (Artificial Intelligence)</h3>
+        <div class="muted-small">Coventry University · United Kingdom</div>
+        <div class="muted-small">
+          Focused on AI, decision systems, business strategy, and technology-driven operating models.
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Bachelor’s Degree — Electrical & Electronics Engineering</h3>
+        <div class="muted-small">Republic of Ireland</div>
+        <div class="muted-small">
+          Engineering foundation emphasizing analytical thinking, systems reasoning, and problem solving.
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
     <section id="experience">
       <h2>Experience</h2>
 
-      <div class="card role">
-        <img src="https://cdn.simpleicons.org/ondeck/000000" alt="On Deck Logo">
-        <div>
-          <strong>On Deck · Senior Talent Partner</strong>
-          <p>Built hiring systems and reduced time-to-hire while maintaining perfect offer acceptance.</p>
-        </div>
+      <div class="card">
+        <h3>On Deck · Senior Talent Partner</h3>
+        <p>
+          Built technical hiring frameworks from 0→1, reduced time-to-hire by 48%,
+          doubled outbound performance, and maintained 100% offer acceptance across key roles.
+        </p>
       </div>
 
-      <div class="card role">
-        <img src="https://cdn.simpleicons.org/gitlab/FC6D26" alt="GitLab Logo">
-        <div>
-          <strong>GitLab · Technical Recruiter</strong>
-          <p>Supported distributed engineering growth and eliminated hiring backlog.</p>
-        </div>
+      <div class="card">
+        <h3>StackShift · Senior Talent Manager</h3>
+        <p>
+          Built talent function from ground up, scaled recruiting team, and partnered with founders
+          to establish structured hiring systems and operating cadence.
+        </p>
       </div>
 
-      <div class="card role">
-        <img src="https://cdn.simpleicons.org/andela/173B3F" alt="Andela Logo">
-        <div>
-          <strong>Andela</strong>
-          <p>Contributed to hiring strategy within globally distributed technical environments.</p>
-        </div>
+      <div class="card">
+        <h3>GitLab · Technical Recruiter</h3>
+        <p>
+          Eliminated hiring backlog in under 90 days, supported rapid engineering growth,
+          and built diversity hiring frameworks improving representation across hires.
+        </p>
       </div>
 
+      <div class="card">
+        <h3>Andela</h3>
+        <p>
+          Supported hiring strategy and evaluation within globally distributed technical environments.
+        </p>
+      </div>
     </section>
 
     <footer>
