@@ -1,306 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trust Ogor | Talent Leader</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Trust Ogor</title>
+
+  <!-- Font (modern startup standard) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #f9fafb;
-      --fg: #111;
-      --muted: #555;
-      --card-bg: white;
-      --primary: #4f46e5;
+      --fg: #111111;
+      --muted: #555555;
       --border: rgba(0,0,0,0.06);
-      --nav-bg: rgba(255,255,255,0.7);
+      --primary: #4f46e5;
     }
 
-    body.dark {
-      --bg: #0f172a;
-      --fg: #e5e7eb;
-      --muted: #94a3b8;
-      --card-bg: #111827;
-      --border: rgba(255,255,255,0.08);
-      --nav-bg: rgba(15,23,42,0.7);
+    * {
+      box-sizing: border-box;
     }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: Inter, sans-serif;
       background: var(--bg);
       color: var(--fg);
-      padding-top: 80px;
-      transition: background 0.3s, color 0.3s;
+      padding: 40px 20px;
     }
 
-    a { text-decoration: none; color: inherit; }
-
-    .nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      backdrop-filter: blur(12px);
-      background: var(--nav-bg);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .nav-inner {
-      max-width: 1000px;
-      margin: auto;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
     }
 
-    .logo { font-weight: 600; font-size: 15px; }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      position: relative;
-    }
-
-    .nav-link {
+    p {
       color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav-link.active { color: var(--fg); }
-
-    .nav-indicator {
-      position: absolute;
-      bottom: -6px;
-      height: 2px;
-      background: var(--primary);
-      border-radius: 999px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-right { display: flex; gap: 14px; }
-
-    .toggle { cursor: pointer; font-size: 18px; }
-    .hamburger { display: none; cursor: pointer; }
-
-    .container { max-width: 1000px; margin: auto; padding: 0 20px 60px; }
-
-    .hero {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: white;
-      border-radius: 24px;
-      padding: 60px 40px;
-    }
-
-    .hero h1 { font-size: 42px; margin: 0; }
-    .hero p { opacity: 0.95; max-width: 700px; }
-
-    .buttons { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
-
-    .button {
-      background: white;
-      color: #111;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .section { margin-top: 70px; }
-
-    .grid { display: grid; gap: 20px; }
-
-    @media(min-width: 768px) {
-      .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 22px;
-      border: 1px solid var(--border);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: 0.5s ease;
-    }
-
-    .card.in-view {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .muted { color: var(--muted); font-size: 14px; }
-
-    @media(max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: block; }
+      font-size: 16px;
+      line-height: 1.6;
     }
   </style>
 </head>
 
 <body>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="logo">Trust Ogor</div>
-
-    <div class="nav-links">
-      <a href="#about" class="nav-link active">About</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#experience" class="nav-link">Experience</a>
-      <a href="#thinking" class="nav-link">Thinking</a>
-      <span class="nav-indicator"></span>
-    </div>
-
-    <div class="nav-right">
-      <div class="toggle" id="themeToggle">🌙</div>
-      <div class="hamburger">☰</div>
-    </div>
+  <div class="container">
+    <h1>Trust Ogor</h1>
+    <p>Building a modern GitHub Pages portfolio.</p>
   </div>
-</nav>
-
-<div class="container">
-
-  <section class="hero" id="about">
-    <h1>Trust Ogor, MBA</h1>
-    <p>Senior Talent Leader · MBA (AI) · Startup & Technical Hiring Architect</p>
-
-    <p>
-      I build 0→1 and scale-ready recruiting engines for engineering, machine learning, product,
-      and GTM teams. I partner closely with founders and technical leadership to design hiring
-      systems that combine speed, signal quality, and long-term organizational leverage.
-    </p>
-
-    <p>
-      My background across GitLab, Andela, On Deck, and venture-backed startup ecosystems has
-      centered on designing high-velocity recruiting architectures, data-led decision systems,
-      and interviewer enablement frameworks.
-    </p>
-
-    <div class="buttons">
-      <a href="/assets/resume.pdf" target="_blank" class="button">View Resume</a>
-      <a href="https://www.linkedin.com/in/togor/" target="_blank" class="button">LinkedIn</a>
-      <a href="mailto:trustogor@gmail.com" class="button">Contact</a>
-    </div>
-  </section>
-
-  <section id="projects" class="section grid grid-2">
-    <div class="card">
-      <h3>LocalLinked (MBA Venture Project)</h3>
-      <p class="muted">
-        Led end-to-end GTM strategy, onboarding 85% of a 2,000-student target in week one and
-        securing 36 commercial partnerships pre-launch via a data-driven commission model.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Recruiting Systems & Talent Architecture</h3>
-      <p class="muted">
-        Designed structured hiring blueprints, interviewer frameworks, and recruiting operating
-        systems for distributed, high-growth technology environments.
-      </p>
-    </div>
-  </section>
-
-  <section id="experience" class="section grid grid-2">
-    <div class="card">
-      <h3>On Deck · Senior Talent Partner</h3>
-      <p class="muted">
-        Built technical hiring framework from 0→1. Reduced time-to-hire by 48%, doubled outbound
-        performance, and maintained 100% offer acceptance across critical technical roles.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>StackShift · Senior Talent Manager</h3>
-      <p class="muted">
-        Built talent function from ground up, scaling internal recruiting team 2→6 and driving
-        founder-led growth through structured hiring systems and operating cadence.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>GitLab · Technical Recruiter</h3>
-      <p class="muted">
-        Eliminated six-month hiring backlog in under 90 days, supported 220% engineering growth,
-        and built diversity hiring framework increasing representation to 30% of hires.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Andela</h3>
-      <p class="muted">
-        Partnered within globally distributed technical environments, supporting hiring strategy,
-        evaluation rigor, and recruiting operations.
-      </p>
-    </div>
-  </section>
-
-  <section id="education" class="section grid grid-2">
-  <div class="card">
-    <h3>MBA (Artificial Intelligence)</h3>
-    <p class="muted">Coventry University · United Kingdom</p>
-    <p class="muted">
-      Focused on AI, business strategy, decision systems, and technology-driven operating models.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>Bachelor's Degree — Electrical & Electronics Engineering</h3>
-    <p class="muted">Republic of Ireland</p>
-    <p class="muted">
-      Engineering foundation emphasizing analytical thinking, systems reasoning, and technical problem solving.
-    </p>
-  </div>
-    
-</section>
-  <section id="thinking" class="section grid grid-2">
-    <div class="card"><p class="muted">AI & managerial leverage</p></div>
-    <div class="card"><p class="muted">High-signal hiring systems</p></div>
-    <div class="card"><p class="muted">Decision architectures & talent markets</p></div>
-    <div class="card"><p class="muted">Technology-driven value creation</p></div>
-  </section>
-
-</div>
-
-<script>
-  const toggle = document.getElementById("themeToggle");
-  const cards = document.querySelectorAll(".card");
-  const links = document.querySelectorAll(".nav-link");
-  const indicator = document.querySelector(".nav-indicator");
-
-  if(localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark");
-    toggle.textContent = "☀️";
-  }
-
-  toggle.onclick = () => {
-    document.body.classList.toggle("dark");
-    const dark = document.body.classList.contains("dark");
-    toggle.textContent = dark ? "☀️" : "🌙";
-    localStorage.setItem("theme", dark ? "dark" : "light");
-  };
-
-  function moveIndicator(el) {
-    indicator.style.width = `${el.offsetWidth}px`;
-    indicator.style.left = `${el.offsetLeft}px`;
-  }
-  moveIndicator(document.querySelector(".nav-link.active"));
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add("in-view");
-    });
-  }, { threshold: 0.15 });
-
-  cards.forEach(card => observer.observe(card));
-</script>
-
 </body>
 </html>
