@@ -9,22 +9,13 @@
 
   <style>
     :root {
-      --bg: #f9fafb;
-      --fg: #111;
-      --muted: #555;
-      --card-bg: white;
-      --primary: #4f46e5;
-      --border: rgba(0,0,0,0.06);
-      --nav-bg: rgba(255,255,255,0.7);
-    }
-
-    body.dark {
       --bg: #0f172a;
       --fg: #e5e7eb;
       --muted: #94a3b8;
       --card-bg: #111827;
       --border: rgba(255,255,255,0.08);
-      --nav-bg: rgba(15,23,42,0.7);
+      --primary: #6366f1;
+      --nav-bg: rgba(15,23,42,0.75);
     }
 
     * { box-sizing: border-box; }
@@ -33,128 +24,165 @@
     body {
       margin: 0;
       font-family: Inter, sans-serif;
-      background: var(--bg);
+      background: radial-gradient(circle at top, #1e293b, #0f172a);
       color: var(--fg);
-      padding-top: 80px;
-      transition: background 0.3s, color 0.3s;
+      padding-top: 90px;
     }
 
     a { text-decoration: none; color: inherit; }
 
+    /* NAVBAR */
     .nav {
       position: fixed;
       top: 0;
       width: 100%;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       background: var(--nav-bg);
       border-bottom: 1px solid var(--border);
       z-index: 1000;
     }
 
     .nav-inner {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
-      padding: 16px 20px;
+      padding: 18px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .logo { font-weight: 600; font-size: 15px; }
+    .logo {
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+    }
 
     .nav-links {
       display: flex;
-      gap: 28px;
-      position: relative;
-    }
-
-    .nav-link {
-      color: var(--muted);
+      gap: 30px;
       font-size: 14px;
+      color: var(--muted);
     }
 
-    .nav-link.active { color: var(--fg); }
+    .nav-links a:hover { color: white; }
 
-    .nav-indicator {
-      position: absolute;
-      bottom: -6px;
-      height: 2px;
-      background: var(--primary);
-      border-radius: 999px;
-      transition: all 0.3s ease;
+    /* LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 22px 80px;
     }
 
-    .nav-right { display: flex; gap: 14px; }
+    section { margin-bottom: 100px; }
 
-    .toggle { cursor: pointer; font-size: 18px; }
-    .hamburger { display: none; cursor: pointer; }
+    h1 {
+      font-size: 48px;
+      margin: 0 0 10px;
+      letter-spacing: -0.5px;
+    }
 
-    .container { max-width: 1000px; margin: auto; padding: 0 20px 60px; }
+    h2 {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
 
+    p { color: var(--muted); max-width: 720px; }
+
+    /* HERO */
     .hero {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      padding: 60px 50px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
       color: white;
-      border-radius: 24px;
-      padding: 60px 40px;
     }
 
-    .hero h1 { font-size: 42px; margin: 0; }
-    .hero p { opacity: 0.95; max-width: 700px; }
+    .hero p { color: rgba(255,255,255,0.92); }
 
-    .buttons { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .buttons {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
     .button {
       background: white;
       color: #111;
-      padding: 10px 16px;
+      padding: 11px 18px;
       border-radius: 999px;
       font-size: 14px;
       font-weight: 500;
+      transition: 0.2s ease;
     }
 
-    .section { margin-top: 70px; }
+    .button:hover { transform: translateY(-1px); }
 
-    .grid { display: grid; gap: 20px; }
-
-    @media(min-width: 768px) {
-      .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    }
-
+    /* CARDS */
     .card {
       background: var(--card-bg);
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 22px;
       border: 1px solid var(--border);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: 0.5s ease;
     }
 
-    .card.in-view {
-      opacity: 1;
-      transform: translateY(0);
+    /* TIMELINE */
+    .timeline {
+      position: relative;
+      margin-top: 30px;
+      padding-left: 30px;
+      border-left: 1px solid var(--border);
     }
 
-    .muted { color: var(--muted); font-size: 14px; }
+    .timeline-item {
+      margin-bottom: 34px;
+      position: relative;
+    }
 
-    .role {
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -38px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(99,102,241,0.6);
+    }
+
+    .role-header {
       display: flex;
-      gap: 12px;
-      align-items: flex-start;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
     }
 
-    .role img {
-      width: 26px;
-      height: 26px;
-      border-radius: 6px;
-      object-fit: contain;
-      background: white;
-      padding: 3px;
+    .role-header img {
+      width: 18px;
+      height: 18px;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    .role-company {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
     }
 
     @media(max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: block; }
+      h1 { font-size: 36px; }
+      .hero { padding: 40px 28px; }
+      .nav-links { gap: 18px; }
     }
   </style>
 </head>
@@ -166,37 +194,24 @@
     <div class="logo">Trust Ogor</div>
 
     <div class="nav-links">
-      <a href="#about" class="nav-link active">About</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#experience" class="nav-link">Experience</a>
-      <a href="#education" class="nav-link">Education</a>
-      <a href="#certifications" class="nav-link">Certifications</a>
-      <span class="nav-indicator"></span>
-    </div>
-
-    <div class="nav-right">
-      <div class="toggle" id="themeToggle">🌙</div>
-      <div class="hamburger">☰</div>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
     </div>
   </div>
 </nav>
 
 <div class="container">
 
-  <!-- HERO / ABOUT -->
+  <!-- HERO -->
   <section class="hero" id="about">
     <h1>Trust Ogor</h1>
-    <p>Senior Talent Leader · MBA (Artificial Intelligence) · Technical Hiring Strategist</p>
+    <p>Senior Talent Leader · MBA (Artificial Intelligence)</p>
 
     <p>
       I design and scale recruiting systems, evaluation frameworks, and talent architectures
-      for high-growth technology companies. My work focuses on building high-signal hiring engines,
-      interviewer enablement systems, and data-informed decision structures.
-    </p>
-
-    <p>
-      Across GitLab, Andela, On Deck, and startup ecosystems, I’ve partnered with founders and
-      leadership teams to build structured hiring systems that combine speed, rigor, and long-term leverage.
+      for high-growth technology companies. My work focuses on decision quality, hiring velocity,
+      and building structured recruiting engines.
     </p>
 
     <div class="buttons">
@@ -206,123 +221,98 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="section grid grid-2">
-    <div class="card">
-      <h3>LocalLinked (MBA Venture Project)</h3>
-      <p class="muted">
-        Developed GTM strategy and partnership model, achieving rapid onboarding and early-stage
-        commercial traction through incentive-aligned growth mechanics.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Recruiting Systems & Talent Architecture</h3>
-      <p class="muted">
-        Designed structured interview systems, recruiting workflows, and evaluation frameworks
-        for distributed and high-growth technology environments.
-      </p>
-    </div>
-  </section>
-
   <!-- EXPERIENCE -->
-  <section id="experience" class="section grid grid-2">
+  <section id="experience">
+    <h2>Experience</h2>
 
-    <div class="card role">
-      <img src="https://logo.clearbit.com/ondeck.com">
-      <div>
-        <h3>On Deck / ODF · Senior Talent Partner</h3>
-        <p class="muted">
-          Built technical hiring frameworks, optimized recruiting velocity, and supported founder-led
-          talent strategy across early-stage and scaling portfolio companies.
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="role-header">
+          <img src="https://cdn.simpleicons.org/indeed/white">
+          On Deck / ODF · Senior Talent Partner
+        </div>
+        <div class="role-company">Startup Talent & Portfolio Support</div>
+        <p>
+          Built technical hiring frameworks, partnered with founders, and supported structured
+          recruiting systems across early-stage and scaling environments.
         </p>
       </div>
-    </div>
 
-    <div class="card role">
-      <img src="https://logo.clearbit.com/gitlab.com">
-      <div>
-        <h3>GitLab · Technical Recruiter</h3>
-        <p class="muted">
-          Supported distributed engineering growth, improved hiring efficiency, and partnered with
-          stakeholders to enhance structured evaluation and recruiting operations.
+      <div class="timeline-item">
+        <div class="role-header">
+          <img src="https://cdn.simpleicons.org/gitlab/white">
+          GitLab · Technical Recruiter
+        </div>
+        <div class="role-company">Distributed Engineering Organization</div>
+        <p>
+          Supported global engineering growth, improved hiring workflows, and contributed
+          to structured evaluation and recruiting operations.
         </p>
       </div>
-    </div>
 
-    <div class="card role">
-      <img src="https://logo.clearbit.com/andela.com">
-      <div>
-        <h3>Andela</h3>
-        <p class="muted">
-          Contributed to hiring strategy and candidate evaluation within globally distributed
-          technical environments.
+      <div class="timeline-item">
+        <div class="role-header">
+          <img src="https://cdn.simpleicons.org/andela/white">
+          Andela
+        </div>
+        <div class="role-company">Distributed Technical Talent Ecosystem</div>
+        <p>
+          Partnered within globally distributed technical environments, supporting hiring
+          strategy and evaluation rigor.
         </p>
       </div>
-    </div>
 
-    <div class="card role">
-      <img src="https://logo.clearbit.com/notion.so">
-      <div>
-        <h3>StackShift / Sourcing Sprints</h3>
-        <p class="muted">
-          Partnered on sourcing strategy, recruiting operations, and talent pipeline design for
-          startup and growth-stage companies.
+      <div class="timeline-item">
+        <div class="role-header">
+          <img src="https://cdn.simpleicons.org/notion/white">
+          StackShift / Sourcing Sprints
+        </div>
+        <div class="role-company">Startup Recruiting & Sourcing Systems</div>
+        <p>
+          Contributed to sourcing strategy, recruiting operations, and talent pipeline design
+          for startup and growth-stage companies.
         </p>
       </div>
-    </div>
 
+    </div>
   </section>
 
   <!-- EDUCATION -->
-  <section id="education" class="section grid grid-2">
-    <div class="card">
-      <h3>MBA (Artificial Intelligence)</h3>
-      <p class="muted">University of Portsmouth · United Kingdom</p>
-    </div>
+  <section id="education">
+    <h2>Education & Certifications</h2>
 
     <div class="card">
-      <h3>BTech — Electrical & Electronics Engineering</h3>
-      <p class="muted">Griffith College Dublin · Republic of Ireland</p>
+      <strong>MBA (Artificial Intelligence)</strong><br>
+      <span style="color: var(--muted); font-size: 13px;">
+        University of Portsmouth · United Kingdom
+      </span>
     </div>
-  </section>
 
-  <!-- CERTIFICATIONS -->
-  <section id="certifications" class="section grid grid-2">
+    <div style="height:12px"></div>
+
     <div class="card">
-      <h3>Generative AI for Recruiting</h3>
-      <p class="muted">
+      <strong>BTech — Electrical & Electronics Engineering</strong><br>
+      <span style="color: var(--muted); font-size: 13px;">
+        Griffith College Dublin · Republic of Ireland
+      </span>
+    </div>
+
+    <div style="height:12px"></div>
+
+    <div class="card">
+      <strong>Generative AI for Recruiting</strong><br>
+      <span style="color: var(--muted); font-size: 13px;">
         LinkedIn Learning · Earned February 2026
-      </p>
+      </span>
     </div>
   </section>
+
+  <footer>
+    © 2026 Trust Ogor. All rights reserved.
+  </footer>
 
 </div>
-
-<script>
-  const toggle = document.getElementById("themeToggle");
-  const cards = document.querySelectorAll(".card");
-
-  if(localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark");
-    toggle.textContent = "☀️";
-  }
-
-  toggle.onclick = () => {
-    document.body.classList.toggle("dark");
-    const dark = document.body.classList.contains("dark");
-    toggle.textContent = dark ? "☀️" : "🌙";
-    localStorage.setItem("theme", dark ? "dark" : "light");
-  };
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add("in-view");
-    });
-  }, { threshold: 0.15 });
-
-  cards.forEach(card => observer.observe(card));
-</script>
 
 </body>
 </html>
