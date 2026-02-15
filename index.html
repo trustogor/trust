@@ -137,6 +137,21 @@
 
     .muted { color: var(--muted); font-size: 14px; }
 
+    .role {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .role img {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      object-fit: contain;
+      background: white;
+      padding: 3px;
+    }
+
     @media(max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
@@ -154,7 +169,8 @@
       <a href="#about" class="nav-link active">About</a>
       <a href="#projects" class="nav-link">Projects</a>
       <a href="#experience" class="nav-link">Experience</a>
-      <a href="#thinking" class="nav-link">Thinking</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#certifications" class="nav-link">Certifications</a>
       <span class="nav-indicator"></span>
     </div>
 
@@ -167,20 +183,20 @@
 
 <div class="container">
 
+  <!-- HERO / ABOUT -->
   <section class="hero" id="about">
     <h1>Trust Ogor</h1>
-    <p>Senior Talent Leader · MBA (AI) · Startup & Technical Hiring Architect</p>
+    <p>Senior Talent Leader · MBA (Artificial Intelligence) · Technical Hiring Strategist</p>
 
     <p>
-      I build 0→1 and scale-ready recruiting engines for engineering, machine learning, product,
-      and GTM teams. I partner closely with founders and technical leadership to design hiring
-      systems that combine speed, signal quality, and long-term organizational leverage.
+      I design and scale recruiting systems, evaluation frameworks, and talent architectures
+      for high-growth technology companies. My work focuses on building high-signal hiring engines,
+      interviewer enablement systems, and data-informed decision structures.
     </p>
 
     <p>
-      My background across GitLab, Andela, On Deck, and venture-backed startup ecosystems has
-      centered on designing high-velocity recruiting architectures, data-led decision systems,
-      and interviewer enablement frameworks.
+      Across GitLab, Andela, On Deck, and startup ecosystems, I’ve partnered with founders and
+      leadership teams to build structured hiring systems that combine speed, rigor, and long-term leverage.
     </p>
 
     <div class="buttons">
@@ -190,63 +206,95 @@
     </div>
   </section>
 
+  <!-- PROJECTS -->
   <section id="projects" class="section grid grid-2">
     <div class="card">
       <h3>LocalLinked (MBA Venture Project)</h3>
       <p class="muted">
-        Led end-to-end GTM strategy, onboarding 85% of a 2,000-student target in week one and
-        securing 36 commercial partnerships pre-launch via a data-driven commission model.
+        Developed GTM strategy and partnership model, achieving rapid onboarding and early-stage
+        commercial traction through incentive-aligned growth mechanics.
       </p>
     </div>
 
     <div class="card">
       <h3>Recruiting Systems & Talent Architecture</h3>
       <p class="muted">
-        Designed structured hiring blueprints, interviewer frameworks, and recruiting operating
-        systems for distributed, high-growth technology environments.
+        Designed structured interview systems, recruiting workflows, and evaluation frameworks
+        for distributed and high-growth technology environments.
       </p>
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
   <section id="experience" class="section grid grid-2">
+
+    <div class="card role">
+      <img src="https://logo.clearbit.com/ondeck.com">
+      <div>
+        <h3>On Deck / ODF · Senior Talent Partner</h3>
+        <p class="muted">
+          Built technical hiring frameworks, optimized recruiting velocity, and supported founder-led
+          talent strategy across early-stage and scaling portfolio companies.
+        </p>
+      </div>
+    </div>
+
+    <div class="card role">
+      <img src="https://logo.clearbit.com/gitlab.com">
+      <div>
+        <h3>GitLab · Technical Recruiter</h3>
+        <p class="muted">
+          Supported distributed engineering growth, improved hiring efficiency, and partnered with
+          stakeholders to enhance structured evaluation and recruiting operations.
+        </p>
+      </div>
+    </div>
+
+    <div class="card role">
+      <img src="https://logo.clearbit.com/andela.com">
+      <div>
+        <h3>Andela</h3>
+        <p class="muted">
+          Contributed to hiring strategy and candidate evaluation within globally distributed
+          technical environments.
+        </p>
+      </div>
+    </div>
+
+    <div class="card role">
+      <img src="https://logo.clearbit.com/notion.so">
+      <div>
+        <h3>StackShift / Sourcing Sprints</h3>
+        <p class="muted">
+          Partnered on sourcing strategy, recruiting operations, and talent pipeline design for
+          startup and growth-stage companies.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="section grid grid-2">
     <div class="card">
-      <h3>On Deck · Senior Talent Partner</h3>
-      <p class="muted">
-        Built technical hiring framework from 0→1. Reduced time-to-hire by 48%, doubled outbound
-        performance, and maintained 100% offer acceptance across critical technical roles.
-      </p>
+      <h3>MBA (Artificial Intelligence)</h3>
+      <p class="muted">University of Portsmouth · United Kingdom</p>
     </div>
 
     <div class="card">
-      <h3>StackShift · Senior Talent Manager</h3>
-      <p class="muted">
-        Built talent function from ground up, scaling internal recruiting team 2→6 and driving
-        founder-led growth through structured hiring systems and operating cadence.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>GitLab · Technical Recruiter</h3>
-      <p class="muted">
-        Eliminated six-month hiring backlog in under 90 days, supported 220% engineering growth,
-        and built diversity hiring framework increasing representation to 30% of hires.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Andela</h3>
-      <p class="muted">
-        Partnered within globally distributed technical environments, supporting hiring strategy,
-        evaluation rigor, and recruiting operations.
-      </p>
+      <h3>BTech — Electrical & Electronics Engineering</h3>
+      <p class="muted">Griffith College Dublin · Republic of Ireland</p>
     </div>
   </section>
 
-  <section id="thinking" class="section grid grid-2">
-    <div class="card"><p class="muted">AI & managerial leverage</p></div>
-    <div class="card"><p class="muted">High-signal hiring systems</p></div>
-    <div class="card"><p class="muted">Decision architectures & talent markets</p></div>
-    <div class="card"><p class="muted">Technology-driven value creation</p></div>
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" class="section grid grid-2">
+    <div class="card">
+      <h3>Generative AI for Recruiting</h3>
+      <p class="muted">
+        LinkedIn Learning · Earned February 2026
+      </p>
+    </div>
   </section>
 
 </div>
@@ -254,8 +302,6 @@
 <script>
   const toggle = document.getElementById("themeToggle");
   const cards = document.querySelectorAll(".card");
-  const links = document.querySelectorAll(".nav-link");
-  const indicator = document.querySelector(".nav-indicator");
 
   if(localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
@@ -268,12 +314,6 @@
     toggle.textContent = dark ? "☀️" : "🌙";
     localStorage.setItem("theme", dark ? "dark" : "light");
   };
-
-  function moveIndicator(el) {
-    indicator.style.width = `${el.offsetWidth}px`;
-    indicator.style.left = `${el.offsetLeft}px`;
-  }
-  moveIndicator(document.querySelector(".nav-link.active"));
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
