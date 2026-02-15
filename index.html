@@ -6,9 +6,6 @@
 
   <title>Trust Ogor</title>
 
-  <!-- FAVICON -->
-  <link rel="icon" type="image/png" href="/favicon.png">
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -31,8 +28,11 @@
       border-radius: 26px;
       padding: 34px 44px 70px;
       box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+      position: relative;
       border: 1px solid rgba(255,255,255,0.05);
     }
+
+    /* NAV */
 
     .nav {
       display: flex;
@@ -44,6 +44,7 @@
     .logo {
       font-weight: 600;
       font-size: 15px;
+      letter-spacing: 0.3px;
     }
 
     .nav-links {
@@ -56,18 +57,29 @@
     .nav-links a {
       text-decoration: none;
       color: inherit;
+      transition: 0.2s ease;
     }
 
-    .hero { max-width: 620px; }
+    .nav-links a:hover {
+      color: #818cf8;
+    }
+
+    /* HERO */
+
+    .hero {
+      max-width: 620px;
+    }
 
     h1 {
       font-size: 46px;
       margin: 0 0 14px;
+      letter-spacing: -0.6px;
     }
 
     .subtitle {
       font-size: 18px;
       color: #818cf8;
+      font-weight: 500;
       margin-bottom: 26px;
     }
 
@@ -76,6 +88,8 @@
       line-height: 1.7;
       margin-bottom: 34px;
     }
+
+    /* BUTTONS */
 
     .buttons {
       display: flex;
@@ -89,16 +103,40 @@
       padding: 12px 22px;
       border-radius: 14px;
       font-size: 14px;
+      font-weight: 500;
       text-decoration: none;
+      transition: 0.25s ease;
+      box-shadow: 0 10px 35px rgba(99, 102, 241, 0.35);
     }
 
     .button.secondary {
       background: rgba(255,255,255,0.04);
       color: #cbd5f5;
+      box-shadow: none;
       border: 1px solid rgba(255,255,255,0.06);
     }
 
-    .section { margin-top: 80px; }
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(99, 102, 241, 0.45);
+    }
+
+    /* SECTIONS */
+
+    .section {
+      margin-top: 80px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+
+    .muted {
+      color: #94a3b8;
+      line-height: 1.6;
+      font-size: 14px;
+    }
 
     .grid {
       display: grid;
@@ -114,12 +152,12 @@
       border-radius: 16px;
       padding: 18px;
       border: 1px solid rgba(255,255,255,0.04);
+      transition: 0.25s ease;
     }
 
-    .muted {
-      color: #94a3b8;
-      font-size: 14px;
-      line-height: 1.6;
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(129,140,248,0.35);
     }
 
     footer {
@@ -134,6 +172,7 @@
 
 <div class="page">
 
+  <!-- NAV -->
   <div class="nav">
     <div class="logo">Trust Ogor</div>
 
@@ -144,6 +183,7 @@
     </div>
   </div>
 
+  <!-- HERO -->
   <div class="hero">
     <h1>Hi, I'm Trust 👋</h1>
 
@@ -153,35 +193,95 @@
 
     <div class="description">
       I design and scale recruiting systems, structured evaluation frameworks, and
-      high-signal hiring architectures for technology companies, partnering closely
-      with founders and leadership teams.
+      high-signal hiring architectures for technology companies.
+
+      My background spans globally distributed environments and high-growth teams,
+      where I’ve partnered with founders and leadership to improve hiring velocity,
+      decision quality, and interviewer calibration across technical and product roles.
+
+      I’m particularly interested in the intersection of AI, decision systems,
+      and organizational leverage.
     </div>
 
     <div class="buttons">
-      <a href="/assets/resume.pdf" target="_blank" class="button">View Resume</a>
-      <a href="https://www.linkedin.com/in/togor/" target="_blank" class="button secondary">LinkedIn</a>
-      <a href="mailto:trustogor@gmail.com" class="button secondary">Contact</a>
+      <a href="/assets/resume.pdf" target="_blank" class="button">
+        View Resume
+      </a>
+
+      <a href="https://www.linkedin.com/in/togor/" target="_blank" class="button secondary">
+        LinkedIn
+      </a>
+
+      <a href="mailto:trustogor@gmail.com" class="button secondary">
+        Contact
+      </a>
     </div>
   </div>
 
+  <!-- EXPERIENCE -->
   <div class="section" id="experience">
     <h2>Experience</h2>
 
     <div class="grid grid-2">
-      <div class="card"><strong>On Deck / ODF</strong><div class="muted">Senior Talent Partner</div></div>
-      <div class="card"><strong>GitLab</strong><div class="muted">Technical Recruiter</div></div>
-      <div class="card"><strong>Andela</strong><div class="muted">Technical Recruiting</div></div>
-      <div class="card"><strong>StackShift / Sourcing Sprints</strong><div class="muted">Talent & Sourcing Strategy</div></div>
+
+      <div class="card">
+        <strong>On Deck / ODF</strong>
+        <div class="muted">
+          Senior Talent Partner — Built structured hiring systems, supported founder-led
+          talent strategy, and optimized recruiting workflows across early-stage and
+          scaling companies.
+        </div>
+      </div>
+
+      <div class="card">
+        <strong>GitLab</strong>
+        <div class="muted">
+          Technical Recruiter — Partnered within a fully distributed environment,
+          supporting engineering growth, improving hiring efficiency, and contributing
+          to structured evaluation practices.
+        </div>
+      </div>
+
+      <div class="card">
+        <strong>Andela</strong>
+        <div class="muted">
+          Worked within globally distributed technical ecosystems, contributing to
+          recruiting operations, candidate evaluation, and hiring strategy.
+        </div>
+      </div>
+
+      <div class="card">
+        <strong>StackShift / Sourcing Sprints</strong>
+        <div class="muted">
+          Supported sourcing strategy, pipeline design, and recruiting execution for
+          startups and high-growth technology teams.
+        </div>
+      </div>
+
     </div>
   </div>
 
+  <!-- EDUCATION -->
   <div class="section" id="education">
     <h2>Education & Certifications</h2>
 
     <div class="grid grid-2">
-      <div class="card"><strong>MBA — Artificial Intelligence</strong><div class="muted">University of Portsmouth</div></div>
-      <div class="card"><strong>BTech — Electrical & Electronics Engineering</strong><div class="muted">Griffith College Dublin</div></div>
-      <div class="card"><strong>Generative AI for Recruiting</strong><div class="muted">LinkedIn Learning · Feb 2026</div></div>
+
+      <div class="card">
+        <strong>MBA — Artificial Intelligence</strong>
+        <div class="muted">University of Portsmouth · United Kingdom</div>
+      </div>
+
+      <div class="card">
+        <strong>BTech — Electrical & Electronics Engineering</strong>
+        <div class="muted">Griffith College Dublin · Republic of Ireland</div>
+      </div>
+
+      <div class="card">
+        <strong>Generative AI for Recruiting</strong>
+        <div class="muted">LinkedIn Learning · February 2026</div>
+      </div>
+
     </div>
   </div>
 
