@@ -3,293 +3,689 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>Trust Ogor</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Inter, sans-serif;
-      background: #0f172a;
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-      color: #e5e7eb;
+    :root {
+      --bg: #080c14;
+      --surface: #0d1424;
+      --border: rgba(255,255,255,0.06);
+      --accent: #5b8dee;
+      --accent-2: #38d9a9;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --muted-2: #94a3b8;
     }
 
-    .page {
-      width: 100%;
-      max-width: 1100px;
-      background: #020617;
-      border-radius: 26px;
-      padding: 34px 44px 70px;
-      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(91,141,238,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(91,141,238,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-blob {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(91,141,238,0.09) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      top: -200px;
+      left: -200px;
+      transition: transform 0.12s ease;
+    }
+
+    .container {
       position: relative;
-      border: 1px solid rgba(255,255,255,0.05);
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
     }
 
     /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 20px 0;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
 
-    .nav {
+    nav.scrolled {
+      border-color: var(--border);
+      background: rgba(8,12,20,0.88);
+    }
+
+    nav .inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 70px;
     }
 
-    .logo {
-      font-weight: 600;
+    .home-btn {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
       font-size: 15px;
-      letter-spacing: 0.3px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+      transition: color 0.2s;
     }
+
+    .home-btn:hover { color: var(--accent); }
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      gap: 32px;
       font-size: 14px;
-      color: #64748b;
+      color: var(--muted);
     }
 
     .nav-links a {
       text-decoration: none;
       color: inherit;
-      transition: 0.2s ease;
+      transition: color 0.2s;
+      position: relative;
     }
 
-    .nav-links a:hover {
-      color: #818cf8;
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.25s ease;
     }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
 
     /* HERO */
-
-    .hero {
-      max-width: 620px;
-    }
+    .hero { padding: 120px 0 100px; }
 
     h1 {
-      font-size: 46px;
-      margin: 0 0 14px;
-      letter-spacing: -0.6px;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(42px, 6vw, 70px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
     }
 
-    .subtitle {
+    h1 .line { display: block; }
+    h1 .accent { color: var(--accent); }
+
+    .typewriter-wrap {
       font-size: 18px;
-      color: #818cf8;
-      font-weight: 500;
-      margin-bottom: 26px;
+      color: var(--muted-2);
+      font-weight: 400;
+      margin-bottom: 28px;
+      min-height: 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.35s forwards;
+    }
+
+    #typewriter {
+      border-right: 2px solid var(--accent);
+      padding-right: 4px;
     }
 
     .description {
-      color: #94a3b8;
-      line-height: 1.7;
-      margin-bottom: 34px;
+      max-width: 560px;
+      color: var(--muted-2);
+      line-height: 1.75;
+      font-size: 15px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
     }
-
-    /* BUTTONS */
 
     .buttons {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.65s forwards;
     }
 
-    .button {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: white;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       padding: 12px 22px;
-      border-radius: 14px;
+      border-radius: 10px;
       font-size: 14px;
       font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
       text-decoration: none;
-      transition: 0.25s ease;
-      box-shadow: 0 10px 35px rgba(99, 102, 241, 0.35);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
     }
 
-    .button.secondary {
-      background: rgba(255,255,255,0.04);
-      color: #cbd5f5;
-      box-shadow: none;
-      border: 1px solid rgba(255,255,255,0.06);
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(91,141,238,0.3);
     }
 
-    .button:hover {
+    .btn-primary:hover {
+      background: #4a7de0;
       transform: translateY(-2px);
-      box-shadow: 0 18px 40px rgba(99, 102, 241, 0.45);
+      box-shadow: 0 14px 40px rgba(91,141,238,0.45);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--muted-2);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(91,141,238,0.4);
+      color: var(--text);
+      transform: translateY(-2px);
     }
 
     /* SECTIONS */
+    section { padding: 90px 0; }
 
-    .section {
-      margin-top: 80px;
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
     }
 
-    .section h2 {
-      font-size: 20px;
-      margin-bottom: 18px;
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      margin-bottom: 48px;
     }
 
-    .muted {
-      color: #94a3b8;
-      line-height: 1.6;
-      font-size: 14px;
+    .divider {
+      height: 1px;
+      background: var(--border);
     }
 
-    .grid {
-      display: grid;
-      gap: 18px;
-    }
+    /* CARDS */
+    .grid { display: grid; gap: 16px; }
 
-    @media(min-width: 768px) {
+    @media(min-width: 640px) {
       .grid-2 { grid-template-columns: repeat(2, 1fr); }
     }
 
     .card {
-      background: rgba(255,255,255,0.02);
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
-      transition: 0.25s ease;
+      padding: 22px 24px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(91,141,238,0.05) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(129,140,248,0.35);
+      transform: translateY(-4px);
+      border-color: rgba(91,141,238,0.3);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     }
 
-    footer {
-      margin-top: 100px;
+    .card:hover::before { opacity: 1; }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .company-logo-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card strong {
+      font-weight: 600;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .card .muted {
+      color: var(--muted-2);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .edu-card-inner { margin-top: 14px; }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(91,141,238,0.1);
+      color: var(--accent);
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .skill-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: all 0.25s ease;
+    }
+
+    .skill-item:hover {
+      border-color: rgba(91,141,238,0.35);
+      transform: translateY(-3px);
+    }
+
+    .skill-name {
       font-size: 13px;
-      color: #64748b;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .skill-bar-track {
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 0;
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 80px 0 60px; }
+      nav .inner { flex-direction: column; gap: 16px; }
+      footer { flex-direction: column; gap: 10px; text-align: center; }
+      .nav-links { gap: 20px; }
     }
   </style>
 </head>
-
 <body>
 
-<div class="page">
+<div class="glow-blob" id="glowBlob"></div>
 
-  <!-- NAV -->
-  <div class="nav">
-    <div class="logo">Trust Ogor</div>
-
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="container">
+    <div class="inner">
+      <a href="#" class="home-btn" id="homeBtn">Home</a>
+      <div class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+      </div>
     </div>
   </div>
+</nav>
 
-  <!-- HERO -->
+<!-- HERO -->
+<div class="container">
   <div class="hero">
-    <h1>Hi, I'm Trust 👋</h1>
+    <h1>
+      <span class="line">Hi, I'm Trust.</span>
+      <span class="line accent">I build hiring systems</span>
+      <span class="line">that actually work.</span>
+    </h1>
 
-    <div class="subtitle">
-      Talent Strategy & Technical Recruiting Leader
+    <div class="typewriter-wrap">
+      <span id="typewriter"></span>
     </div>
 
-    <div class="description">
-      I design and scale recruiting systems, structured evaluation frameworks, and
-      high-signal hiring architectures for technology companies.
-
-      My background spans globally distributed environments and high-growth teams,
-      where I’ve partnered with founders and leadership to improve hiring velocity,
-      decision quality, and interviewer calibration across technical and product roles.
-
-      I’m particularly interested in the intersection of AI, decision systems,
-      and organizational leverage.
-    </div>
+    <p class="description">
+      I design and scale recruiting systems, structured evaluation frameworks,
+      and high-signal hiring architectures for technology companies. My background
+      spans globally distributed environments and high-growth teams — partnering
+      with founders and leadership to improve hiring velocity, decision quality,
+      and interviewer calibration.
+    </p>
 
     <div class="buttons">
-      <a href="/assets/resume.pdf" target="_blank" class="button">
-        View Resume
-      </a>
-
-      <a href="https://www.linkedin.com/in/togor/" target="_blank" class="button secondary">
-        LinkedIn
-      </a>
-
-      <a href="mailto:trustogor@gmail.com" class="button secondary">
-        Contact
-      </a>
+      <a href="/assets/resume.pdf" target="_blank" class="btn btn-primary">↓ View Resume</a>
+      <a href="https://www.linkedin.com/in/togor/" target="_blank" class="btn btn-secondary">LinkedIn →</a>
+      <a href="mailto:trustogor@gmail.com" class="btn btn-secondary">Email me</a>
     </div>
   </div>
-
-  <!-- EXPERIENCE -->
-  <div class="section" id="experience">
-    <h2>Experience</h2>
-
-    <div class="grid grid-2">
-
-      <div class="card">
-        <strong>On Deck / ODF</strong>
-        <div class="muted">
-          Senior Talent Partner — Built structured hiring systems, supported founder-led
-          talent strategy, and optimized recruiting workflows across early-stage and
-          scaling companies.
-        </div>
-      </div>
-
-      <div class="card">
-        <strong>GitLab</strong>
-        <div class="muted">
-          Technical Recruiter — Partnered within a fully distributed environment,
-          supporting engineering growth, improving hiring efficiency, and contributing
-          to structured evaluation practices.
-        </div>
-      </div>
-
-      <div class="card">
-        <strong>Andela</strong>
-        <div class="muted">
-          Worked within globally distributed technical ecosystems, contributing to
-          recruiting operations, candidate evaluation, and hiring strategy.
-        </div>
-      </div>
-
-      <div class="card">
-        <strong>StackShift / Sourcing Sprints</strong>
-        <div class="muted">
-          Supported sourcing strategy, pipeline design, and recruiting execution for
-          startups and high-growth technology teams.
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- EDUCATION -->
-  <div class="section" id="education">
-    <h2>Education & Certifications</h2>
-
-    <div class="grid grid-2">
-
-      <div class="card">
-        <strong>MBA — Artificial Intelligence</strong>
-        <div class="muted">University of Portsmouth · United Kingdom</div>
-      </div>
-
-      <div class="card">
-        <strong>BTech — Electrical & Electronics Engineering</strong>
-        <div class="muted">Griffith College Dublin · Republic of Ireland</div>
-      </div>
-
-      <div class="card">
-        <strong>Generative AI for Recruiting</strong>
-        <div class="muted">LinkedIn Learning · February 2026</div>
-      </div>
-
-    </div>
-  </div>
-
-  <footer>
-    © 2026 Trust Ogor. All rights reserved.
-  </footer>
-
 </div>
 
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">Career</div>
+    <h2 class="reveal">Experience</h2>
+
+    <div class="grid grid-2">
+
+      <!-- On Deck -->
+      <div class="card reveal reveal-delay-1">
+        <div class="card-header">
+          <div class="company-logo-box" style="background:#12142a;">
+            <!-- On Deck: stylised "OD" monogram -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+              <rect width="40" height="40" rx="10" fill="#12142a"/>
+              <text x="20" y="26" text-anchor="middle" font-family="Georgia,serif" font-weight="700"
+                font-size="13" fill="#6c9fff" letter-spacing="0.5">OD</text>
+            </svg>
+          </div>
+          <span class="tag">Talent Strategy</span>
+        </div>
+        <strong>On Deck / ODF</strong>
+        <div class="muted">Senior Talent Partner — Built structured hiring systems and recruiting workflows for high-growth startup founders.</div>
+      </div>
+
+      <!-- GitLab -->
+      <div class="card reveal reveal-delay-2">
+        <div class="card-header">
+          <div class="company-logo-box" style="background:#2d1f0e;">
+            <!-- GitLab brand SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586 559" width="28" height="28">
+              <path fill="#e24329" d="M461.37 301.73 293 557 124.63 301.73l57.19-175.79L293 0l111.18 125.94z"/>
+              <path fill="#fc6d26" d="M461.37 301.73H586L461.37 125.94zM0 301.73h124.63L0 125.94z"/>
+              <path fill="#fca326" d="M124.63 301.73 293 557 0 301.73zM461.37 301.73 293 557l293-255.27z"/>
+              <path fill="#e24329" d="M124.63 125.94 0 301.73l124.63-175.79zM461.37 125.94 586 301.73 461.37 125.94z"/>
+            </svg>
+          </div>
+          <span class="tag">Technical Recruiting</span>
+        </div>
+        <strong>GitLab</strong>
+        <div class="muted">Technical Recruiter — Supported distributed engineering hiring and evaluation systems across a remote-first org.</div>
+      </div>
+
+      <!-- Andela -->
+      <div class="card reveal reveal-delay-3">
+        <div class="card-header">
+          <div class="company-logo-box" style="background:#0a2010;">
+            <!-- Andela: green circle + A shape -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+              <circle cx="20" cy="20" r="18" fill="#00b140"/>
+              <polygon points="20,8 28,30 12,30" fill="white"/>
+              <rect x="13" y="25" width="14" height="3" rx="1" fill="#00b140"/>
+            </svg>
+          </div>
+          <span class="tag">Operations</span>
+        </div>
+        <strong>Andela</strong>
+        <div class="muted">Contributed to recruiting operations within globally distributed technical teams across Africa and Europe.</div>
+      </div>
+
+      <!-- StackShift -->
+      <div class="card reveal reveal-delay-4">
+        <div class="card-header">
+          <div class="company-logo-box" style="background:#0c1e2a;">
+            <!-- StackShift: stacked bar icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+              <rect x="6" y="9"  width="28" height="6" rx="3" fill="#38d9a9"/>
+              <rect x="6" y="17" width="20" height="6" rx="3" fill="#38d9a9" opacity="0.65"/>
+              <rect x="6" y="25" width="24" height="6" rx="3" fill="#38d9a9" opacity="0.35"/>
+            </svg>
+          </div>
+          <span class="tag">Sourcing</span>
+        </div>
+        <strong>StackShift / Sourcing Sprints</strong>
+        <div class="muted">Supported sourcing strategy and pipeline design for startup environments with rapid hiring cycles.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">Capabilities</div>
+    <h2 class="reveal">Skills & Tools</h2>
+    <div class="skills-grid" id="skillsGrid"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label reveal">Background</div>
+    <h2 class="reveal">Education & Certifications</h2>
+
+    <div class="grid grid-2">
+      <div class="card reveal reveal-delay-1">
+        <span class="tag">Postgraduate</span>
+        <div class="edu-card-inner">
+          <strong>MBA — Artificial Intelligence</strong>
+          <div class="muted">University of Portsmouth · United Kingdom</div>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-2">
+        <span class="tag">Undergraduate</span>
+        <div class="edu-card-inner">
+          <strong>BTech — Electrical & Electronics Engineering</strong>
+          <div class="muted">Griffith College Dublin · Republic of Ireland</div>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-3">
+        <span class="tag">Certification · 2026</span>
+        <div class="edu-card-inner">
+          <strong>Generative AI for Recruiting</strong>
+          <div class="muted">LinkedIn Learning · February 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="container">
+  <footer>
+    <span>© 2026 Trust Ogor. All rights reserved.</span>
+    <div style="display:flex;gap:20px;">
+      <a href="https://www.linkedin.com/in/togor/" target="_blank">LinkedIn</a>
+      <a href="mailto:trustogor@gmail.com">Email</a>
+      <a href="/assets/resume.pdf" target="_blank">Resume</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Home button → smooth scroll to top
+  document.getElementById('homeBtn').addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Glow blob follows cursor
+  const blob = document.getElementById('glowBlob');
+  document.addEventListener('mousemove', e => {
+    blob.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
+  });
+
+  // Sticky nav on scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Typewriter
+  const roles = [
+    'Talent Strategy Leader',
+    'Technical Recruiting Specialist',
+    'Hiring Architecture Designer',
+    'AI & Org Leverage Enthusiast',
+  ];
+  let roleIndex = 0, charIndex = 0, deleting = false;
+  const tw = document.getElementById('typewriter');
+
+  function type() {
+    const current = roles[roleIndex];
+    if (!deleting) {
+      tw.textContent = current.slice(0, ++charIndex);
+      if (charIndex === current.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      tw.textContent = current.slice(0, --charIndex);
+      if (charIndex === 0) { deleting = false; roleIndex = (roleIndex + 1) % roles.length; }
+    }
+    setTimeout(type, deleting ? 45 : 75);
+  }
+  setTimeout(type, 1000);
+
+  // Scroll reveal
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // Skills render + bar animation
+  const skills = [
+    { name: 'Talent Strategy',         level: 95 },
+    { name: 'Technical Recruiting',    level: 90 },
+    { name: 'Structured Interviewing', level: 92 },
+    { name: 'Pipeline Design',         level: 88 },
+    { name: 'Lever / Greenhouse',      level: 85 },
+    { name: 'LinkedIn Recruiter',      level: 93 },
+    { name: 'Data-Driven Hiring',      level: 80 },
+    { name: 'Generative AI Tools',     level: 78 },
+    { name: 'Interviewer Calibration', level: 87 },
+    { name: 'Employer Branding',       level: 75 },
+    { name: 'Stakeholder Management',  level: 90 },
+    { name: 'Remote Team Hiring',      level: 92 },
+  ];
+
+  const skillsGrid = document.getElementById('skillsGrid');
+
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const fill = e.target.querySelector('.skill-bar-fill');
+        if (fill) setTimeout(() => { fill.style.width = fill.dataset.level + '%'; }, 150);
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  skills.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'skill-item reveal';
+    el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+    el.innerHTML = `
+      <div class="skill-name">${s.name}</div>
+      <div class="skill-bar-track">
+        <div class="skill-bar-fill" data-level="${s.level}"></div>
+      </div>`;
+    skillsGrid.appendChild(el);
+    revealObs.observe(el);
+    barObs.observe(el);
+  });
+</script>
 </body>
 </html>
