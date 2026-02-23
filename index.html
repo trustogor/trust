@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trust Ogor</title>
 
-  <!-- Favicon: TO monogram -->
+  <!-- Favicon: TO monogram (inline SVG, no external file needed) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080c14'/%3E%3Crect x='4' y='4' width='56' height='56' rx='11' fill='none' stroke='%235b8dee' stroke-width='2' opacity='0.5'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='28' fill='%235b8dee' letter-spacing='-1'%3ETO%3C/text%3E%3C/svg%3E">
 
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ── CSS VARIABLES ── */
+    /* ════════════════════════════════
+       CSS VARIABLES
+    ════════════════════════════════ */
     :root {
       --bg:       #080c14;
       --surface:  #0d1424;
@@ -23,7 +25,9 @@
       --muted-2:  #94a3b8;
     }
 
-    /* ── RESET ── */
+    /* ════════════════════════════════
+       RESET
+    ════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
@@ -34,7 +38,9 @@
       overflow-x: hidden;
     }
 
-    /* ── BACKGROUND GRID ── */
+    /* ════════════════════════════════
+       BACKGROUND GRID
+    ════════════════════════════════ */
     body::before {
       content: '';
       position: fixed;
@@ -47,7 +53,9 @@
       z-index: 0;
     }
 
-    /* ── GLOW BLOB ── */
+    /* ════════════════════════════════
+       GLOW BLOB (follows cursor)
+    ════════════════════════════════ */
     .glow-blob {
       position: fixed;
       width: 600px;
@@ -61,7 +69,9 @@
       transition: transform 0.12s ease;
     }
 
-    /* ── LAYOUT ── */
+    /* ════════════════════════════════
+       LAYOUT
+    ════════════════════════════════ */
     .container {
       position: relative;
       z-index: 1;
@@ -70,7 +80,9 @@
       padding: 0 32px;
     }
 
-    /* ── NAV ── */
+    /* ════════════════════════════════
+       NAV
+    ════════════════════════════════ */
     nav {
       position: sticky;
       top: 0;
@@ -133,7 +145,9 @@
     .nav-links a:hover { color: var(--text); }
     .nav-links a:hover::after { width: 100%; }
 
-    /* ── HERO ── */
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
     .hero { padding: 120px 0 100px; }
 
     h1 {
@@ -147,7 +161,7 @@
       animation: fadeUp 0.7s 0.2s forwards;
     }
 
-    h1 .line  { display: block; }
+    h1 .line   { display: block; }
     h1 .accent { color: var(--accent); }
 
     .typewriter-wrap {
@@ -183,7 +197,9 @@
       animation: fadeUp 0.7s 0.65s forwards;
     }
 
-    /* ── BUTTONS ── */
+    /* ════════════════════════════════
+       BUTTONS
+    ════════════════════════════════ */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -223,7 +239,9 @@
       transform: translateY(-2px);
     }
 
-    /* ── SECTION SHARED ── */
+    /* ════════════════════════════════
+       SHARED SECTION STYLES
+    ════════════════════════════════ */
     section { padding: 90px 0; }
 
     .section-label {
@@ -248,7 +266,9 @@
       background: var(--border);
     }
 
-    /* ── CARDS ── */
+    /* ════════════════════════════════
+       CARDS
+    ════════════════════════════════ */
     .grid { display: grid; gap: 16px; }
 
     @media (min-width: 640px) {
@@ -325,7 +345,9 @@
 
     .edu-card-inner { margin-top: 14px; }
 
-    /* ── SKILLS ── */
+    /* ════════════════════════════════
+       SKILLS
+    ════════════════════════════════ */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -367,7 +389,9 @@
       transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* ── FOOTER ── */
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
     footer {
       padding: 40px 0;
       font-size: 13px;
@@ -388,7 +412,9 @@
 
     .footer-links { display: flex; gap: 20px; }
 
-    /* ── SCROLL REVEAL ── */
+    /* ════════════════════════════════
+       SCROLL REVEAL
+    ════════════════════════════════ */
     .reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -405,28 +431,32 @@
     .reveal-delay-3 { transition-delay: 0.30s; }
     .reveal-delay-4 { transition-delay: 0.40s; }
 
-    /* ── KEYFRAMES ── */
+    /* ════════════════════════════════
+       KEYFRAMES
+    ════════════════════════════════ */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0);    }
     }
 
-    /* ── RESPONSIVE ── */
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
     @media (max-width: 640px) {
-      .hero        { padding: 80px 0 60px; }
-      nav .inner   { flex-direction: column; gap: 16px; }
-      .nav-links   { gap: 20px; }
-      footer       { flex-direction: column; gap: 10px; text-align: center; }
-      .footer-links{ justify-content: center; }
+      .hero         { padding: 80px 0 60px; }
+      nav .inner    { flex-direction: column; gap: 16px; }
+      .nav-links    { gap: 20px; }
+      footer        { flex-direction: column; gap: 10px; text-align: center; }
+      .footer-links { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-<!-- Cursor glow effect -->
+<!-- Cursor glow -->
 <div class="glow-blob" id="glowBlob"></div>
 
-<!-- ═══════════════════════════════════════
+<!-- ════════════════════════════════════════
      NAV
 ════════════════════════════════════════ -->
 <nav id="mainNav">
@@ -442,7 +472,7 @@
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════
+<!-- ════════════════════════════════════════
      HERO
 ════════════════════════════════════════ -->
 <div class="container">
@@ -477,8 +507,9 @@
 
 <div class="divider"></div>
 
-<!-- ═══════════════════════════════════════
-     EXPERIENCE
+<!-- ════════════════════════════════════════
+     EXPERIENCE  (descending order)
+     1. StackShift  2. On Deck  3. GitLab  4. Andela
 ════════════════════════════════════════ -->
 <section id="experience">
   <div class="container">
@@ -488,8 +519,24 @@
 
     <div class="grid grid-2">
 
-      <!-- On Deck -->
+      <!-- 1. StackShift -->
       <div class="card reveal reveal-delay-1">
+        <div class="card-header">
+          <div class="company-logo-box" style="background:#0c1e2a;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+              <rect x="6" y="9"  width="28" height="6" rx="3" fill="#38d9a9"/>
+              <rect x="6" y="17" width="20" height="6" rx="3" fill="#38d9a9" opacity="0.65"/>
+              <rect x="6" y="25" width="24" height="6" rx="3" fill="#38d9a9" opacity="0.35"/>
+            </svg>
+          </div>
+          <span class="tag">Sourcing</span>
+        </div>
+        <strong>StackShift / Sourcing Sprints</strong>
+        <div class="muted">Supported sourcing strategy and pipeline design for startup environments with rapid hiring cycles.</div>
+      </div>
+
+      <!-- 2. On Deck -->
+      <div class="card reveal reveal-delay-2">
         <div class="card-header">
           <div class="company-logo-box" style="background:#12142a;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
@@ -505,8 +552,8 @@
         <div class="muted">Senior Talent Partner — Built structured hiring systems and recruiting workflows for high-growth startup founders.</div>
       </div>
 
-      <!-- GitLab -->
-      <div class="card reveal reveal-delay-2">
+      <!-- 3. GitLab -->
+      <div class="card reveal reveal-delay-3">
         <div class="card-header">
           <div class="company-logo-box" style="background:#2d1f0e;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586 559" width="28" height="28">
@@ -522,8 +569,8 @@
         <div class="muted">Technical Recruiter — Supported distributed engineering hiring and evaluation systems across a remote-first org.</div>
       </div>
 
-      <!-- Andela -->
-      <div class="card reveal reveal-delay-3">
+      <!-- 4. Andela -->
+      <div class="card reveal reveal-delay-4">
         <div class="card-header">
           <div class="company-logo-box" style="background:#0a2010;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
@@ -538,50 +585,33 @@
         <div class="muted">Contributed to recruiting operations within globally distributed technical teams across Africa and Europe.</div>
       </div>
 
-      <!-- StackShift -->
-      <div class="card reveal reveal-delay-4">
-        <div class="card-header">
-          <div class="company-logo-box" style="background:#0c1e2a;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-              <rect x="6" y="9"  width="28" height="6" rx="3" fill="#38d9a9"/>
-              <rect x="6" y="17" width="20" height="6" rx="3" fill="#38d9a9" opacity="0.65"/>
-              <rect x="6" y="25" width="24" height="6" rx="3" fill="#38d9a9" opacity="0.35"/>
-            </svg>
-          </div>
-          <span class="tag">Sourcing</span>
-        </div>
-        <strong>StackShift / Sourcing Sprints</strong>
-        <div class="muted">Supported sourcing strategy and pipeline design for startup environments with rapid hiring cycles.</div>
-      </div>
-
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══════════════════════════════════════
-     SKILLS
+<!-- ════════════════════════════════════════
+     SKILLS  (rendered by JS)
 ════════════════════════════════════════ -->
 <section id="skills">
   <div class="container">
     <div class="section-label reveal">Capabilities</div>
-    <h2 class="reveal">Skills & Tools</h2>
-    <!-- Skill cards injected by JS -->
+    <h2 class="reveal">Skills &amp; Tools</h2>
     <div class="skills-grid" id="skillsGrid"></div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══════════════════════════════════════
+<!-- ════════════════════════════════════════
      EDUCATION
 ════════════════════════════════════════ -->
 <section id="education">
   <div class="container">
 
     <div class="section-label reveal">Background</div>
-    <h2 class="reveal">Education & Certifications</h2>
+    <h2 class="reveal">Education &amp; Certifications</h2>
 
     <div class="grid grid-2">
 
@@ -613,7 +643,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
+<!-- ════════════════════════════════════════
      FOOTER
 ════════════════════════════════════════ -->
 <div class="container">
@@ -627,7 +657,7 @@
   </footer>
 </div>
 
-<!-- ═══════════════════════════════════════
+<!-- ════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════ -->
 <script>
@@ -637,13 +667,13 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ── Glow blob follows cursor ── */
+  /* ── Glow blob follows mouse cursor ── */
   const blob = document.getElementById('glowBlob');
   document.addEventListener('mousemove', e => {
     blob.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
   });
 
-  /* ── Sticky nav background on scroll ── */
+  /* ── Sticky nav: add background when scrolled ── */
   const mainNav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
     mainNav.classList.toggle('scrolled', window.scrollY > 30);
@@ -679,7 +709,7 @@
   }
   setTimeout(type, 1000);
 
-  /* ── Scroll reveal (shared observer) ── */
+  /* ── Scroll reveal ── */
   const revealObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -691,7 +721,7 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-  /* ── Skills: data, render, bar animation ── */
+  /* ── Skills: data + dynamic render + animated bars ── */
   const skills = [
     { name: 'Talent Strategy',         level: 95 },
     { name: 'Technical Recruiting',    level: 90 },
@@ -709,7 +739,6 @@
 
   const skillsGrid = document.getElementById('skillsGrid');
 
-  /* Separate observer to fire bar fill when card enters viewport */
   const barObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
