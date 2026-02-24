@@ -5,15 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trust Ogor</title>
 
-  <!-- Favicon: TO monogram (inline SVG — no external file needed) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080c14'/%3E%3Crect x='4' y='4' width='56' height='56' rx='11' fill='none' stroke='%235b8dee' stroke-width='2' opacity='0.5'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='28' fill='%235b8dee' letter-spacing='-1'%3ETO%3C/text%3E%3C/svg%3E">
 
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ════════════════════════════════
-       CSS VARIABLES
-    ════════════════════════════════ */
     :root {
       --bg:       #080c14;
       --surface:  #0d1424;
@@ -25,468 +21,145 @@
       --muted-2:  #94a3b8;
     }
 
-    /* ════════════════════════════════
-       RESET
-    ════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* ════════════════════════════════
-       BACKGROUND GRID
-    ════════════════════════════════ */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
+      content: ''; position: fixed; inset: 0;
       background-image:
         linear-gradient(rgba(91,141,238,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(91,141,238,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-      z-index: 0;
+      background-size: 60px 60px; pointer-events: none; z-index: 0;
     }
 
-    /* ════════════════════════════════
-       GLOW BLOB
-    ════════════════════════════════ */
     .glow-blob {
-      position: fixed;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
+      position: fixed; width: 600px; height: 600px; border-radius: 50%;
       background: radial-gradient(circle, rgba(91,141,238,0.09) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-      top: -200px;
-      left: -200px;
+      pointer-events: none; z-index: 0; top: -200px; left: -200px;
       transition: transform 0.12s ease;
     }
 
-    /* ════════════════════════════════
-       LAYOUT
-    ════════════════════════════════ */
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
+    .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 32px; }
 
-    /* ════════════════════════════════
-       NAV
-    ════════════════════════════════ */
+    /* ── NAV ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 20px 0;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, background 0.3s;
+      position: sticky; top: 0; z-index: 100; padding: 20px 0;
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid transparent; transition: border-color 0.3s, background 0.3s;
     }
-
-    nav.scrolled {
-      border-color: var(--border);
-      background: rgba(8,12,20,0.88);
-    }
-
-    nav .inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .home-btn {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.2px;
-      transition: color 0.2s;
-    }
-
+    nav.scrolled { border-color: var(--border); background: rgba(8,12,20,0.88); }
+    nav .inner { display: flex; justify-content: space-between; align-items: center; }
+    .home-btn { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--text); text-decoration: none; transition: color 0.2s; }
     .home-btn:hover { color: var(--accent); }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: inherit;
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: width 0.25s ease;
-    }
-
+    .nav-links { display: flex; gap: 32px; font-size: 14px; color: var(--muted); }
+    .nav-links a { text-decoration: none; color: inherit; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s ease; }
     .nav-links a:hover { color: var(--text); }
     .nav-links a:hover::after { width: 100%; }
 
-    /* ════════════════════════════════
-       HERO
-    ════════════════════════════════ */
+    /* ── HERO ── */
     .hero { padding: 120px 0 100px; }
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(42px, 6vw, 70px);
-      font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -1.5px;
-      margin-bottom: 24px;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.2s forwards;
-    }
-
-    h1 .line   { display: block; }
+    h1 { font-family: 'Syne', sans-serif; font-size: clamp(42px, 6vw, 70px); font-weight: 800; line-height: 1.08; letter-spacing: -1.5px; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+    h1 .line { display: block; }
     h1 .accent { color: var(--accent); }
+    .typewriter-wrap { font-size: 18px; color: var(--muted-2); font-weight: 400; margin-bottom: 28px; min-height: 28px; opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
+    #typewriter { border-right: 2px solid var(--accent); padding-right: 4px; }
+    .description { max-width: 580px; color: var(--muted-2); line-height: 1.75; font-size: 15px; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+    .buttons { display: flex; gap: 12px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.65s forwards; }
 
-    .typewriter-wrap {
-      font-size: 18px;
-      color: var(--muted-2);
-      font-weight: 400;
-      margin-bottom: 28px;
-      min-height: 28px;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.35s forwards;
-    }
+    /* ── BUTTONS ── */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 10px; font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif; text-decoration: none; transition: all 0.25s ease; cursor: pointer; border: none; }
+    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 30px rgba(91,141,238,0.3); }
+    .btn-primary:hover { background: #4a7de0; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(91,141,238,0.45); }
+    .btn-secondary { background: var(--surface); color: var(--muted-2); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: rgba(91,141,238,0.4); color: var(--text); transform: translateY(-2px); }
 
-    #typewriter {
-      border-right: 2px solid var(--accent);
-      padding-right: 4px;
-    }
-
-    .description {
-      max-width: 560px;
-      color: var(--muted-2);
-      line-height: 1.75;
-      font-size: 15px;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.5s forwards;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.65s forwards;
-    }
-
-    /* ════════════════════════════════
-       BUTTONS
-    ════════════════════════════════ */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 22px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 500;
-      font-family: 'DM Sans', sans-serif;
-      text-decoration: none;
-      transition: all 0.25s ease;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 8px 30px rgba(91,141,238,0.3);
-    }
-
-    .btn-primary:hover {
-      background: #4a7de0;
-      transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(91,141,238,0.45);
-    }
-
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--muted-2);
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      border-color: rgba(91,141,238,0.4);
-      color: var(--text);
-      transform: translateY(-2px);
-    }
-
-    /* ════════════════════════════════
-       SHARED SECTION STYLES
-    ════════════════════════════════ */
+    /* ── SECTIONS ── */
     section { padding: 90px 0; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h2 { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -0.6px; margin-bottom: 48px; }
+    .divider { height: 1px; background: var(--border); }
 
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.6px;
-      margin-bottom: 48px;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ════════════════════════════════
-       CARDS (shared base)
-    ════════════════════════════════ */
+    /* ── CARDS ── */
     .grid { display: grid; gap: 16px; }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px 24px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(91,141,238,0.05) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(91,141,238,0.3);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    }
-
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(91,141,238,0.05) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; }
+    .card:hover { transform: translateY(-4px); border-color: rgba(91,141,238,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
     .card:hover::before { opacity: 1; }
+    .card strong { font-weight: 600; font-size: 15px; display: block; margin-bottom: 8px; color: var(--text); }
+    .card .muted { color: var(--muted-2); font-size: 13.5px; line-height: 1.6; }
+    .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: rgba(91,141,238,0.1); color: var(--accent); white-space: nowrap; }
 
-    .card strong {
-      font-weight: 600;
-      font-size: 15px;
-      display: block;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-
-    .card .muted {
-      color: var(--muted-2);
-      font-size: 13.5px;
-      line-height: 1.6;
-    }
-
-    .tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 500;
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: rgba(91,141,238,0.1);
-      color: var(--accent);
-      white-space: nowrap;
-    }
-
-    /* ════════════════════════════════
-       RESUME-STYLE ROW LAYOUT
-       Used by Experience & Education
-    ════════════════════════════════ */
-    .exp-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-    }
-
+    /* ── RESUME ROW ── */
+    .exp-card { display: flex; align-items: flex-start; gap: 20px; }
     .exp-left { flex-shrink: 0; }
-
-    .company-logo-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
+    .company-logo-box { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .exp-right { flex: 1; }
-
-    .exp-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 8px;
-      flex-wrap: wrap;
-    }
-
+    .exp-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
     .exp-top strong { margin-bottom: 0; }
+    .exp-meta { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .exp-date { font-size: 11px; color: var(--muted); white-space: nowrap; margin-top: 2px; }
 
-    /* ════════════════════════════════
-       SUBSECTION LABELS
-       (Education / Certifications)
-    ════════════════════════════════ */
-    .sub-label {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: var(--muted-2);
-      margin-bottom: 14px;
-      border-left: 2px solid var(--accent);
-      padding-left: 10px;
-    }
+    /* accomplishment bullets */
+    .exp-bullets { margin-top: 10px; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .exp-bullets li { font-size: 13px; color: var(--muted-2); line-height: 1.55; padding-left: 16px; position: relative; }
+    .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 1px; }
 
+    /* stat pills */
+    .stat-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .stat-pill { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: rgba(56,217,169,0.1); color: var(--accent-2); border: 1px solid rgba(56,217,169,0.2); }
+
+    /* ── SUBSECTION LABELS ── */
+    .sub-label { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: var(--muted-2); margin-bottom: 14px; border-left: 2px solid var(--accent); padding-left: 10px; }
     .sub-section { margin-top: 40px; }
 
-    /* ════════════════════════════════
-       SKILLS
-    ════════════════════════════════ */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 12px;
-    }
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .skill-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; transition: all 0.25s ease; }
+    .skill-item:hover { border-color: rgba(91,141,238,0.35); transform: translateY(-3px); }
+    .skill-name { font-size: 13px; font-weight: 500; margin-bottom: 10px; color: var(--text); }
+    .skill-bar-track { height: 3px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; }
+    .skill-bar-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0%; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
 
-    .skill-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 18px;
-      transition: all 0.25s ease;
-    }
+    /* ── TECH STACK ── */
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .tech-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+    .tech-card-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech-tag { font-size: 12px; color: var(--muted-2); background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 6px; padding: 3px 9px; }
 
-    .skill-item:hover {
-      border-color: rgba(91,141,238,0.35);
-      transform: translateY(-3px);
-    }
-
-    .skill-name {
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 10px;
-      color: var(--text);
-    }
-
-    .skill-bar-track {
-      height: 3px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .skill-bar-fill {
-      height: 100%;
-      border-radius: 10px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      width: 0%;
-      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* ════════════════════════════════
-       FOOTER
-    ════════════════════════════════ */
-    footer {
-      padding: 40px 0;
-      font-size: 13px;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border);
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
+    /* ── FOOTER ── */
+    footer { padding: 40px 0; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--accent); }
-
     .footer-links { display: flex; gap: 20px; }
 
-    /* ════════════════════════════════
-       SCROLL REVEAL
-    ════════════════════════════════ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.10s; }
     .reveal-delay-2 { transition-delay: 0.20s; }
     .reveal-delay-3 { transition-delay: 0.30s; }
     .reveal-delay-4 { transition-delay: 0.40s; }
+    .reveal-delay-5 { transition-delay: 0.50s; }
 
-    /* ════════════════════════════════
-       KEYFRAMES
-    ════════════════════════════════ */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0);    }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ════════════════════════════════
-       RESPONSIVE
-    ════════════════════════════════ */
     @media (max-width: 640px) {
-      .hero         { padding: 80px 0 60px; }
-      nav .inner    { flex-direction: column; gap: 16px; }
-      .nav-links    { gap: 20px; }
-      footer        { flex-direction: column; gap: 10px; text-align: center; }
+      .hero { padding: 80px 0 60px; }
+      nav .inner { flex-direction: column; gap: 16px; }
+      .nav-links { gap: 20px; }
+      footer { flex-direction: column; gap: 10px; text-align: center; }
       .footer-links { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-<!-- Cursor glow -->
 <div class="glow-blob" id="glowBlob"></div>
 
-<!-- ════════════════════════════════════════
-     NAV
-════════════════════════════════════════ -->
+<!-- ══ NAV ══ -->
 <nav id="mainNav">
   <div class="container">
     <div class="inner">
@@ -494,105 +167,143 @@
       <div class="nav-links">
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
+        <a href="#stack">Stack</a>
         <a href="#education">Education</a>
       </div>
     </div>
   </div>
 </nav>
 
-<!-- ════════════════════════════════════════
-     HERO
-════════════════════════════════════════ -->
+<!-- ══ HERO ══ -->
 <div class="container">
   <div class="hero">
-
     <h1>
       <span class="line">Hi, I'm Trust.</span>
-      <span class="line accent">I build hiring systems</span>
-      <span class="line">that actually work.</span>
+      <span class="line accent">I build 0→1 recruiting</span>
+      <span class="line">engines that scale.</span>
     </h1>
-
-    <div class="typewriter-wrap">
-      <span id="typewriter"></span>
-    </div>
-
+    <div class="typewriter-wrap"><span id="typewriter"></span></div>
     <p class="description">
-      I design and scale recruiting systems, structured evaluation frameworks,
-      and high-signal hiring architectures for technology companies. My background
-      spans globally distributed environments and high-growth teams — partnering
-      with founders and leadership to improve hiring velocity, decision quality,
-      and interviewer calibration.
+      Senior Talent Leader building high-velocity hiring frameworks for engineering, ML, product, and GTM teams.
+      I partner closely with founders and CTOs, move fast, and hire with technical rigor.
+      My background across GitLab, On Deck, and StackShift — combined with an MBA in AI — gives me
+      the architecture thinking to build systems that keep companies ahead of their roadmaps.
     </p>
-
     <div class="buttons">
       <a href="/assets/resume.pdf" target="_blank" class="btn btn-primary">↓ View Resume</a>
       <a href="https://www.linkedin.com/in/togor/" target="_blank" class="btn btn-secondary">LinkedIn →</a>
       <a href="mailto:trustogor@gmail.com" class="btn btn-secondary">Email me</a>
     </div>
-
   </div>
 </div>
 
 <div class="divider"></div>
 
-<!-- ════════════════════════════════════════
-     EXPERIENCE
-     Descending: StackShift → On Deck → GitLab → Andela
-════════════════════════════════════════ -->
+<!-- ══ EXPERIENCE ══ -->
 <section id="experience">
   <div class="container">
-
     <div class="section-label reveal">Career</div>
     <h2 class="reveal">Experience</h2>
-
     <div class="grid">
 
-      <!-- 1. StackShift -->
+      <!-- LocalLinked — MBA Project -->
       <div class="card exp-card reveal reveal-delay-1">
         <div class="exp-left">
-          <div class="company-logo-box" style="background:#0c1e2a;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-              <rect x="6" y="9"  width="28" height="6" rx="3" fill="#38d9a9"/>
-              <rect x="6" y="17" width="20" height="6" rx="3" fill="#38d9a9" opacity="0.65"/>
-              <rect x="6" y="25" width="24" height="6" rx="3" fill="#38d9a9" opacity="0.35"/>
+          <div class="company-logo-box" style="background:#0d1f18;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
+              <!-- Location pin mark for LocalLinked -->
+              <circle cx="22" cy="17" r="8" fill="none" stroke="#38d9a9" stroke-width="3"/>
+              <circle cx="22" cy="17" r="3" fill="#38d9a9"/>
+              <path d="M22 25 L16 35 L22 32 L28 35 Z" fill="#38d9a9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-top">
+            <strong>LocalLinked</strong>
+            <span class="exp-date">May – Aug 2025</span>
+          </div>
+          <div class="exp-meta">MBA Project · Talent Lead &amp; GTM Strategy</div>
+          <div class="muted">Led a team of 4 working directly with founders to scope, design, and execute LocalLinked's full go-to-market strategy — aligning university partnerships, business onboarding, revenue modelling, hiring, marketing, and student engagement into a launch blueprint the company adopted.</div>
+          <ul class="exp-bullets">
+            <li>Achieved 85% of 2,000-student onboarding target in week one by securing exclusive placement in official university communications and residence hall welcome packs.</li>
+            <li>Onboarded 36 local businesses pre-launch with a data-driven partnership strategy and commission-only revenue model, minimising adoption risk.</li>
+            <li>Created the hiring blueprint for all founding team roles — defining scope, responsibilities, success metrics, and progression pathways.</li>
+            <li>Designed a career-focused Student Ambassador Program operating as a structured internship.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- StackShift -->
+      <div class="card exp-card reveal reveal-delay-2">
+        <div class="exp-left">
+          <div class="company-logo-box" style="background:#0f1f14;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
+              <rect x="14" y="14" width="22" height="22" rx="5" fill="#8aaab8" opacity="0.55"/>
+              <rect x="9" y="10" width="22" height="22" rx="5" fill="#2E6B8A"/>
+              <ellipse cx="20" cy="21" rx="4.5" ry="3.2" fill="#1a4a63"/>
+              <rect x="4" y="5" width="22" height="22" rx="5" fill="#5DB442"/>
+              <ellipse cx="15" cy="16" rx="4.5" ry="3.2" fill="#3d8a28"/>
             </svg>
           </div>
         </div>
         <div class="exp-right">
           <div class="exp-top">
             <strong>StackShift</strong>
-            <span class="tag">Sourcing</span>
+            <span class="exp-date">2023 – 2024</span>
           </div>
-          <div class="muted">Supported sourcing strategy and pipeline design for startup environments with rapid hiring cycles.</div>
+          <div class="exp-meta">Senior Talent Manager</div>
+          <div class="muted">StackShift connects early-stage VC-funded startups with the top 1% of global talent.</div>
+          <ul class="exp-bullets">
+            <li>Built the talent function from 0→1, becoming a trusted strategic partner to founders and driving hiring outcomes that generated founder-to-founder referrals.</li>
+            <li>Scaled the internal team from 2→6 (4 recruiters + 2 sourcers) and formalised the recruiting operating system.</li>
+          </ul>
         </div>
       </div>
 
-      <!-- 2. On Deck -->
-      <div class="card exp-card reveal reveal-delay-2">
+      <!-- On Deck -->
+      <div class="card exp-card reveal reveal-delay-3">
         <div class="exp-left">
-          <div class="company-logo-box" style="background:#12142a;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-              <rect width="40" height="40" rx="10" fill="#12142a"/>
-              <text x="20" y="26" text-anchor="middle"
-                font-family="Georgia,serif" font-weight="700"
-                font-size="13" fill="#6c9fff" letter-spacing="0.5">OD</text>
+          <div class="company-logo-box" style="background:#1E2A3A;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
+              <rect width="44" height="44" rx="8" fill="#1E2A3A"/>
+              <circle cx="22" cy="22" r="14" fill="none" stroke="#EEE8DC" stroke-width="3.5"/>
+              <path d="M19 13 L19 31 Q29 31 29 22 Q29 13 19 13 Z" fill="#EEE8DC"/>
+              <rect x="19" y="15.5" width="10" height="2"  rx="0.5" fill="#1E2A3A"/>
+              <rect x="19" y="19.5" width="10" height="2"  rx="0.5" fill="#1E2A3A"/>
+              <rect x="19" y="23.5" width="9"  height="2"  rx="0.5" fill="#1E2A3A"/>
+              <rect x="19" y="27.5" width="7"  height="2"  rx="0.5" fill="#1E2A3A"/>
             </svg>
           </div>
         </div>
         <div class="exp-right">
           <div class="exp-top">
             <strong>On Deck</strong>
-            <span class="tag">Talent Strategy</span>
+            <span class="exp-date">2021 – 2022</span>
           </div>
-          <div class="muted">Senior Talent Partner — Built structured hiring systems and recruiting workflows for high-growth startup founders.</div>
+          <div class="exp-meta">Senior Talent Partner</div>
+          <div class="muted">Founding member of the talent team. Built On Deck's technical hiring framework from 0→1, partnering directly with the CTO across Engineering, Product, Design, and ML.</div>
+          <ul class="exp-bullets">
+            <li>Doubled outreach performance — open rates 25%→60%, response rates 15%→30% — within one month of rewriting sourcing strategy and candidate messaging.</li>
+            <li>Reduced average time-to-hire by 48% (60→28 days) by installing a data-driven hiring cadence and tighter decision cycles.</li>
+            <li>Maintained 100% offer-acceptance rate through structured pre-close steps and hiring manager coaching.</li>
+            <li>Hired 25 people in first 9 months: 16 Engineers, 1 EM, 1 ML Engineer, 1 Data Scientist, 4 PMs, 2 Designers.</li>
+            <li>Designed company-wide diversity hiring architecture delivering 30% increase in representation across technical functions.</li>
+          </ul>
+          <div class="stat-pills">
+            <span class="stat-pill">48% faster time-to-hire</span>
+            <span class="stat-pill">100% offer acceptance</span>
+            <span class="stat-pill">25 hires in 9 months</span>
+            <span class="stat-pill">30% diversity increase</span>
+          </div>
         </div>
       </div>
 
-      <!-- 3. GitLab -->
-      <div class="card exp-card reveal reveal-delay-3">
+      <!-- GitLab -->
+      <div class="card exp-card reveal reveal-delay-4">
         <div class="exp-left">
           <div class="company-logo-box" style="background:#2d1f0e;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586 559" width="28" height="28">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586 559" width="30" height="30">
               <path fill="#e24329" d="M461.37 301.73 293 557 124.63 301.73l57.19-175.79L293 0l111.18 125.94z"/>
               <path fill="#fc6d26" d="M461.37 301.73H586L461.37 125.94zM0 301.73h124.63L0 125.94z"/>
               <path fill="#fca326" d="M124.63 301.73 293 557 0 301.73zM461.37 301.73 293 557l293-255.27z"/>
@@ -603,30 +314,44 @@
         <div class="exp-right">
           <div class="exp-top">
             <strong>GitLab</strong>
-            <span class="tag">Technical Recruiting</span>
+            <span class="exp-date">2018 – 2020</span>
           </div>
-          <div class="muted">Technical Recruiter — Supported distributed engineering hiring and evaluation systems across a remote-first org.</div>
+          <div class="exp-meta">Technical Recruiter</div>
+          <div class="muted">Owned hiring strategy for GitLab's backend and infrastructure org during a critical hyper-growth phase, partnering with the Director of Engineering across globally distributed teams.</div>
+          <ul class="exp-bullets">
+            <li>Eliminated a six-month hiring backlog in under 90 days, unblocking critical infrastructure work and restoring predictable hiring velocity.</li>
+            <li>Contributed to 220% engineering headcount growth in 2019 — GitLab expanded from ~400 to 1,200+ globally distributed team members.</li>
+            <li>Grew engineering diversity from 0%→30% of hires without compromising technical or cultural standards.</li>
+            <li>Achieved 92% positive candidate experience score through a closed-loop feedback and quality system.</li>
+            <li>Recognised by the VP of Engineering for outsized impact during a defining growth phase.</li>
+          </ul>
+          <div class="stat-pills">
+            <span class="stat-pill">220% headcount growth</span>
+            <span class="stat-pill">92% candidate NPS</span>
+            <span class="stat-pill">Backlog cleared in 90 days</span>
+          </div>
         </div>
       </div>
 
-      <!-- 4. Andela — geometric A lettermark, brand orange #FF5000 -->
-      <div class="card exp-card reveal reveal-delay-4">
+      <!-- Andela -->
+      <div class="card exp-card reveal reveal-delay-5">
         <div class="exp-left">
-          <div class="company-logo-box" style="background:#1e0e00;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-              <polygon points="8,34 16,8 20,8 13,34"  fill="#FF5000"/>
-              <polygon points="32,34 24,8 20,8 27,34" fill="#FF5000"/>
-              <rect x="13.5" y="22" width="13" height="4" rx="0.5" fill="#1e0e00"/>
-              <polygon points="18,8 22,8 20,14" fill="#1e0e00"/>
+          <div class="company-logo-box" style="background:#0b1f1e;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
+              <path d="M22 4 L34 10.5 L36 23 L34 35.5 L22 40 L10 35.5 L8 23 L10 10.5 Z"
+                    fill="none" stroke="#1B4D4A" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M22 10 L24.5 22 L22 34 L19.5 22 Z" fill="#1B4D4A"/>
+              <path d="M10 22 L22 24.5 L34 22 L22 19.5 Z" fill="#1B4D4A"/>
             </svg>
           </div>
         </div>
         <div class="exp-right">
           <div class="exp-top">
             <strong>Andela</strong>
-            <span class="tag">Operations</span>
+            <span class="exp-date">Prior</span>
           </div>
-          <div class="muted">Contributed to recruiting operations within globally distributed technical teams across Africa and Europe.</div>
+          <div class="exp-meta">Recruiting Operations</div>
+          <div class="muted">Contributed to recruiting operations within globally distributed technical teams across Africa and Europe, supporting Andela's mission to connect African engineers with world-class opportunities.</div>
         </div>
       </div>
 
@@ -636,125 +361,165 @@
 
 <div class="divider"></div>
 
-<!-- ════════════════════════════════════════
-     SKILLS  (rendered dynamically by JS)
-════════════════════════════════════════ -->
+<!-- ══ SKILLS ══ -->
 <section id="skills">
   <div class="container">
     <div class="section-label reveal">Capabilities</div>
-    <h2 class="reveal">Skills &amp; Tools</h2>
+    <h2 class="reveal">Core Competencies</h2>
     <div class="skills-grid" id="skillsGrid"></div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ════════════════════════════════════════
-     BACKGROUND
-     Education subsection  →  Certifications subsection
-     Same resume-style rows as Experience
-════════════════════════════════════════ -->
+<!-- ══ TECH STACK ══ -->
+<section id="stack">
+  <div class="container">
+    <div class="section-label reveal">Tools</div>
+    <h2 class="reveal">Tech Stack</h2>
+    <div class="tech-grid">
+
+      <div class="tech-card reveal reveal-delay-1">
+        <div class="tech-card-label">ATS</div>
+        <div class="tech-tags">
+          <span class="tech-tag">Greenhouse</span>
+          <span class="tech-tag">Lever</span>
+          <span class="tech-tag">Ashby</span>
+        </div>
+      </div>
+
+      <div class="tech-card reveal reveal-delay-2">
+        <div class="tech-card-label">Sourcing &amp; Outreach</div>
+        <div class="tech-tags">
+          <span class="tech-tag">LinkedIn Recruiter</span>
+          <span class="tech-tag">Lemlist</span>
+          <span class="tech-tag">Entelo</span>
+          <span class="tech-tag">ContactOut</span>
+          <span class="tech-tag">SalesQL</span>
+          <span class="tech-tag">Teamable</span>
+        </div>
+      </div>
+
+      <div class="tech-card reveal reveal-delay-3">
+        <div class="tech-card-label">Productivity &amp; Collaboration</div>
+        <div class="tech-tags">
+          <span class="tech-tag">G-Suite</span>
+          <span class="tech-tag">Slack</span>
+          <span class="tech-tag">Notion</span>
+          <span class="tech-tag">Zoom / Teams</span>
+          <span class="tech-tag">GitHub</span>
+        </div>
+      </div>
+
+      <div class="tech-card reveal reveal-delay-4">
+        <div class="tech-card-label">Data &amp; Reporting</div>
+        <div class="tech-tags">
+          <span class="tech-tag">DreamTeam</span>
+          <span class="tech-tag">Greenhouse Reporting</span>
+          <span class="tech-tag">Lever Analytics</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ BACKGROUND ══ -->
 <section id="education">
   <div class="container">
-
     <div class="section-label reveal">Background</div>
     <h2 class="reveal">Education &amp; Certifications</h2>
 
-    <!-- ── Education ──────────────────────── -->
+    <!-- Education -->
     <div class="sub-label reveal">Education</div>
     <div class="grid">
 
-      <!-- University of Portsmouth
-           Brand: deep navy #003087 with gold accent #C8A84B
-           Shield shape with UoP initials — matches their official heraldic identity -->
+      <!-- University of Portsmouth -->
       <div class="card exp-card reveal reveal-delay-1">
         <div class="exp-left">
-          <div class="company-logo-box" style="background:#001a4d;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
-              <!-- Shield outline -->
-              <path d="M22 4 L38 10 L38 26 Q38 36 22 42 Q6 36 6 26 L6 10 Z" fill="#003087"/>
-              <!-- Gold top bar -->
-              <rect x="6" y="10" width="32" height="5" fill="#C8A84B" opacity="0.9"/>
-              <!-- UoP monogram -->
-              <text x="22" y="30" text-anchor="middle"
-                font-family="Georgia,serif" font-weight="700"
-                font-size="11" fill="#C8A84B" letter-spacing="0.5">UoP</text>
+          <div class="company-logo-box" style="background:#f5f5f5;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="44" height="44">
+              <path d="M10 6 Q10 4 12 4 L32 4 Q34 4 34 6 L34 30 Q34 42 22 42 Q10 42 10 30 Z" fill="#5B9BD5"/>
+              <path d="M20 20 L46 20 L46 42 L30 42 L24 50 L24 42 L20 42 Z" fill="#6B2D8B"/>
+              <path d="M20 20 L34 20 L34 42 L24 42 L24 50 L24 42 L20 42 Z" fill="#3d1a5e" opacity="0.55"/>
+              <path d="M22 4 L34 4 L34 18 Z" fill="#3a7ab5" opacity="0.5"/>
             </svg>
           </div>
         </div>
         <div class="exp-right">
           <div class="exp-top">
-            <strong>MBA — Artificial Intelligence</strong>
-            <span class="tag">Postgraduate</span>
+            <strong>MBA — Business &amp; Artificial Intelligence</strong>
+            <span class="exp-date">2026</span>
           </div>
           <div class="muted">University of Portsmouth · United Kingdom</div>
         </div>
       </div>
 
-      <!-- Griffith College Dublin
-           Brand: deep red #C8102E on dark background
-           GCD shield/crest monogram -->
+      <!-- Griffith College Dublin -->
       <div class="card exp-card reveal reveal-delay-2">
         <div class="exp-left">
-          <div class="company-logo-box" style="background:#1a0005;">
+          <div class="company-logo-box" style="background:#CC1F2D;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
-              <!-- Shield outline -->
-              <path d="M22 4 L38 10 L38 26 Q38 36 22 42 Q6 36 6 26 L6 10 Z" fill="#C8102E"/>
-              <!-- White top bar -->
-              <rect x="6" y="10" width="32" height="5" fill="#fff" opacity="0.85"/>
-              <!-- GC monogram -->
-              <text x="22" y="30" text-anchor="middle"
-                font-family="Georgia,serif" font-weight="700"
-                font-size="11" fill="#fff" letter-spacing="0.5">GCD</text>
+              <rect width="44" height="44" rx="0" fill="#CC1F2D"/>
+              <rect x="5"  y="18" width="34" height="16" fill="white" opacity="0.9"/>
+              <rect x="15" y="13" width="14" height="21" fill="white"/>
+              <polygon points="22,8 29,13 15,13" fill="white"/>
+              <rect x="20" y="4" width="4" height="6" fill="white"/>
+              <rect x="7"  y="22" width="4" height="5" fill="#CC1F2D" opacity="0.7"/>
+              <rect x="13" y="22" width="4" height="5" fill="#CC1F2D" opacity="0.7"/>
+              <rect x="17" y="17" width="3" height="4" fill="#CC1F2D" opacity="0.7"/>
+              <rect x="24" y="17" width="3" height="4" fill="#CC1F2D" opacity="0.7"/>
+              <rect x="27" y="22" width="4" height="5" fill="#CC1F2D" opacity="0.7"/>
+              <rect x="33" y="22" width="4" height="5" fill="#CC1F2D" opacity="0.7"/>
+              <rect x="3" y="34" width="38" height="2" fill="white" opacity="0.5"/>
+              <text x="22" y="41" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="4.2" fill="white" letter-spacing="0.5">GRIFFITH COLLEGE</text>
             </svg>
           </div>
         </div>
         <div class="exp-right">
           <div class="exp-top">
             <strong>BTech — Electrical &amp; Electronics Engineering</strong>
-            <span class="tag">Undergraduate</span>
+            <span class="exp-date">2014</span>
           </div>
+          <div class="exp-meta">First Class Honours</div>
           <div class="muted">Griffith College Dublin · Republic of Ireland</div>
         </div>
       </div>
 
     </div>
 
-    <!-- ── Certifications ─────────────────── -->
+    <!-- Certifications -->
     <div class="sub-label reveal sub-section">Certifications</div>
     <div class="grid">
 
-      <!-- LinkedIn Learning — certificate / ribbon icon in teal -->
       <div class="card exp-card reveal reveal-delay-1">
         <div class="exp-left">
-          <div class="company-logo-box" style="background:#0d1f18;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-              <rect x="6" y="6" width="28" height="20" rx="3" fill="none" stroke="#38d9a9" stroke-width="2"/>
-              <line x1="11" y1="13" x2="29" y2="13" stroke="#38d9a9" stroke-width="2"   stroke-linecap="round"/>
-              <line x1="11" y1="18" x2="22" y2="18" stroke="#38d9a9" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-              <circle cx="20" cy="32" r="4" fill="none" stroke="#38d9a9" stroke-width="2"/>
-              <line x1="17" y1="36" x2="15" y2="40" stroke="#38d9a9" stroke-width="1.5"/>
-              <line x1="23" y1="36" x2="25" y2="40" stroke="#38d9a9" stroke-width="1.5"/>
+          <div class="company-logo-box" style="background:#041929;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
+              <rect x="4" y="4" width="36" height="36" rx="6" fill="#0A66C2"/>
+              <circle cx="14" cy="13" r="2.5" fill="#fff"/>
+              <rect x="11.5" y="17" width="5" height="14" rx="1" fill="#fff"/>
+              <rect x="19.5" y="17" width="5" height="14" rx="1" fill="#fff"/>
+              <path d="M24.5 20 Q24.5 17 28.5 17 Q32.5 17 32.5 21 L32.5 31 L27.5 31 L27.5 22 Q27.5 20.5 26 20.5 Q24.5 20.5 24.5 22 Z" fill="#fff"/>
             </svg>
           </div>
         </div>
         <div class="exp-right">
           <div class="exp-top">
             <strong>Generative AI for Recruiting</strong>
-            <span class="tag">Certification · 2026</span>
+            <span class="exp-date">Feb 2026</span>
           </div>
-          <div class="muted">LinkedIn Learning · February 2026</div>
+          <div class="muted">LinkedIn Learning</div>
         </div>
       </div>
 
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════ -->
+<!-- ══ FOOTER ══ -->
 <div class="container">
   <footer>
     <span>© 2026 Trust Ogor. All rights reserved.</span>
@@ -766,89 +531,68 @@
   </footer>
 </div>
 
-<!-- ════════════════════════════════════════
-     JAVASCRIPT
-════════════════════════════════════════ -->
+<!-- ══ JAVASCRIPT ══ -->
 <script>
-
-  /* ── Home button: smooth scroll to top ── */
   document.getElementById('homeBtn').addEventListener('click', e => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ── Glow blob follows mouse cursor ── */
   const blob = document.getElementById('glowBlob');
   document.addEventListener('mousemove', e => {
     blob.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
   });
 
-  /* ── Sticky nav: frosted glass on scroll ── */
   const mainNav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
     mainNav.classList.toggle('scrolled', window.scrollY > 30);
   });
 
-  /* ── Typewriter effect ── */
   const roles = [
-    'Talent Strategy Leader',
+    'Senior Talent Leader',
     'Technical Recruiting Specialist',
-    'Hiring Architecture Designer',
-    'AI & Org Leverage Enthusiast',
+    'Talent Architecture Designer',
+    'Hiring Systems Builder',
   ];
   let roleIndex = 0, charIndex = 0, deleting = false;
   const tw = document.getElementById('typewriter');
-
   function type() {
     const current = roles[roleIndex];
     if (!deleting) {
       tw.textContent = current.slice(0, ++charIndex);
-      if (charIndex === current.length) {
-        deleting = true;
-        setTimeout(type, 1800);
-        return;
-      }
+      if (charIndex === current.length) { deleting = true; setTimeout(type, 1800); return; }
     } else {
       tw.textContent = current.slice(0, --charIndex);
-      if (charIndex === 0) {
-        deleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-      }
+      if (charIndex === 0) { deleting = false; roleIndex = (roleIndex + 1) % roles.length; }
     }
     setTimeout(type, deleting ? 45 : 75);
   }
   setTimeout(type, 1000);
 
-  /* ── Scroll reveal ── */
   const revealObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObs.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObs.unobserve(entry.target); }
     });
   }, { threshold: 0.12 });
-
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-  /* ── Skills: data + render + animated bars ── */
+  // Skills from resume key competencies
   const skills = [
-    { name: 'Talent Strategy',         level: 95 },
-    { name: 'Technical Recruiting',    level: 90 },
-    { name: 'Structured Interviewing', level: 92 },
-    { name: 'Pipeline Design',         level: 88 },
-    { name: 'Lever / Greenhouse',      level: 85 },
-    { name: 'LinkedIn Recruiter',      level: 93 },
-    { name: 'Data-Driven Hiring',      level: 80 },
-    { name: 'Generative AI Tools',     level: 78 },
-    { name: 'Interviewer Calibration', level: 87 },
-    { name: 'Employer Branding',       level: 75 },
-    { name: 'Stakeholder Management',  level: 90 },
-    { name: 'Remote Team Hiring',      level: 92 },
+    { name: 'Talent Architecture',          level: 96 },
+    { name: 'Global Hiring Strategy',        level: 93 },
+    { name: 'Executive Partnerships',        level: 90 },
+    { name: 'Data-Led Recruiting',           level: 88 },
+    { name: 'Interview Enablement',          level: 91 },
+    { name: 'Recruiting Operations',         level: 92 },
+    { name: 'Technical Fluency',             level: 85 },
+    { name: 'People Management',             level: 87 },
+    { name: 'Culture & Values Alignment',    level: 89 },
+    { name: 'Pipeline Design',               level: 94 },
+    { name: 'Diversity Hiring',              level: 90 },
+    { name: 'Generative AI Tools',           level: 78 },
   ];
 
   const skillsGrid = document.getElementById('skillsGrid');
-
   const barObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -872,7 +616,6 @@
     revealObs.observe(el);
     barObs.observe(el);
   });
-
 </script>
 </body>
 </html>
