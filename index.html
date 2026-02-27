@@ -1,680 +1,438 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trust Ogor</title>
+import { useEffect, useRef } from "react";
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080c14'/%3E%3Crect x='4' y='4' width='56' height='56' rx='11' fill='none' stroke='%235b8dee' stroke-width='2' opacity='0.5'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='28' fill='%235b8dee' letter-spacing='-1'%3ETO%3C/text%3E%3C/svg%3E">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+const C = {
+  bg: "#080c14", surface: "#0d1424",
+  border: "rgba(255,255,255,0.06)", accent: "#5b8dee",
+  teal: "#38d9a9", text: "#e2e8f0", muted: "#64748b", muted2: "#94a3b8",
+};
 
-  <style>
-    /* ── VARIABLES ── */
-    :root {
-      --bg:      #080c14;
-      --surface: #0d1424;
-      --border:  rgba(255,255,255,0.06);
-      --accent:  #5b8dee;
-      --teal:    #38d9a9;
-      --text:    #e2e8f0;
-      --muted:   #64748b;
-      --muted2:  #94a3b8;
-    }
+const gs = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+`;
 
-    /* ── RESET ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+const Wrap = ({ children, style }) => (
+  <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 40px", ...style }}>{children}</div>
+);
+const Divider = () => <div style={{ height: 1, background: C.border }} />;
+const SL = ({ c }) => <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: C.accent, marginBottom: 8 }}>{c}</div>;
+const H2 = ({ c }) => <h2 style={{ fontFamily: "'Syne',sans-serif", fontSize: 32, fontWeight: 700, letterSpacing: -0.6, color: C.text, marginBottom: 24 }}>{c}</h2>;
+const SubLabel = ({ c, top }) => <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: 0.5, color: C.muted2, marginBottom: 12, borderLeft: `2px solid ${C.accent}`, paddingLeft: 10, marginTop: top || 0 }}>{c}</div>;
+const Tag = ({ c }) => <span style={{ fontSize: 12, color: C.muted2, background: "rgba(255,255,255,0.04)", border: `1px solid ${C.border}`, borderRadius: 6, padding: "4px 10px" }}>{c}</span>;
+const Pill = ({ c }) => <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 20, background: "rgba(56,217,169,0.1)", color: C.teal, border: "1px solid rgba(56,217,169,0.2)" }}>{c}</span>;
 
-    /* ── GRID BG ── */
-    body::before {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background-image:
-        linear-gradient(rgba(91,141,238,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(91,141,238,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
+// ── Logos ──
+const LL  = () => <svg viewBox="0 0 44 44" width="44" height="44"><g transform="translate(22,22)">{[0,51.43,102.86,154.29,205.71,257.14,308.57].map((r,i)=><path key={i} d="M2,-4 C5,-11 10,-13 8,-8 C6,-3 2,0 0,2 C-1,3 0,1 2,-4 Z" fill="#F5A623" transform={`rotate(${r})`}/>)}</g></svg>;
+const SS  = () => <svg viewBox="0 0 44 44" width="44" height="44"><rect x="14" y="14" width="22" height="22" rx="5" fill="#8aaab8" opacity="0.55"/><rect x="9" y="10" width="22" height="22" rx="5" fill="#2E6B8A"/><ellipse cx="20" cy="21" rx="4.5" ry="3.2" fill="#1a4a63"/><rect x="4" y="5" width="22" height="22" rx="5" fill="#5DB442"/><ellipse cx="15" cy="16" rx="4.5" ry="3.2" fill="#3d8a28"/></svg>;
+const OD  = () => <svg viewBox="0 0 44 44" width="44" height="44"><rect width="44" height="44" rx="8" fill="#1E2A3A"/><circle cx="22" cy="22" r="14" fill="none" stroke="#EEE8DC" strokeWidth="3.5"/><path d="M19 13 L19 31 Q29 31 29 22 Q29 13 19 13 Z" fill="#EEE8DC"/><rect x="19" y="15.5" width="10" height="2" rx="0.5" fill="#1E2A3A"/><rect x="19" y="19.5" width="10" height="2" rx="0.5" fill="#1E2A3A"/><rect x="19" y="23.5" width="9" height="2" rx="0.5" fill="#1E2A3A"/><rect x="19" y="27.5" width="7" height="2" rx="0.5" fill="#1E2A3A"/></svg>;
+const GL  = () => <svg viewBox="0 0 586 559" width="30" height="30"><path fill="#e24329" d="M461.37 301.73 293 557 124.63 301.73l57.19-175.79L293 0l111.18 125.94z"/><path fill="#fc6d26" d="M461.37 301.73H586L461.37 125.94zM0 301.73h124.63L0 125.94z"/><path fill="#fca326" d="M124.63 301.73 293 557 0 301.73zM461.37 301.73 293 557l293-255.27z"/><path fill="#e24329" d="M124.63 125.94 0 301.73l124.63-175.79zM461.37 125.94 586 301.73 461.37 125.94z"/></svg>;
+const AN  = () => <svg viewBox="0 0 44 44" width="44" height="44"><path d="M22 4 L34 10.5 L36 23 L34 35.5 L22 40 L10 35.5 L8 23 L10 10.5 Z" fill="none" stroke="#1B4D4A" strokeWidth="3" strokeLinejoin="round"/><path d="M22 10 L24.5 22 L22 34 L19.5 22 Z" fill="#1B4D4A"/><path d="M10 22 L22 24.5 L34 22 L22 19.5 Z" fill="#1B4D4A"/></svg>;
+const PO  = () => <svg viewBox="0 0 56 56" width="44" height="44"><path d="M10 6 Q10 4 12 4 L32 4 Q34 4 34 6 L34 30 Q34 42 22 42 Q10 42 10 30 Z" fill="#5B9BD5"/><path d="M20 20 L46 20 L46 42 L30 42 L24 50 L24 42 L20 42 Z" fill="#6B2D8B"/><path d="M20 20 L34 20 L34 42 L24 42 L24 50 L24 42 L20 42 Z" fill="#3d1a5e" opacity="0.55"/><path d="M22 4 L34 4 L34 18 Z" fill="#3a7ab5" opacity="0.5"/></svg>;
+const GC  = () => <svg viewBox="0 0 44 44" width="44" height="44"><rect width="44" height="44" fill="#CC1F2D"/><rect x="5" y="18" width="34" height="16" fill="white" opacity="0.9"/><rect x="15" y="13" width="14" height="21" fill="white"/><polygon points="22,8 29,13 15,13" fill="white"/><rect x="20" y="4" width="4" height="6" fill="white"/><rect x="7" y="22" width="4" height="5" fill="#CC1F2D" opacity="0.7"/><rect x="13" y="22" width="4" height="5" fill="#CC1F2D" opacity="0.7"/><rect x="17" y="17" width="3" height="4" fill="#CC1F2D" opacity="0.7"/><rect x="24" y="17" width="3" height="4" fill="#CC1F2D" opacity="0.7"/><rect x="27" y="22" width="4" height="5" fill="#CC1F2D" opacity="0.7"/><rect x="33" y="22" width="4" height="5" fill="#CC1F2D" opacity="0.7"/><rect x="3" y="34" width="38" height="2" fill="white" opacity="0.5"/><text x="22" y="41" textAnchor="middle" fontFamily="Arial" fontWeight="700" fontSize="4.2" fill="white" letterSpacing="0.5">GRIFFITH COLLEGE</text></svg>;
+const LI2 = () => <svg viewBox="0 0 44 44" width="44" height="44"><rect x="4" y="4" width="36" height="36" rx="6" fill="#0A66C2"/><circle cx="14" cy="13" r="2.5" fill="#fff"/><rect x="11.5" y="17" width="5" height="14" rx="1" fill="#fff"/><rect x="19.5" y="17" width="5" height="14" rx="1" fill="#fff"/><path d="M24.5 20 Q24.5 17 28.5 17 Q32.5 17 32.5 21 L32.5 31 L27.5 31 L27.5 22 Q27.5 20.5 26 20.5 Q24.5 20.5 24.5 22 Z" fill="#fff"/></svg>;
 
-    /* ── GLOW BLOB ── */
-    .glow-blob {
-      position: fixed; width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(91,141,238,0.09) 0%, transparent 70%);
-      pointer-events: none; z-index: 0; top: -200px; left: -200px;
-      transition: transform 0.12s ease;
-    }
-
-    /* ── LAYOUT ── */
-    .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 32px; }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 100; padding: 18px 0;
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid transparent; transition: border-color 0.3s, background 0.3s;
-    }
-    nav.scrolled { border-color: var(--border); background: rgba(8,12,20,0.88); }
-    nav .inner { display: flex; justify-content: space-between; align-items: center; }
-    .home-btn { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--text); text-decoration: none; transition: color 0.2s; }
-    .home-btn:hover { color: var(--accent); }
-    .nav-links { display: flex; gap: 32px; font-size: 14px; }
-    .nav-links a { text-decoration: none; color: var(--muted); transition: color 0.2s; position: relative; }
-    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s ease; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { width: 100%; }
-
-    /* ── HERO ── */
-    .hero { padding: 60px 0 40px; }
-    h1 { font-family: 'Syne', sans-serif; font-size: clamp(42px, 6vw, 70px); font-weight: 800; line-height: 1.08; letter-spacing: -1.5px; margin-bottom: 18px; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
-    h1 .line { display: block; }
-    h1 .accent { color: var(--accent); }
-    .typewriter-wrap { font-size: 18px; color: var(--muted2); font-weight: 400; margin-bottom: 20px; min-height: 28px; opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
-    #typewriter { border-right: 2px solid var(--accent); padding-right: 4px; }
-    .description { max-width: 580px; color: var(--muted2); line-height: 1.75; font-size: 15px; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
-    .buttons { display: flex; gap: 14px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.65s forwards; }
-
-    /* ── SOFT FANCY BUTTONS ── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 13px 28px; border-radius: 50px;
-      font-size: 14px; font-weight: 500; letter-spacing: 0.2px;
-      font-family: 'DM Sans', sans-serif;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: all 0.3s ease; position: relative; overflow: hidden;
-    }
-    .btn::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-      transform: translateX(-100%); transition: transform 0.55s ease;
-    }
-    .btn:hover::after { transform: translateX(100%); }
-    .btn-linkedin {
-      background: rgba(91,141,238,0.1); color: #a8c4ff;
-      border: 1px solid rgba(91,141,238,0.28); backdrop-filter: blur(10px);
-      box-shadow: 0 2px 18px rgba(91,141,238,0.14), inset 0 1px 0 rgba(255,255,255,0.07);
-    }
-    .btn-linkedin:hover {
-      background: rgba(91,141,238,0.2); border-color: rgba(91,141,238,0.55); color: #cddeff;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(91,141,238,0.26), inset 0 1px 0 rgba(255,255,255,0.12);
-    }
-    .btn-email {
-      background: rgba(56,217,169,0.08); color: #7de8cb;
-      border: 1px solid rgba(56,217,169,0.22); backdrop-filter: blur(10px);
-      box-shadow: 0 2px 18px rgba(56,217,169,0.1), inset 0 1px 0 rgba(255,255,255,0.05);
-    }
-    .btn-email:hover {
-      background: rgba(56,217,169,0.16); border-color: rgba(56,217,169,0.48); color: #b2f5e4;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(56,217,169,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
-    }
-
-    /* ── SECTIONS ── */
-    section { padding: 40px 0; }
-    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-    h2 { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -0.6px; margin-bottom: 24px; }
-    .divider { height: 1px; background: var(--border); }
-
-    /* ── CARDS ── */
-    .grid { display: grid; gap: 12px; }
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; transition: all 0.3s ease; position: relative; overflow: hidden; }
-    .card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(91,141,238,0.05) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; }
-    .card:hover { transform: translateY(-4px); border-color: rgba(91,141,238,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-    .card:hover::before { opacity: 1; }
-    .card strong { font-weight: 600; font-size: 15px; display: block; margin-bottom: 6px; color: var(--text); }
-    .card .muted { color: var(--muted2); font-size: 13.5px; line-height: 1.6; }
-
-    /* ── EXP ROW ── */
-    .exp-card { display: flex; align-items: flex-start; gap: 18px; }
-    .exp-left { flex-shrink: 0; }
-    .company-logo-box { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .exp-right { flex: 1; min-width: 0; }
-    .exp-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 4px; flex-wrap: wrap; }
-    .exp-top strong { margin-bottom: 0; }
-    .exp-meta { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-    .exp-date { font-size: 11px; color: var(--muted); white-space: nowrap; margin-top: 2px; flex-shrink: 0; }
-    .exp-bullets { margin-top: 8px; list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .exp-bullets li { font-size: 13px; color: var(--muted2); line-height: 1.55; padding-left: 16px; position: relative; }
-    .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 1px; }
-    .stat-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-    .stat-pill { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: rgba(56,217,169,0.1); color: var(--teal); border: 1px solid rgba(56,217,169,0.2); }
-
-    /* ── SUBSECTIONS ── */
-    .sub-label { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: var(--muted2); margin-bottom: 12px; border-left: 2px solid var(--accent); padding-left: 10px; }
-    .sub-section { margin-top: 24px; }
-
-    /* ── SKILLS ── */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
-    .skill-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; transition: all 0.25s ease; }
-    .skill-item:hover { border-color: rgba(91,141,238,0.35); transform: translateY(-3px); }
-    .skill-name { font-size: 13px; font-weight: 500; margin-bottom: 10px; color: var(--text); }
-    .skill-bar-track { height: 3px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; }
-    .skill-bar-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--accent), var(--teal)); width: 0%; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
-
-    /* ── TECH STACK ── */
-    .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-    .tech-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
-    .tech-card-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-    .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tech-tag { font-size: 12px; color: var(--muted2); background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 6px; padding: 3px 9px; }
-
-    /* ── FOOTER ── */
-    footer { padding: 28px 0; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
-    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--accent); }
-    .footer-links { display: flex; gap: 20px; }
-
-    /* ── REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.08s; }
-    .reveal-delay-2 { transition-delay: 0.16s; }
-    .reveal-delay-3 { transition-delay: 0.24s; }
-    .reveal-delay-4 { transition-delay: 0.32s; }
-    .reveal-delay-5 { transition-delay: 0.40s; }
-
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* ── MOBILE ≤ 768px ── */
-    @media (max-width: 768px) {
-      .container { padding: 0 20px; }
-      nav .inner { flex-direction: column; gap: 12px; }
-      .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
-      .hero { padding: 44px 0 30px; }
-      .description { font-size: 14px; margin-bottom: 22px; }
-      .buttons { flex-direction: column; align-items: stretch; }
-      .btn { width: 100%; justify-content: center; }
-      section { padding: 32px 0; }
-      h2 { font-size: 26px; margin-bottom: 18px; }
-      .exp-card { gap: 12px; }
-      .company-logo-box { width: 38px; height: 38px; }
-      .exp-top { flex-direction: column; align-items: flex-start; gap: 3px; }
-      .exp-bullets li { font-size: 12.5px; }
-      .stat-pill { font-size: 10px; padding: 3px 8px; }
-      .skills-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .skill-item { padding: 11px 13px; }
-      .skill-name { font-size: 12px; }
-      .tech-grid { grid-template-columns: 1fr; gap: 10px; }
-      .sub-section { margin-top: 18px; }
-      footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 0; }
-      .footer-links { justify-content: center; flex-wrap: wrap; }
-    }
-
-    /* ── MOBILE ≤ 400px ── */
-    @media (max-width: 400px) {
-      h1 { letter-spacing: -0.5px; }
-      .exp-card { gap: 10px; }
-      .company-logo-box { width: 34px; height: 34px; }
-      .card { padding: 14px; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-<div class="glow-blob" id="glowBlob"></div>
-
-<!-- NAV -->
-<nav id="mainNav">
-  <div class="container">
-    <div class="inner">
-      <a href="#" class="home-btn" id="homeBtn">Home</a>
-      <div class="nav-links">
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#stack">Stack</a>
-        <a href="#education">Education</a>
+const LogoBox = ({ bg, Logo }) => (
+  <div style={{ width: 44, height: 44, borderRadius: 10, background: bg, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", flexShrink: 0 }}>
+    <Logo />
+  </div>
+);
+const ExpCard = ({ bg, Logo, title, date, meta, desc, bullets, pills }) => (
+  <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: "20px 22px", display: "flex", gap: 18, marginBottom: 12 }}>
+    <LogoBox bg={bg} Logo={Logo} />
+    <div style={{ flex: 1, minWidth: 0 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginBottom: 4, flexWrap: "wrap" }}>
+        <strong style={{ fontSize: 15, fontWeight: 600, color: C.text }}>{title}</strong>
+        <span style={{ fontSize: 11, color: C.muted, flexShrink: 0, marginTop: 2 }}>{date}</span>
       </div>
+      {meta && <div style={{ fontSize: 12, color: C.muted, marginBottom: 4 }}>{meta}</div>}
+      {desc && <div style={{ fontSize: 13.5, color: C.muted2, lineHeight: 1.6, marginBottom: bullets ? 8 : 0 }}>{desc}</div>}
+      {bullets && <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 5 }}>{bullets.map((b,i)=><li key={i} style={{ fontSize: 13, color: C.muted2, lineHeight: 1.55, paddingLeft: 16, position: "relative" }}><span style={{ position:"absolute", left:0, color:C.accent, fontSize:11, top:1 }}>→</span>{b}</li>)}</ul>}
+      {pills && <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginTop:8 }}>{pills.map((p,i)=><Pill key={i} c={p}/>)}</div>}
     </div>
   </div>
-</nav>
+);
 
-<!-- HERO -->
-<div class="container">
-  <div class="hero">
-    <h1>
-      <span class="line">Hi, I'm Trust.</span>
-      <span class="line accent">I build 0→1 recruiting</span>
-      <span class="line">engines that scale.</span>
-    </h1>
-    <div class="typewriter-wrap"><span id="typewriter"></span></div>
-    <p class="description">
-      Senior Talent Leader building high-velocity hiring frameworks for engineering, ML, product, and GTM teams.
-      I partner closely with founders and CTOs, move fast, and hire with technical rigor.
-      My background across GitLab, On Deck, and StackShift — combined with an MBA in AI — gives me
-      the architecture thinking to build systems that keep companies ahead of their roadmaps.
-    </p>
-    <div class="buttons">
-      <a href="https://www.linkedin.com/in/togor/" target="_blank" class="btn btn-linkedin">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-        LinkedIn
-      </a>
-      <a href="mailto:trustogor@gmail.com" class="btn btn-email">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="4" width="20" height="16" rx="2"/>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-        </svg>
-        Email me
-      </a>
+// ── Project primitives ──
+const ProjCard = ({ num, title, ctx, children }) => (
+  <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 18, padding: "28px 30px", marginBottom: 20, position: "relative", overflow: "hidden" }}>
+    <div style={{ position:"absolute", inset:0, background:"linear-gradient(135deg,rgba(91,141,238,0.04) 0%,transparent 55%)", pointerEvents:"none", borderRadius:18 }} />
+    <div style={{ display:"flex", alignItems:"flex-start", gap:18, marginBottom:20 }}>
+      <div style={{ fontFamily:"'Syne',sans-serif", fontSize:42, fontWeight:800, color:"rgba(91,141,238,0.12)", letterSpacing:-2, lineHeight:1, flexShrink:0, marginTop:-4 }}>{num}</div>
+      <div>
+        <div style={{ fontFamily:"'Syne',sans-serif", fontSize:18, fontWeight:700, color:C.text, letterSpacing:-0.4, marginBottom:4 }}>{title}</div>
+        <div style={{ fontSize:12, color:C.accent, fontWeight:500 }}>{ctx}</div>
+      </div>
     </div>
+    {children}
   </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="container">
-    <div class="section-label reveal">Career</div>
-    <h2 class="reveal">Experience</h2>
-    <div class="grid">
-
-      <!-- LocalLinked -->
-      <div class="card exp-card reveal reveal-delay-1">
-        <div class="exp-left">
-          <div class="company-logo-box" style="background:#111111;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
-              <g transform="translate(22,22)">
-                <path d="M2,-4 C5,-11 10,-13 8,-8 C6,-3 2,0 0,2 C-1,3 0,1 2,-4 Z" fill="#F5A623" transform="rotate(0)"/>
-                <path d="M2,-4 C5,-11 10,-13 8,-8 C6,-3 2,0 0,2 C-1,3 0,1 2,-4 Z" fill="#F5A623" transform="rotate(51.43)"/>
-                <path d="M2,-4 C5,-11 10,-13 8,-8 C6,-3 2,0 0,2 C-1,3 0,1 2,-4 Z" fill="#F5A623" transform="rotate(102.86)"/>
-                <path d="M2,-4 C5,-11 10,-13 8,-8 C6,-3 2,0 0,2 C-1,3 0,1 2,-4 Z" fill="#F5A623" transform="rotate(154.29)"/>
-                <path d="M2,-4 C5,-11 10,-13 8,-8 C6,-3 2,0 0,2 C-1,3 0,1 2,-4 Z" fill="#F5A623" transform="rotate(205.71)"/>
-                <path d="M2,-4 C5,-11 10,-13 8,-8 C6,-3 2,0 0,2 C-1,3 0,1 2,-4 Z" fill="#F5A623" transform="rotate(257.14)"/>
-                <path d="M2,-4 C5,-11 10,-13 8,-8 C6,-3 2,0 0,2 C-1,3 0,1 2,-4 Z" fill="#F5A623" transform="rotate(308.57)"/>
-              </g>
-            </svg>
-          </div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-top">
-            <strong>LocalLinked</strong>
-            <span class="exp-date">May – Aug 2025</span>
-          </div>
-          <div class="exp-meta">MBA Project · Talent Lead &amp; GTM Strategy</div>
-          <div class="muted">Led a team of 4 working directly with founders to scope, design, and execute LocalLinked's full go-to-market strategy — aligning university partnerships, business onboarding, revenue modelling, hiring, marketing, and student engagement into a launch blueprint the company adopted.</div>
-          <ul class="exp-bullets">
-            <li>Achieved 85% of 2,000-student onboarding target in week one by securing exclusive placement in official university communications and residence hall welcome packs.</li>
-            <li>Onboarded 36 local businesses pre-launch with a data-driven partnership strategy and commission-only revenue model, minimising adoption risk.</li>
-            <li>Created the hiring blueprint for all founding team roles — defining scope, responsibilities, success metrics, and progression pathways.</li>
-            <li>Designed a career-focused Student Ambassador Program operating as a structured internship.</li>
-          </ul>
-        </div>
+);
+const PVA = ({ problem, action }) => (
+  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16, marginBottom:20 }}>
+    {[["Problem", problem],["Action", action]].map(([lbl,txt])=>(
+      <div key={lbl}>
+        <div style={{ fontSize:9, fontWeight:700, letterSpacing:2, textTransform:"uppercase", color:C.muted, marginBottom:6 }}>{lbl}</div>
+        <div style={{ fontSize:13, color:C.muted2, lineHeight:1.65 }}>{txt}</div>
       </div>
-
-      <!-- StackShift -->
-      <div class="card exp-card reveal reveal-delay-2">
-        <div class="exp-left">
-          <div class="company-logo-box" style="background:#0f1f14;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
-              <rect x="14" y="14" width="22" height="22" rx="5" fill="#8aaab8" opacity="0.55"/>
-              <rect x="9"  y="10" width="22" height="22" rx="5" fill="#2E6B8A"/>
-              <ellipse cx="20" cy="21" rx="4.5" ry="3.2" fill="#1a4a63"/>
-              <rect x="4"  y="5"  width="22" height="22" rx="5" fill="#5DB442"/>
-              <ellipse cx="15" cy="16" rx="4.5" ry="3.2" fill="#3d8a28"/>
-            </svg>
-          </div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-top">
-            <strong>StackShift</strong>
-            <span class="exp-date">2023 – 2024</span>
-          </div>
-          <div class="exp-meta">Senior Talent Manager</div>
-          <div class="muted">StackShift connects early-stage VC-funded startups with the top 1% of global talent using a unique recruiting model.</div>
-          <ul class="exp-bullets">
-            <li>Built the talent function from 0→1, becoming a trusted strategic partner to founders and driving hiring outcomes that generated founder-to-founder referrals.</li>
-            <li>Scaled the internal team from 2→6 (4 recruiters + 2 sourcers) and formalised the full recruiting operating system.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- On Deck -->
-      <div class="card exp-card reveal reveal-delay-3">
-        <div class="exp-left">
-          <div class="company-logo-box" style="background:#1E2A3A;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
-              <rect width="44" height="44" rx="8" fill="#1E2A3A"/>
-              <circle cx="22" cy="22" r="14" fill="none" stroke="#EEE8DC" stroke-width="3.5"/>
-              <path d="M19 13 L19 31 Q29 31 29 22 Q29 13 19 13 Z" fill="#EEE8DC"/>
-              <rect x="19" y="15.5" width="10" height="2"  rx="0.5" fill="#1E2A3A"/>
-              <rect x="19" y="19.5" width="10" height="2"  rx="0.5" fill="#1E2A3A"/>
-              <rect x="19" y="23.5" width="9"  height="2"  rx="0.5" fill="#1E2A3A"/>
-              <rect x="19" y="27.5" width="7"  height="2"  rx="0.5" fill="#1E2A3A"/>
-            </svg>
-          </div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-top">
-            <strong>On Deck</strong>
-            <span class="exp-date">2021 – 2022</span>
-          </div>
-          <div class="exp-meta">Senior Talent Partner</div>
-          <div class="muted">Founding member of the talent team. Built On Deck's technical hiring framework from 0→1, partnering directly with the CTO across Engineering, Product, Design, and ML.</div>
-          <ul class="exp-bullets">
-            <li>Doubled outreach performance — open rates 25%→60%, response rates 15%→30% — within one month of rewriting sourcing strategy and candidate messaging.</li>
-            <li>Reduced average time-to-hire by 48% (60→28 days) by installing a data-driven hiring cadence and tighter decision cycles.</li>
-            <li>Maintained 100% offer-acceptance rate through structured pre-close steps and hiring manager coaching.</li>
-            <li>Hired 25 people in first 9 months: 16 Engineers, 1 EM, 1 ML Engineer, 1 Data Scientist, 4 PMs, 2 Designers.</li>
-            <li>Designed company-wide diversity hiring architecture delivering a 30% increase in representation across technical functions.</li>
-          </ul>
-          <div class="stat-pills">
-            <span class="stat-pill">48% faster time-to-hire</span>
-            <span class="stat-pill">100% offer acceptance</span>
-            <span class="stat-pill">25 hires in 9 months</span>
-            <span class="stat-pill">30% diversity increase</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- GitLab -->
-      <div class="card exp-card reveal reveal-delay-4">
-        <div class="exp-left">
-          <div class="company-logo-box" style="background:#2d1f0e;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586 559" width="30" height="30">
-              <path fill="#e24329" d="M461.37 301.73 293 557 124.63 301.73l57.19-175.79L293 0l111.18 125.94z"/>
-              <path fill="#fc6d26" d="M461.37 301.73H586L461.37 125.94zM0 301.73h124.63L0 125.94z"/>
-              <path fill="#fca326" d="M124.63 301.73 293 557 0 301.73zM461.37 301.73 293 557l293-255.27z"/>
-              <path fill="#e24329" d="M124.63 125.94 0 301.73l124.63-175.79zM461.37 125.94 586 301.73 461.37 125.94z"/>
-            </svg>
-          </div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-top">
-            <strong>GitLab</strong>
-            <span class="exp-date">2018 – 2020</span>
-          </div>
-          <div class="exp-meta">Technical Recruiter</div>
-          <div class="muted">Owned hiring strategy for GitLab's backend and infrastructure org during a critical hyper-growth phase, partnering with the Director of Engineering across globally distributed teams.</div>
-          <ul class="exp-bullets">
-            <li>Eliminated a six-month hiring backlog in under 90 days, restoring predictable hiring velocity across globally distributed teams.</li>
-            <li>Contributed to 220% engineering headcount growth in 2019 — GitLab expanded from ~400 to 1,200+ team members.</li>
-            <li>Grew engineering diversity from 0%→30% of hires without compromising technical or cultural standards.</li>
-            <li>Achieved 92% positive candidate experience score through a closed-loop feedback and quality system.</li>
-            <li>Recognised by the VP of Engineering for outsized impact during a defining growth phase.</li>
-          </ul>
-          <div class="stat-pills">
-            <span class="stat-pill">220% headcount growth</span>
-            <span class="stat-pill">92% candidate NPS</span>
-            <span class="stat-pill">Backlog cleared in 90 days</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Andela -->
-      <div class="card exp-card reveal reveal-delay-5">
-        <div class="exp-left">
-          <div class="company-logo-box" style="background:#0b1f1e;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
-              <path d="M22 4 L34 10.5 L36 23 L34 35.5 L22 40 L10 35.5 L8 23 L10 10.5 Z"
-                    fill="none" stroke="#1B4D4A" stroke-width="3" stroke-linejoin="round"/>
-              <path d="M22 10 L24.5 22 L22 34 L19.5 22 Z" fill="#1B4D4A"/>
-              <path d="M10 22 L22 24.5 L34 22 L22 19.5 Z" fill="#1B4D4A"/>
-            </svg>
-          </div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-top">
-            <strong>Andela</strong>
-            <span class="exp-date">Prior</span>
-          </div>
-          <div class="exp-meta">Recruiting Operations</div>
-          <div class="muted">Contributed to recruiting operations within globally distributed technical teams across Africa and Europe, supporting Andela's mission to connect African engineers with world-class opportunities.</div>
-        </div>
-      </div>
-
-    </div>
+    ))}
   </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <div class="section-label reveal">Capabilities</div>
-    <h2 class="reveal">Core Competencies</h2>
-    <div class="skills-grid" id="skillsGrid"></div>
+);
+const Metrics = ({ items }) => (
+  <div style={{ display:"flex", flexWrap:"wrap", gap:8, marginBottom:24 }}>
+    {items.map((m,i)=>(
+      <div key={i} style={{ display:"flex", flexDirection:"column", gap:3, background:"rgba(91,141,238,0.08)", border:"1px solid rgba(91,141,238,0.2)", borderRadius:10, padding:"10px 16px" }}>
+        <span style={{ fontFamily:"'Syne',sans-serif", fontSize:18, fontWeight:800, color:C.accent, letterSpacing:-0.5, lineHeight:1 }}>{m[0]}</span>
+        <span style={{ fontSize:10, color:C.muted, fontWeight:500, marginTop:2 }}>{m[1]}</span>
+      </div>
+    ))}
   </div>
-</section>
+);
+const VizTitle = ({ c }) => <div style={{ fontSize:11, fontWeight:700, letterSpacing:1.5, textTransform:"uppercase", color:C.muted, marginBottom:14 }}>{c}</div>;
+const Leverage = ({ c, top }) => (
+  <div style={{ fontSize:13, color:C.muted2, lineHeight:1.65, padding:"14px 16px", borderLeft:"2px solid rgba(56,217,169,0.5)", background:"rgba(56,217,169,0.04)", borderRadius:"0 8px 8px 0", fontStyle:"italic", marginTop: top || 0 }}>{c}</div>
+);
 
-<div class="divider"></div>
-
-<!-- TECH STACK -->
-<section id="stack">
-  <div class="container">
-    <div class="section-label reveal">Tools</div>
-    <h2 class="reveal">Tech Stack</h2>
-    <div class="tech-grid">
-      <div class="tech-card reveal reveal-delay-1">
-        <div class="tech-card-label">ATS</div>
-        <div class="tech-tags">
-          <span class="tech-tag">Greenhouse</span>
-          <span class="tech-tag">Lever</span>
-          <span class="tech-tag">Ashby</span>
-        </div>
-      </div>
-      <div class="tech-card reveal reveal-delay-2">
-        <div class="tech-card-label">Sourcing &amp; Outreach</div>
-        <div class="tech-tags">
-          <span class="tech-tag">LinkedIn Recruiter</span>
-          <span class="tech-tag">Lemlist</span>
-          <span class="tech-tag">Entelo</span>
-          <span class="tech-tag">ContactOut</span>
-          <span class="tech-tag">SalesQL</span>
-          <span class="tech-tag">Teamable</span>
-        </div>
-      </div>
-      <div class="tech-card reveal reveal-delay-3">
-        <div class="tech-card-label">Productivity &amp; Collaboration</div>
-        <div class="tech-tags">
-          <span class="tech-tag">G-Suite</span>
-          <span class="tech-tag">Slack</span>
-          <span class="tech-tag">Notion</span>
-          <span class="tech-tag">Zoom / Teams</span>
-          <span class="tech-tag">GitHub</span>
-        </div>
-      </div>
-      <div class="tech-card reveal reveal-delay-4">
-        <div class="tech-card-label">Data &amp; Reporting</div>
-        <div class="tech-tags">
-          <span class="tech-tag">DreamTeam</span>
-          <span class="tech-tag">Greenhouse Reporting</span>
-          <span class="tech-tag">Lever Analytics</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- EDUCATION & CERTIFICATIONS -->
-<section id="education">
-  <div class="container">
-    <div class="section-label reveal">Background</div>
-    <h2 class="reveal">Education &amp; Certifications</h2>
-
-    <div class="sub-label reveal">Education</div>
-    <div class="grid">
-
-      <!-- University of Portsmouth -->
-      <div class="card exp-card reveal reveal-delay-1">
-        <div class="exp-left">
-          <div class="company-logo-box" style="background:#f5f5f5;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="44" height="44">
-              <path d="M10 6 Q10 4 12 4 L32 4 Q34 4 34 6 L34 30 Q34 42 22 42 Q10 42 10 30 Z" fill="#5B9BD5"/>
-              <path d="M20 20 L46 20 L46 42 L30 42 L24 50 L24 42 L20 42 Z" fill="#6B2D8B"/>
-              <path d="M20 20 L34 20 L34 42 L24 42 L24 50 L24 42 L20 42 Z" fill="#3d1a5e" opacity="0.55"/>
-              <path d="M22 4 L34 4 L34 18 Z" fill="#3a7ab5" opacity="0.5"/>
-            </svg>
-          </div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-top">
-            <strong>MBA — Business &amp; Artificial Intelligence</strong>
-            <span class="exp-date">2026</span>
-          </div>
-          <div class="muted">University of Portsmouth · United Kingdom</div>
-        </div>
-      </div>
-
-      <!-- Griffith College Dublin -->
-      <div class="card exp-card reveal reveal-delay-2">
-        <div class="exp-left">
-          <div class="company-logo-box" style="background:#CC1F2D;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
-              <rect width="44" height="44" fill="#CC1F2D"/>
-              <rect x="5"  y="18" width="34" height="16" fill="white" opacity="0.9"/>
-              <rect x="15" y="13" width="14" height="21" fill="white"/>
-              <polygon points="22,8 29,13 15,13" fill="white"/>
-              <rect x="20" y="4"  width="4"  height="6"  fill="white"/>
-              <rect x="7"  y="22" width="4"  height="5"  fill="#CC1F2D" opacity="0.7"/>
-              <rect x="13" y="22" width="4"  height="5"  fill="#CC1F2D" opacity="0.7"/>
-              <rect x="17" y="17" width="3"  height="4"  fill="#CC1F2D" opacity="0.7"/>
-              <rect x="24" y="17" width="3"  height="4"  fill="#CC1F2D" opacity="0.7"/>
-              <rect x="27" y="22" width="4"  height="5"  fill="#CC1F2D" opacity="0.7"/>
-              <rect x="33" y="22" width="4"  height="5"  fill="#CC1F2D" opacity="0.7"/>
-              <rect x="3"  y="34" width="38" height="2"  fill="white" opacity="0.5"/>
-              <text x="22" y="41" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="4.2" fill="white" letter-spacing="0.5">GRIFFITH COLLEGE</text>
-            </svg>
-          </div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-top">
-            <strong>BTech — Electrical &amp; Electronics Engineering</strong>
-            <span class="exp-date">2014</span>
-          </div>
-          <div class="exp-meta">First Class Honours</div>
-          <div class="muted">Griffith College Dublin · Republic of Ireland</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="sub-label reveal sub-section">Certifications</div>
-    <div class="grid">
-      <div class="card exp-card reveal reveal-delay-1">
-        <div class="exp-left">
-          <div class="company-logo-box" style="background:#041929;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
-              <rect x="4" y="4" width="36" height="36" rx="6" fill="#0A66C2"/>
-              <circle cx="14" cy="13" r="2.5" fill="#fff"/>
-              <rect x="11.5" y="17" width="5"  height="14" rx="1" fill="#fff"/>
-              <rect x="19.5" y="17" width="5"  height="14" rx="1" fill="#fff"/>
-              <path d="M24.5 20 Q24.5 17 28.5 17 Q32.5 17 32.5 21 L32.5 31 L27.5 31 L27.5 22 Q27.5 20.5 26 20.5 Q24.5 20.5 24.5 22 Z" fill="#fff"/>
-            </svg>
-          </div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-top">
-            <strong>Generative AI for Recruiting</strong>
-            <span class="exp-date">Feb 2026</span>
-          </div>
-          <div class="muted">LinkedIn Learning</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FOOTER -->
-<div class="container">
-  <footer>
-    <span>© 2026 Trust Ogor. All rights reserved.</span>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/togor/" target="_blank">LinkedIn</a>
-      <a href="mailto:trustogor@gmail.com">Email</a>
-    </div>
-  </footer>
-</div>
-
-<!-- JAVASCRIPT -->
-<script>
-  document.getElementById('homeBtn').addEventListener('click', e => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  const blob = document.getElementById('glowBlob');
-  document.addEventListener('mousemove', e => {
-    blob.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
-  });
-
-  const mainNav = document.getElementById('mainNav');
-  window.addEventListener('scroll', () => {
-    mainNav.classList.toggle('scrolled', window.scrollY > 30);
-  });
-
-  const roles = [
-    'Senior Talent Leader',
-    'Technical Recruiting Specialist',
-    'Talent Architecture Designer',
-    'Hiring Systems Builder',
+// ── Outreach bar chart (static SVG bars) ──
+const OutreachChart = () => {
+  const data = [
+    { label: "Open Rate",     before: 25, after: 60 },
+    { label: "Response Rate", before: 15, after: 30 },
   ];
-  let roleIndex = 0, charIndex = 0, deleting = false;
-  const tw = document.getElementById('typewriter');
-  function type() {
-    const current = roles[roleIndex];
-    if (!deleting) {
-      tw.textContent = current.slice(0, ++charIndex);
-      if (charIndex === current.length) { deleting = true; setTimeout(type, 1800); return; }
-    } else {
-      tw.textContent = current.slice(0, --charIndex);
-      if (charIndex === 0) { deleting = false; roleIndex = (roleIndex + 1) % roles.length; }
-    }
-    setTimeout(type, deleting ? 45 : 75);
-  }
-  setTimeout(type, 1000);
+  const maxVal = 80;
+  const barW = 60, gap = 8, groupGap = 60, h = 160, leftPad = 36;
+  return (
+    <div style={{ marginBottom: 20 }}>
+      <VizTitle c="Outreach Engine — Before vs After" />
+      <svg width="100%" viewBox={`0 0 ${leftPad + data.length * (barW*2+gap+groupGap)} ${h+40}`} style={{ overflow:"visible" }}>
+        {/* Y gridlines */}
+        {[0,20,40,60,80].map(v => {
+          const y = h - (v/maxVal)*h;
+          return <g key={v}>
+            <line x1={leftPad} y1={y} x2={leftPad + data.length*(barW*2+gap+groupGap)-20} y2={y} stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
+            <text x={leftPad-6} y={y+4} textAnchor="end" fontSize="10" fill={C.muted}>{v}%</text>
+          </g>;
+        })}
+        {data.map((d, gi) => {
+          const x = leftPad + gi*(barW*2+gap+groupGap);
+          const bH = (d.before/maxVal)*h;
+          const aH = (d.after/maxVal)*h;
+          return <g key={d.label}>
+            {/* Before bar */}
+            <rect x={x} y={h-bH} width={barW} height={bH} rx="4" fill="rgba(100,116,139,0.35)" stroke="rgba(100,116,139,0.6)" strokeWidth="1"/>
+            <text x={x+barW/2} y={h-bH-5} textAnchor="middle" fontSize="11" fill={C.muted} fontWeight="600">{d.before}%</text>
+            {/* After bar */}
+            <rect x={x+barW+gap} y={h-aH} width={barW} height={aH} rx="4" fill="rgba(91,141,238,0.7)" stroke={C.accent} strokeWidth="1"/>
+            <text x={x+barW+gap+barW/2} y={h-aH-5} textAnchor="middle" fontSize="11" fill={C.accent} fontWeight="700">{d.after}%</text>
+            {/* Group label */}
+            <text x={x+barW+gap/2} y={h+18} textAnchor="middle" fontSize="12" fill={C.muted2}>{d.label}</text>
+          </g>;
+        })}
+        {/* Legend */}
+        <rect x={leftPad} y={h+30} width={10} height={10} rx="2" fill="rgba(100,116,139,0.35)" stroke="rgba(100,116,139,0.6)" strokeWidth="1"/>
+        <text x={leftPad+14} y={h+39} fontSize="11" fill={C.muted}>Before</text>
+        <rect x={leftPad+70} y={h+30} width={10} height={10} rx="2" fill="rgba(91,141,238,0.7)"/>
+        <text x={leftPad+84} y={h+39} fontSize="11" fill={C.muted}>After</text>
+      </svg>
+    </div>
+  );
+};
 
-  const revealObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
-  const skills = [
-    { name: 'Talent Architecture',        level: 96 },
-    { name: 'Global Hiring Strategy',     level: 93 },
-    { name: 'Executive Partnerships',     level: 90 },
-    { name: 'Data-Led Recruiting',        level: 88 },
-    { name: 'Interview Enablement',       level: 91 },
-    { name: 'Recruiting Operations',      level: 92 },
-    { name: 'Technical Fluency',          level: 85 },
-    { name: 'People Management',          level: 87 },
-    { name: 'Culture & Values Alignment', level: 89 },
-    { name: 'Pipeline Design',            level: 94 },
-    { name: 'Diversity Hiring',           level: 90 },
-    { name: 'Generative AI Tools',        level: 78 },
+// ── GitLab line chart (static SVG) ──
+const GitLabChart = () => {
+  const pts = [
+    { label: "Q1 '18",  v: 400 },
+    { label: "Q2 '18",  v: 420 },
+    { label: "Q3 '18",  v: 440, note: "Trust joins" },
+    { label: "Q4 '18",  v: 560 },
+    { label: "Q1 '19",  v: 700 },
+    { label: "Q2 '19",  v: 880 },
+    { label: "Q3 '19",  v: 1050 },
+    { label: "Q4 '19",  v: 1200, note: "End" },
   ];
+  const W = 560, H = 160, pad = { l:48, r:20, t:16, b:36 };
+  const minV = 300, maxV = 1300;
+  const xScale = i => pad.l + i*(W-pad.l-pad.r)/(pts.length-1);
+  const yScale = v => pad.t + (H-pad.t-pad.b) * (1-(v-minV)/(maxV-minV));
+  const pathD = pts.map((p,i)=>`${i===0?'M':'L'}${xScale(i)},${yScale(p.v)}`).join(' ');
+  const areaD = pathD + ` L${xScale(pts.length-1)},${H-pad.b} L${pad.l},${H-pad.b} Z`;
+  const yTicks = [400,600,800,1000,1200];
+  return (
+    <div style={{ marginBottom: 20 }}>
+      <VizTitle c="Engineering Team Size — GitLab 2018–2019" />
+      <svg width="100%" viewBox={`0 0 ${W} ${H}`} style={{ overflow:"visible" }}>
+        <defs>
+          <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={C.accent} stopOpacity="0.2"/>
+            <stop offset="100%" stopColor={C.accent} stopOpacity="0.01"/>
+          </linearGradient>
+        </defs>
+        {/* Grid */}
+        {yTicks.map(v => (
+          <g key={v}>
+            <line x1={pad.l} y1={yScale(v)} x2={W-pad.r} y2={yScale(v)} stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
+            <text x={pad.l-6} y={yScale(v)+4} textAnchor="end" fontSize="9.5" fill={C.muted}>{v>=1000?v/1000+'k':v}</text>
+          </g>
+        ))}
+        {/* Highlight: Trust's active window Q3'18 → Q4'19 */}
+        <rect x={xScale(2)} y={pad.t} width={xScale(7)-xScale(2)} height={H-pad.t-pad.b} fill="rgba(91,141,238,0.04)" rx="4"/>
+        <text x={(xScale(2)+xScale(7))/2} y={pad.t-4} textAnchor="middle" fontSize="9" fill="rgba(91,141,238,0.5)" fontStyle="italic">Trust's active period</text>
+        {/* Area fill */}
+        <path d={areaD} fill="url(#lineGrad)"/>
+        {/* Line */}
+        <path d={pathD} fill="none" stroke={C.accent} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"/>
+        {/* Points */}
+        {pts.map((p,i) => (
+          <g key={i}>
+            <circle cx={xScale(i)} cy={yScale(p.v)} r="5" fill={C.accent} stroke="#080c14" strokeWidth="2"/>
+            {p.note && <text x={xScale(i)} y={yScale(p.v)-12} textAnchor="middle" fontSize="9" fill={C.accent} fontWeight="600">{p.note}</text>}
+            <text x={xScale(i)} y={H-pad.b+14} textAnchor="middle" fontSize="9.5" fill={C.muted}>{p.label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+};
 
-  const skillsGrid = document.getElementById('skillsGrid');
-  const barObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const fill = e.target.querySelector('.skill-bar-fill');
-        if (fill) setTimeout(() => { fill.style.width = fill.dataset.level + '%'; }, 150);
-        barObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.3 });
+// ── StackShift architecture layers ──
+const archLayers = [
+  { num:"L6", dot:"#a87eff", name:"Documentation & Knowledge Infrastructure", desc:"Company Recruiting Handbook, interview rubrics, sourcing playbooks, hiring manager training, compliance frameworks.", tags:["Recruiting Handbook","Interview Rubrics","Sourcing Playbooks","HM Training"] },
+  { num:"L5", dot:"#7ba8ff", name:"Founder Operating Reviews", desc:"Weekly executive reviews translating hiring data into workforce planning decisions. Role sequencing against product and GTM roadmap.", tags:["Weekly Reviews","Workforce Planning","Strategic Alignment","Role Sequencing"] },
+  { num:"L4", dot:"#5b8dee", name:"Data & Analytics Layer", desc:"Pipeline health dashboards, funnel diagnostics, offer analytics, constraint analysis, and time-to-hire reporting.", tags:["DreamTeam","Funnel Metrics","Pipeline Health","Offer Analytics"] },
+  { num:"L3", dot:"#38d9a9", name:"Hiring Cadence & Offer Control", desc:"Structured decision cycles, weekly funnel reviews, pre-close expectation-setting. Maintained 100% offer acceptance.", tags:["Decision Cadence","Pre-Close Framework","Offer Narrative"] },
+  { num:"L2", dot:"#5deac4", name:"Evaluation Framework & Candidate Experience", desc:"Structured role-specific interview rubrics, bar-raising assessment, bias-mitigation protocols, candidate touchpoint framework.", tags:["Structured Interviews","Bar-Raising","Bias Mitigation","Candidate NPS"] },
+  { num:"L1", dot:"#38d9a9", name:"Sourcing Engine & Outreach", desc:"Multi-channel sourcing strategy. Rewrote talent narratives and outbound sequences to double engagement rates.", tags:["LinkedIn Recruiter","Lemlist","Entelo","ContactOut","SalesQL","Teamable"] },
+];
 
-  skills.forEach((s, i) => {
-    const el = document.createElement('div');
-    el.className = 'skill-item reveal';
-    el.style.transitionDelay = `${(i % 4) * 0.08}s`;
-    el.innerHTML = `
-      <div class="skill-name">${s.name}</div>
-      <div class="skill-bar-track">
-        <div class="skill-bar-fill" data-level="${s.level}"></div>
-      </div>`;
-    skillsGrid.appendChild(el);
-    revealObs.observe(el);
-    barObs.observe(el);
-  });
-</script>
-</body>
-</html>
+const ArchLayer = ({ num, dot, name, desc, tags }) => (
+  <div style={{ display:"flex", alignItems:"flex-start", gap:16, padding:"13px 16px", border:`1px solid ${C.border}`, borderBottom:"none", background:"rgba(255,255,255,0.015)", position:"relative" }}>
+    <div style={{ flexShrink:0, display:"flex", flexDirection:"column", alignItems:"center", gap:4, width:32 }}>
+      <span style={{ fontFamily:"'Syne',sans-serif", fontSize:10, fontWeight:800, color:C.accent, opacity:0.5 }}>{num}</span>
+      <div style={{ width:8, height:8, borderRadius:"50%", background:dot, flexShrink:0 }}/>
+    </div>
+    <div style={{ flex:1 }}>
+      <div style={{ fontSize:13, fontWeight:600, color:C.text, marginBottom:3 }}>{name}</div>
+      <div style={{ fontSize:12, color:C.muted2, lineHeight:1.5, marginBottom:6 }}>{desc}</div>
+      <div style={{ display:"flex", flexWrap:"wrap", gap:5 }}>
+        {tags.map(t => <span key={t} style={{ fontSize:11, color:C.muted, background:"rgba(255,255,255,0.04)", border:`1px solid ${C.border}`, borderRadius:4, padding:"2px 7px" }}>{t}</span>)}
+      </div>
+    </div>
+  </div>
+);
+
+// ── LocalLinked pillars ──
+const pillars = [
+  { color:"#5b8dee", icon:"🎓", name:"University Partnerships", stat:"85%", statColor:C.accent, detail:"Of 2,000-student target hit in week one via exclusive university comms and residence hall placements." },
+  { color:C.teal,   icon:"🤝", name:"Business Network",        stat:"36",  statColor:C.teal,   detail:"Local businesses onboarded pre-launch using a commission-only revenue model that minimised adoption risk." },
+  { color:"#a87eff", icon:"⚙️", name:"Team Architecture",      stat:"0→1", statColor:"#a87eff", detail:"Full hiring blueprint for all founding roles + Ambassador Program designed as a structured career-entry internship." },
+];
+
+const skills = [
+  "Talent Architecture","Global Hiring Strategy","Executive Partnerships","Data-Led Recruiting",
+  "Interview Enablement","Recruiting Operations","Technical Fluency","People Management",
+  "Culture & Values Alignment","Pipeline Design","Diversity Hiring","Generative AI Tools",
+];
+
+const techData = [
+  { label:"ATS",                icon:"🗂",  iconBg:"rgba(91,141,238,0.12)", tags:["Greenhouse","Lever","Ashby"] },
+  { label:"Sourcing & Outreach",icon:"🔍",  iconBg:"rgba(56,217,169,0.12)", tags:["LinkedIn Recruiter","Lemlist","Entelo","ContactOut","SalesQL","Teamable"] },
+  { label:"Productivity",       icon:"⚡",  iconBg:"rgba(168,116,255,0.12)",tags:["G-Suite","Slack","Notion","Zoom / Teams","GitHub"] },
+  { label:"Data & Reporting",   icon:"📊",  iconBg:"rgba(251,189,35,0.12)", tags:["DreamTeam","Greenhouse Reporting","Lever Analytics"] },
+];
+
+export default function Preview() {
+  return (
+    <div style={{ fontFamily:"'DM Sans',sans-serif", background:C.bg, color:C.text, minWidth:900 }}>
+      <style>{gs}</style>
+
+      {/* NAV */}
+      <div style={{ background:"rgba(8,12,20,0.97)", borderBottom:`1px solid ${C.border}`, padding:"18px 0" }}>
+        <Wrap>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+            <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:15, color:C.text }}>Home</span>
+            <div style={{ display:"flex", gap:28, fontSize:14 }}>
+              {["Experience","Projects","Skills","Stack","Education"].map(l=><span key={l} style={{ color:C.muted }}>{l}</span>)}
+            </div>
+          </div>
+        </Wrap>
+      </div>
+
+      {/* HERO */}
+      <Wrap>
+        <div style={{ padding:"60px 0 40px" }}>
+          <h1 style={{ fontFamily:"'Syne',sans-serif", fontSize:68, fontWeight:800, lineHeight:1.06, letterSpacing:-2, marginBottom:18 }}>
+            <span style={{ display:"block" }}>Trust Ogor,</span>
+            <span style={{ display:"block", color:C.accent }}>MBA.</span>
+          </h1>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:10, marginBottom:20 }}>
+            <span style={{ width:7, height:7, borderRadius:"50%", background:C.accent, animation:"pulse 1.5s ease-in-out infinite", display:"inline-block", flexShrink:0 }}/>
+            <span style={{ fontSize:10, fontWeight:700, letterSpacing:2, textTransform:"uppercase", color:C.accent, background:"rgba(91,141,238,0.1)", border:"1px solid rgba(91,141,238,0.25)", padding:"4px 10px", borderRadius:4, flexShrink:0 }}>Now</span>
+            <span style={{ fontSize:14, color:C.muted2, borderRight:`2px solid ${C.accent}`, paddingRight:6 }}>Senior Talent Leader</span>
+          </div>
+          <p style={{ maxWidth:680, color:C.muted2, lineHeight:1.75, fontSize:15, marginBottom:28 }}>Senior Talent Leader specialising in building scalable, high-performance hiring engines for engineering-led and AI-centric companies. 7+ years partnering with founders, CTOs, and executive teams — turning hiring into a structural competitive advantage rather than a reactive function.</p>
+          <div style={{ display:"flex", gap:14 }}>
+            <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, padding:"13px 28px", borderRadius:50, fontSize:14, fontWeight:500, background:"rgba(91,141,238,0.1)", color:"#a8c4ff", border:"1px solid rgba(91,141,238,0.28)", textDecoration:"none" }}>LinkedIn</a>
+            <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, padding:"13px 28px", borderRadius:50, fontSize:14, fontWeight:500, background:"rgba(56,217,169,0.08)", color:"#7de8cb", border:"1px solid rgba(56,217,169,0.22)", textDecoration:"none" }}>Email</a>
+          </div>
+        </div>
+      </Wrap>
+      <Divider/>
+
+      {/* EXPERIENCE (condensed) */}
+      <Wrap style={{ padding:"40px 40px" }}>
+        <SL c="Career"/><H2 c="Experience"/>
+        <ExpCard bg="#111111" Logo={LL} title="LocalLinked" date="May–Aug 2025" meta="MBA Project · Talent Lead & GTM Strategy" desc="Led a 4-person team to design and deliver LocalLinked's full go-to-market strategy — adopted wholesale by the founding team."/>
+        <ExpCard bg="#0f1f14" Logo={SS} title="StackShift" date="2023–2024" meta="Senior Talent Manager" desc="Built the full talent function from 0→1 and scaled the internal team from 2→6."/>
+        <ExpCard bg="#1E2A3A" Logo={OD} title="On Deck" date="2021–2022" meta="Senior Talent Partner" desc="Founding talent team member. Reduced TTH 48%, maintained 100% offer acceptance, made 25 hires in 9 months." pills={["48% faster TTH","100% offer acceptance","25 hires / 9 mo","30% diversity ↑"]}/>
+        <ExpCard bg="#2d1f0e" Logo={GL} title="GitLab" date="2018–2020" meta="Technical Recruiter" desc="Cleared 6-month backlog in under 90 days during 220% headcount growth phase." pills={["220% growth","92% NPS","Backlog <90d"]}/>
+        <ExpCard bg="#0b1f1e" Logo={AN} title="Andela" date="Prior" meta="Recruiting Operations" desc="Recruiting ops across distributed tech teams in Africa and Europe."/>
+      </Wrap>
+      <Divider/>
+
+      {/* ════════════════════════════════
+          SELECTED PROJECTS — 10x
+      ════════════════════════════════ */}
+      <Wrap style={{ padding:"40px 40px" }}>
+        <SL c="Impact"/>
+        <H2 c="Selected Projects"/>
+        <p style={{ color:C.muted2, fontSize:15, marginBottom:32, maxWidth:640, lineHeight:1.7 }}>
+          Four high-leverage engagements where I operated as a systems architect — designing infrastructure, not just filling roles.
+        </p>
+
+        {/* ── 01 On Deck Hiring OS ── */}
+        <ProjCard num="01" title="Hiring Operating System — On Deck" ctx="Engineering · Product · Design · ML · Senior Talent Partner · 2021–2022">
+          <PVA
+            problem="60-day average time-to-hire. Fragmented interview loops with no shared evaluation standard. Outbound response rates below 15%. No repeatable cadence — every hire was a one-off effort."
+            action="Rewrote all outbound talent narratives and sourcing sequences. Restructured interview architecture with role-specific rubrics. Introduced pre-close coaching and weekly hiring decision reviews with the CTO. Embedded data tracking at every funnel stage."
+          />
+          <Metrics items={[["48%","Faster time-to-hire"],["60→28d","Days to hire"],["100%","Offer acceptance"],["25","Hires / 9 months"],["+30%","Diversity representation"]]}/>
+          <OutreachChart/>
+          <Leverage c="Built a repeatable hiring operating system that turned ad-hoc recruiting into a predictable growth engine — still in use well beyond the initial scale phase."/>
+        </ProjCard>
+
+        {/* ── 02 StackShift 0→1 ── */}
+        <ProjCard num="02" title="0→1 Talent Operating System — StackShift" ctx="Full Talent Function Build · People Operations · Senior Talent Manager · 2023–2024">
+          <PVA
+            problem="Zero talent infrastructure. Founders managing all hiring reactively with no sourcing system, no evaluation framework, no team, and no data. High-growth targets with nothing to build on."
+            action="Designed and operationalised the full Talent Operating System from scratch: six interconnected layers spanning sourcing, candidate experience, evaluation, hiring cadence, analytics, and documentation. Hired and managed the internal team, scaling it from 2 to 6."
+          />
+          <Metrics items={[["2→6","Team scaled"],["6","System layers built"],["0→1","Function built"],["Referral","Founder-to-founder growth"]]}/>
+          <div style={{ marginBottom:20 }}>
+            <VizTitle c="Talent Operating System — Architecture"/>
+            <div style={{ border:`1px solid ${C.border}`, borderRadius:10, overflow:"hidden" }}>
+              {archLayers.map((l,i)=>(
+                <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:16, padding:"13px 16px", borderBottom: i<archLayers.length-1 ? `1px solid ${C.border}` : "none", background:"rgba(255,255,255,0.015)" }}>
+                  <div style={{ flexShrink:0, display:"flex", flexDirection:"column", alignItems:"center", gap:4, width:32 }}>
+                    <span style={{ fontFamily:"'Syne',sans-serif", fontSize:10, fontWeight:800, color:C.accent, opacity:0.5 }}>{l.num}</span>
+                    <div style={{ width:8, height:8, borderRadius:"50%", background:l.dot }}/>
+                  </div>
+                  <div style={{ flex:1 }}>
+                    <div style={{ fontSize:13, fontWeight:600, color:C.text, marginBottom:3 }}>{l.name}</div>
+                    <div style={{ fontSize:12, color:C.muted2, lineHeight:1.5, marginBottom:6 }}>{l.desc}</div>
+                    <div style={{ display:"flex", flexWrap:"wrap", gap:5 }}>
+                      {l.tags.map(t=><span key={t} style={{ fontSize:11, color:C.muted, background:"rgba(255,255,255,0.04)", border:`1px solid ${C.border}`, borderRadius:4, padding:"2px 7px" }}>{t}</span>)}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <Leverage c="A self-sustaining talent engine built from zero — trusted enough by founders to generate inbound referrals, the strongest signal of operating credibility at the startup level."/>
+        </ProjCard>
+
+        {/* ── 03 GitLab Backlog ── */}
+        <ProjCard num="03" title="Engineering Backlog Elimination & Scale — GitLab" ctx="Backend & Infrastructure Engineering · Technical Recruiter · 2018–2020">
+          <PVA
+            problem="Six-month hiring backlog across backend and infrastructure. Engineering velocity had stalled at a critical scale point, directly blocking roadmap execution."
+            action="Rebuilt sourcing pipeline from scratch. Partnered with the Director of Engineering to re-sequence all open roles by impact. Restructured interview loops for speed. Grew diversity from 0% to 30% of hires without lowering the bar."
+          />
+          <Metrics items={[["<90d","Backlog cleared"],["220%","Headcount growth"],["400→1,200","Team size"],["92%","Candidate NPS"],["0→30%","Diversity of hires"]]}/>
+          <GitLabChart/>
+          {/* Leadership collab card */}
+          <div style={{ background:"rgba(91,141,238,0.06)", border:"1px solid rgba(91,141,238,0.2)", borderRadius:12, padding:"16px 18px", marginBottom:16, display:"flex", gap:14, alignItems:"flex-start" }}>
+            <span style={{ fontSize:20, flexShrink:0, marginTop:2 }}>🤝</span>
+            <div>
+              <div style={{ fontSize:10, fontWeight:700, letterSpacing:1.5, textTransform:"uppercase", color:C.accent, marginBottom:5 }}>Leadership Collaboration</div>
+              <div style={{ fontSize:13, color:C.muted2, lineHeight:1.6 }}>Operated as a strategic partner to the Director of Engineering — translating backlog into a prioritised hiring roadmap, running weekly constraint reviews, and maintaining direct alignment with VP-level on pace and quality. Recognised by the VP of Engineering for outsized impact during GitLab's defining growth phase.</div>
+            </div>
+          </div>
+          <Leverage c="Restored engineering velocity at GitLab's most critical inflection point. A direct structural enabler of one of the most significant engineering scale-ups in the company's history."/>
+        </ProjCard>
+
+        {/* ── 04 LocalLinked GTM ── */}
+        <ProjCard num="04" title="GTM Strategy & Talent Blueprint — LocalLinked" ctx="MBA Project · Full Go-To-Market Architecture · Talent Lead · 2025">
+          <PVA
+            problem="Pre-launch platform with no GTM strategy, no business development framework, no hiring blueprint, and no university partnership model. Required a complete operating strategy built to launch standard."
+            action="Led a 4-person team to design and deliver a full GTM architecture: university onboarding, business partnership model, commission-based revenue framework, hiring blueprints for all founding roles, ambassador programme, and marketing architecture."
+          />
+          <Metrics items={[["85%","Student target week 1"],["36","Businesses pre-launch"],["2,000","Student target"],["Adopted","By founding team"]]}/>
+          {/* Three pillar visual */}
+          <div style={{ marginBottom:20 }}>
+            <VizTitle c="Go-To-Market Architecture — Three Pillars"/>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:12 }}>
+              {pillars.map((p,i)=>(
+                <div key={i} style={{ background:"rgba(255,255,255,0.025)", border:`1px solid ${C.border}`, borderRadius:12, padding:"16px", position:"relative", overflow:"hidden" }}>
+                  <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:`linear-gradient(90deg, ${p.color}, ${p.color}88)`, borderRadius:"12px 12px 0 0" }}/>
+                  <div style={{ fontSize:22, marginBottom:8 }}>{p.icon}</div>
+                  <div style={{ fontSize:12, fontWeight:700, color:C.text, marginBottom:6 }}>{p.name}</div>
+                  <div style={{ fontFamily:"'Syne',sans-serif", fontSize:24, fontWeight:800, color:p.statColor, letterSpacing:-0.5, lineHeight:1, marginBottom:6 }}>{p.stat}</div>
+                  <div style={{ fontSize:11.5, color:C.muted2, lineHeight:1.5 }}>{p.detail}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <Leverage c="Delivered a complete company launch blueprint — not a slide deck. Every component was adopted wholesale by the founding team, demonstrating the ability to operate at founder level across talent, GTM, revenue, and business strategy simultaneously."/>
+        </ProjCard>
+      </Wrap>
+      <Divider/>
+
+      {/* SKILLS */}
+      <Wrap style={{ padding:"40px 40px" }}>
+        <SL c="Capabilities"/><H2 c="Core Competencies"/>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(6,1fr)", gap:10 }}>
+          {skills.map(s=><div key={s} style={{ background:C.surface, border:`1px solid ${C.border}`, borderRadius:12, padding:"14px 16px" }}><div style={{ fontSize:13, fontWeight:500, color:C.text }}>{s}</div></div>)}
+        </div>
+      </Wrap>
+      <Divider/>
+
+      {/* TECH STACK */}
+      <Wrap style={{ padding:"40px 40px" }}>
+        <SL c="Tools"/><H2 c="Tech Stack"/>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 2fr 1.7fr 1.3fr", gap:12 }}>
+          {techData.map(t=>(
+            <div key={t.label} style={{ background:C.surface, border:`1px solid ${C.border}`, borderRadius:16, padding:"20px 20px 44px", position:"relative", overflow:"hidden" }}>
+              <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:14 }}>
+                <div style={{ width:28, height:28, borderRadius:8, background:t.iconBg, display:"flex", alignItems:"center", justifyContent:"center", fontSize:14, flexShrink:0 }}>{t.icon}</div>
+                <span style={{ fontSize:10, fontWeight:700, letterSpacing:1.8, textTransform:"uppercase", color:C.accent }}>{t.label}</span>
+              </div>
+              <div style={{ display:"flex", flexWrap:"wrap", gap:7 }}>{t.tags.map(tag=><Tag key={tag} c={tag}/>)}</div>
+              <span style={{ position:"absolute", bottom:12, right:16, fontSize:32, fontWeight:800, color:"rgba(91,141,238,0.07)", fontFamily:"'Syne',sans-serif", lineHeight:1 }}>{t.tags.length}</span>
+            </div>
+          ))}
+        </div>
+      </Wrap>
+      <Divider/>
+
+      {/* EDUCATION */}
+      <Wrap style={{ padding:"40px 40px" }}>
+        <SL c="Background"/><H2 c="Education & Certifications"/>
+        <SubLabel c="Education"/>
+        <ExpCard bg="#f5f5f5" Logo={PO} title="MBA — Business & Artificial Intelligence" date="2026" desc="University of Portsmouth · United Kingdom"/>
+        <ExpCard bg="#CC1F2D" Logo={GC} title="BTech — Electrical & Electronics Engineering" date="2014" meta="First Class Honours" desc="Griffith College Dublin · Republic of Ireland"/>
+        <SubLabel c="Certifications" top={24}/>
+        <ExpCard bg="#041929" Logo={LI2} title="Generative AI for Recruiting" date="Feb 2026" desc="LinkedIn Learning"/>
+      </Wrap>
+      <Divider/>
+
+      {/* FOOTER */}
+      <Wrap>
+        <div style={{ padding:"28px 0", fontSize:13, color:C.muted, display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+          <span>© 2026 Trust Ogor. All rights reserved.</span>
+          <div style={{ display:"flex", gap:20 }}>
+            <a href="#" style={{ color:C.muted, textDecoration:"none" }}>LinkedIn</a>
+            <a href="#" style={{ color:C.muted, textDecoration:"none" }}>Email</a>
+          </div>
+        </div>
+      </Wrap>
+    </div>
+  );
+}
