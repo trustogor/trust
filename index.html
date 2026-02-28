@@ -78,21 +78,31 @@ h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:700;let
 .sub-section{margin-top:24px}
 
 /* SKILLS */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-.skill-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;transition:all .25s ease}
-.skill-item:hover{border-color:rgba(91,141,238,.35);transform:translateY(-3px)}
-.skill-name{font-size:13px;font-weight:500;color:var(--text)}
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px 22px;transition:all .3s ease;position:relative;overflow:hidden}
+.comp-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(91,141,238,0.05) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.comp-card:hover{transform:translateY(-4px);border-color:rgba(91,141,238,.3);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.comp-card:hover::before{opacity:1}
+.comp-icon-wrap{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px;flex-shrink:0}
+.comp-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.3}
+.comp-desc{font-size:12px;color:var(--muted2);line-height:1.6}
 
 /* TECH STACK */
-.tech-mosaic{display:grid;grid-template-columns:1fr 2fr 1.7fr 1.3fr;gap:12px}
-.tech-tile{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px 20px 18px;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s}
-.tech-tile:hover{border-color:rgba(91,141,238,.28);box-shadow:0 12px 36px rgba(0,0,0,.28);transform:translateY(-3px)}
-.tech-tile-header{display:flex;align-items:center;gap:8px;margin-bottom:14px}
-.tech-tile-icon{width:28px;height:28px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
-.tech-tile-label{font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent)}
-.tech-tags{display:flex;flex-wrap:wrap;gap:7px}
-.tech-tag{font-size:12px;color:var(--muted2);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:4px 10px}
-.tech-tile-count{position:absolute;bottom:14px;right:16px;font-size:28px;font-weight:800;color:rgba(91,141,238,.08);font-family:'Plus Jakarta Sans',sans-serif;line-height:1}
+.stack-diagram{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.stack-layer{border:1px solid var(--border);border-bottom:none;background:rgba(255,255,255,0.015);transition:background .2s;position:relative;overflow:hidden}
+.stack-layer:first-child{border-radius:14px 14px 0 0}
+.stack-layer:last-child{border-bottom:1px solid var(--border);border-radius:0 0 14px 14px}
+.stack-layer:hover{background:rgba(91,141,238,0.05)}
+.stack-layer-inner{display:flex;align-items:center;gap:0;min-height:72px}
+.stack-layer-label{width:200px;flex-shrink:0;padding:16px 20px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:5px}
+.stack-layer-num{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);opacity:0.6}
+.stack-layer-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:var(--text);line-height:1.3}
+.stack-layer-accent{height:2px;width:100%;position:absolute;top:0;left:0}
+.stack-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:16px 20px;flex:1}
+.stack-tool{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 11px;transition:all .2s}
+.stack-tool:hover{border-color:rgba(91,141,238,0.3);background:rgba(91,141,238,0.06)}
+.stack-tool-logo{width:18px;height:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.stack-tool-name{font-size:12px;color:var(--muted2);font-weight:500;white-space:nowrap}
 
 /* PROJECTS */
 .proj-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px 30px;margin-bottom:20px;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s}
@@ -202,17 +212,12 @@ footer a:hover{color:var(--accent)}
 
 <div class="container">
   <div class="hero">
-    <h1>
-      <span class="line">Trust Ogor,</span>
-      <span class="line accent">MBA.</span>
-    </h1>
+    <h1><span class="line">Trust Ogor, <span class="accent">MBA.</span></span></h1>
     <div class="ticker-wrap">
-      <span class="ticker-dot"></span>
-      <span class="ticker-label">Now</span>
       <span class="ticker-text" id="typewriter"></span>
     </div>
     <p class="description">
-      Senior Talent Leader specialising in building scalable, high-performance hiring engines for engineering-led and AI-centric companies. I've spent 7+ years partnering with founders, CTOs, and executive teams at high-growth environments (GitLab, On Deck, StackShift, Andela), hiring elite Engineering, ML, Product, and GTM talent while designing 0&#8594;1 and scale-ready recruiting systems. Deep technical fluency, data-driven decision making, and an MBA in Artificial Intelligence enable me to combine talent strategy, AI-driven automation, and business objectives &#8212; turning hiring into a structural competitive advantage rather than a reactive function.
+      Senior Talent Leader with 7+ years building scalable recruiting engines at GitLab, On Deck, StackShift, and Andela. I partner with founders and CTOs to design hiring systems that scale &#8212; combining talent strategy, technical fluency, and an MBA with specialisation in AI to deliver outcomes that go beyond the hire.
     </p>
     <div class="buttons">
       <a href="https://www.linkedin.com/in/togor/" target="_blank" class="btn btn-linkedin">
@@ -242,7 +247,7 @@ footer a:hover{color:var(--accent)}
       </div>
       <div class="exp-right">
         <div class="exp-top"><strong>LocalLinked</strong><span class="exp-date">May &#8211; Aug 2025</span></div>
-        <div class="exp-meta">MBA Project &#183; Talent Lead &amp; GTM Strategy</div>
+        <div class="exp-meta">MBA Project &#183; Operations Lead</div>
         <div class="muted">Led a team of 4 working directly with founders to scope, design, and execute LocalLinked's full go-to-market strategy &#8212; aligning university partnerships, business onboarding, revenue modelling, hiring, marketing, and student engagement into a launch blueprint the company adopted.</div>
         <ul class="exp-bullets">
           <li>Achieved 85% of 2,000-student onboarding target in week one by securing exclusive placement in official university communications and residence hall welcome packs.</li>
@@ -320,9 +325,25 @@ footer a:hover{color:var(--accent)}
         <svg viewBox="0 0 44 44" width="44" height="44"><path d="M22 4 L34 10.5 L36 23 L34 35.5 L22 40 L10 35.5 L8 23 L10 10.5 Z" fill="none" stroke="#1B4D4A" stroke-width="3" stroke-linejoin="round"/><path d="M22 10 L24.5 22 L22 34 L19.5 22 Z" fill="#1B4D4A"/><path d="M10 22 L22 24.5 L34 22 L22 19.5 Z" fill="#1B4D4A"/></svg>
       </div>
       <div class="exp-right">
-        <div class="exp-top"><strong>Andela</strong><span class="exp-date">Prior</span></div>
-        <div class="exp-meta">Recruiting Operations</div>
-        <div class="muted">Contributed to recruiting operations within globally distributed technical teams across Africa and Europe, supporting Andela's mission to connect African engineers with world-class opportunities.</div>
+        <div class="exp-top"><strong>Andela</strong><span class="exp-date">2016 &#x2013; 2018</span></div>
+        <div class="exp-meta">Senior Technical Recruiter</div>
+        <div class="muted">Andela identifies and develops top software engineering talent across Africa, embedding engineers with world-class companies globally. Worked within a distributed recruiting team responsible for senior software developer hiring across Nigeria, Ghana, Cameroon, Kenya, and Uganda &#x2014; partnering closely with the VP of Global Operations, Directors of Engineering, Engineering Managers, the Data team, and PeopleOps to scale technical teams at pace.</div>
+        <ul class="exp-bullets">
+          <li>Sourced, engaged, screened, and managed the full interview process for senior engineering talent across five African markets &#x2014; hiring 57 engineers in total, including 6 female engineers, contributing to a 404% team growth in just two quarters.</li>
+          <li>Promoted within two quarters of joining, in recognition of hiring performance and cross-functional impact.</li>
+          <li>Partnered with engineering leaders, recruiting leadership, PeopleOps, and data analytics to design and embed a fully optimised hiring process with strong emphasis on candidate experience, data integrity, diversity, and values alignment.</li>
+          <li>Pioneered a sourcing-led hiring strategy &#x2014; running structured outreach campaigns and talent mapping exercises that shifted the team from reactive to proactive pipeline building.</li>
+          <li>Organised and spoke at tech events and engineering meetups across hiring markets, specifically targeting senior engineers and engineering managers to build direct recruiting pipelines. Converted event relationships into strong hires.</li>
+          <li>Led the design and delivery of interview training workshops for hiring managers and interviewers across all five hiring locations, raising consistency and quality of candidate experience.</li>
+          <li>Co-developed the Andela Interview Guidelines (AIG) &#x2014; a company-wide interviewing framework designed to standardise and elevate the interview experience across all locations and roles.</li>
+          <li>Built and maintained data-driven recruiting processes, tracking and analysing key metrics including time-to-hire, offer acceptance rates, NPS scores, and diversity figures to generate actionable insights.</li>
+        </ul>
+        <div class="stat-pills">
+          <span class="stat-pill">57 engineers hired</span>
+          <span class="stat-pill">404% team growth in 2 quarters</span>
+          <span class="stat-pill">Promoted in 2 quarters</span>
+          <span class="stat-pill">5 hiring markets</span>
+        </div>
       </div>
     </div>
 
@@ -336,59 +357,63 @@ footer a:hover{color:var(--accent)}
 <section id="projects">
 <div class="container">
   <div class="section-label reveal">Impact</div>
-  <h2 class="reveal">Selected Projects</h2>
-  <p class="reveal" style="color:var(--muted2);font-size:15px;margin-bottom:32px;max-width:640px;line-height:1.7;">Four high-leverage engagements where I operated as a systems architect &#8212; designing infrastructure, not just filling roles.</p>
+  <h2 class="reveal">Highlights</h2>
+  <p class="reveal" style="color:var(--muted2);font-size:15px;margin-bottom:32px;max-width:640px;line-height:1.7;">Driving measurable outcomes across every layer of the talent function &#x2014; from candidate experience to company growth.</p>
 
   <!-- 01 On Deck Hiring OS -->
   <div class="proj-card reveal d1">
     <div class="proj-top">
-      <div class="proj-num">01</div>
       <div>
-        <div class="proj-title">GTM Strategy &amp; Talent Blueprint &#8212; LocalLinked</div>
-        <div class="proj-ctx">MBA Project &#183; Full Go-To-Market Architecture &#183; Talent Lead &#183; 2025</div>
+        <div class="proj-title">Operations Lead &#8212; LocalLinked</div>
+        <div class="proj-ctx">Pre-Launch Startup &#183; MBA Project &#183; Operations Lead &#183; 2025</div>
       </div>
     </div>
     <div class="proj-pva">
       <div>
         <div class="proj-blk-label">Problem</div>
-        <div class="proj-blk-text">Pre-launch platform with no GTM strategy, no business development framework, no hiring blueprint, and no university partnership model. Required a complete operating strategy built to launch standard.</div>
+        <div class="proj-blk-text">A student discount and rewards platform preparing to launch with no route to students, no local business network, no revenue model, no hiring plan, and no GTM strategy. Founders needed someone to build the entire launch architecture across every function simultaneously.</div>
       </div>
       <div>
         <div class="proj-blk-label">Action</div>
-        <div class="proj-blk-text">Led a 4-person team to design and deliver a full GTM architecture: university onboarding, business partnership model, commission revenue framework, hiring blueprints for all founding roles, ambassador programme, and marketing architecture.</div>
+        <div class="proj-blk-text">Led a 4-person team working directly with the founders &#8212; secured an exclusive university partnership to reach students through official channels, signed 36 local businesses on a commission-only model, designed the revenue framework, built AI-powered in-app recommendation logic to personalise student offers, created the full hiring blueprint for all founding roles, and launched a structured Student Ambassador Programme as a career-entry internship pathway. Activated a branded LocalLinked booth during orientation week, deploying brand ambassadors to onboard students directly on the ground.</div>
       </div>
     </div>
     <div class="proj-metrics-row">
-      <div class="proj-metric"><span class="proj-metric-val">85%</span><span class="proj-metric-lbl">Student target week 1</span></div>
-      <div class="proj-metric"><span class="proj-metric-val">36</span><span class="proj-metric-lbl">Businesses pre-launch</span></div>
-      <div class="proj-metric"><span class="proj-metric-val">2,000</span><span class="proj-metric-lbl">Student onboarding target</span></div>
-      <div class="proj-metric"><span class="proj-metric-val">Adopted</span><span class="proj-metric-lbl">By founding team</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">1,700</span><span class="proj-metric-lbl">Students onboarded week one</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">36</span><span class="proj-metric-lbl">Businesses signed pre-launch</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">0&#8594;1</span><span class="proj-metric-lbl">Revenue model designed &amp; adopted</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">Full</span><span class="proj-metric-lbl">Hiring blueprint delivered</span></div>
     </div>
-    <div class="proj-viz-title">Go-To-Market Architecture &#8212; Three Pillars</div>
-    <div class="pillar-grid">
-      <div class="pillar-card pillar-a">
+    <div class="proj-viz-title">Launch Architecture &#8212; Four Pillars</div>
+    <div class="pillar-grid" style="grid-template-columns:repeat(4,1fr);">
+      <div class="pillar-card p1">
         <div class="pillar-icon">&#127891;</div>
         <div class="pillar-name">University Partnerships</div>
-        <div class="pillar-stat" style="color:var(--accent)">85%</div>
-        <div class="pillar-detail">Of 2,000-student target hit in week one via exclusive university communications and residence hall placements.</div>
+        <div class="pillar-stat" style="color:var(--accent);font-size:20px;">1,700</div>
+        <div class="pillar-detail">Students onboarded in week one via exclusive university comms and residence hall placements, backed by a branded orientation booth with ambassadors onboarding students on the ground. The institutional credibility of official university channels replaced what would have cost thousands in ads, social media, and paid campaigns.</div>
       </div>
-      <div class="pillar-card pillar-b">
+      <div class="pillar-card p2">
         <div class="pillar-icon">&#129309;</div>
         <div class="pillar-name">Business Network</div>
-        <div class="pillar-stat" style="color:var(--teal)">36</div>
-        <div class="pillar-detail">Local businesses onboarded pre-launch using a commission-only revenue model that minimised adoption risk for early partners.</div>
+        <div class="pillar-stat" style="color:var(--teal);font-size:22px;">36</div>
+        <div class="pillar-detail">Local businesses onboarded pre-launch on a commission-only model, eliminating upfront cost as a barrier to adoption.</div>
       </div>
-      <div class="pillar-card pillar-c">
+      <div class="pillar-card p3">
+        <div class="pillar-icon">&#129302;</div>
+        <div class="pillar-name">AI &amp; Product</div>
+        <div class="pillar-stat" style="color:#a87eff;font-size:20px;">In-App</div>
+        <div class="pillar-detail">Designed AI-powered recommendation logic personalising student offers by location, category, and browsing behaviour.</div>
+      </div>
+      <div class="pillar-card p1" style="--p-accent:#38d9a9;">
         <div class="pillar-icon">&#9881;&#65039;</div>
         <div class="pillar-name">Team Architecture</div>
-        <div class="pillar-stat" style="color:#a87eff">0&#8594;1</div>
-        <div class="pillar-detail">Full hiring blueprint for all founding roles + a structured Ambassador Program designed as a real career-entry internship pathway.</div>
+        <div class="pillar-stat" style="color:var(--teal);font-size:22px;">0&#8594;1</div>
+        <div class="pillar-detail">Full hiring blueprint for all founding roles + Ambassador Programme structured as a real career-entry internship.</div>
       </div>
     </div>
-    <div class="proj-leverage">Delivered a complete company launch blueprint &#8212; not a slide deck. Every component was adopted wholesale by the founding team, demonstrating the ability to operate at founder level across talent, GTM, revenue, and business strategy simultaneously.</div>
+    <div class="proj-leverage">Delivered a fully operational launch blueprint across GTM, revenue, product, and talent &#8212; not a slide deck. Every component was adopted by the founding team, demonstrating the ability to operate at founder level across multiple functions simultaneously.</div>
   </div><div class="proj-card reveal d2">
     <div class="proj-top">
-      <div class="proj-num">02</div>
       <div>
         <div class="proj-title">0&#8594;1 Talent Operating System &#8212; StackShift</div>
         <div class="proj-ctx">Full Talent Function Build &#183; People Operations &#183; Senior Talent Manager &#183; 2023&#8211;2024</div>
@@ -397,11 +422,11 @@ footer a:hover{color:var(--accent)}
     <div class="proj-pva">
       <div>
         <div class="proj-blk-label">Problem</div>
-        <div class="proj-blk-text">Zero talent infrastructure. Founders managing all hiring reactively with no sourcing system, no evaluation framework, no team, and no data. High-growth targets with nothing to build on.</div>
+        <div class="proj-blk-text">Zero talent infrastructure. Founders managing all hiring reactively with no sourcing system, no evaluation framework, no team, and no data.</div>
       </div>
       <div>
         <div class="proj-blk-label">Action</div>
-        <div class="proj-blk-text">Designed and operationalised the full Talent Operating System from scratch: six interconnected layers spanning sourcing, candidate experience, evaluation, hiring cadence, analytics, and documentation. Scaled internal team from 2 to 6.</div>
+        <div class="proj-blk-text">Designed and operationalised the full Talent Operating System from scratch across six interconnected layers. Hired and managed the internal team, scaling from 2 to 6.</div>
       </div>
     </div>
     <div class="proj-metrics-row">
@@ -413,37 +438,59 @@ footer a:hover{color:var(--accent)}
     <div class="proj-viz-title">Talent Operating System &#8212; Architecture</div>
     <div class="arch-wrap">
       <div class="arch-layer">
-        <span class="arch-lnum">L6</span><div class="arch-dot" style="background:#a87eff"></div>
-        <div><div class="arch-name">Documentation &amp; Knowledge Infrastructure</div><div class="arch-desc">Company Recruiting Handbook, interview rubrics, sourcing playbooks, hiring manager training, compliance frameworks.</div><div class="arch-tags"><span class="arch-tag">Recruiting Handbook</span><span class="arch-tag">Interview Rubrics</span><span class="arch-tag">Sourcing Playbooks</span><span class="arch-tag">HM Training</span></div></div>
+        <div class="arch-layer-left"><span class="arch-layer-num">L6</span><div class="arch-layer-dot" style="background:#a87eff;"></div></div>
+        <div class="arch-layer-body">
+          <div class="arch-layer-name">Documentation &amp; Knowledge Infrastructure</div>
+          <div class="arch-layer-desc">Company Recruiting Handbook, interview rubrics, sourcing playbooks, hiring manager training, compliance frameworks.</div>
+          <div class="arch-tags"><span class="arch-tag">Recruiting Handbook</span><span class="arch-tag">Interview Rubrics</span><span class="arch-tag">Sourcing Playbooks</span><span class="arch-tag">HM Training</span></div>
+        </div>
       </div>
       <div class="arch-layer">
-        <span class="arch-lnum">L5</span><div class="arch-dot" style="background:#7ba8ff"></div>
-        <div><div class="arch-name">Founder Operating Reviews</div><div class="arch-desc">Weekly executive reviews translating hiring data into workforce planning decisions. Role sequencing against product and GTM roadmap.</div><div class="arch-tags"><span class="arch-tag">Weekly Reviews</span><span class="arch-tag">Workforce Planning</span><span class="arch-tag">Strategic Alignment</span><span class="arch-tag">Role Sequencing</span></div></div>
+        <div class="arch-layer-left"><span class="arch-layer-num">L5</span><div class="arch-layer-dot" style="background:#7ba8ff;"></div></div>
+        <div class="arch-layer-body">
+          <div class="arch-layer-name">Founder Operating Reviews</div>
+          <div class="arch-layer-desc">Weekly executive reviews translating hiring data into workforce planning. Role sequencing against product and GTM roadmap.</div>
+          <div class="arch-tags"><span class="arch-tag">Weekly Reviews</span><span class="arch-tag">Workforce Planning</span><span class="arch-tag">Strategic Alignment</span><span class="arch-tag">Role Sequencing</span></div>
+        </div>
       </div>
       <div class="arch-layer">
-        <span class="arch-lnum">L4</span><div class="arch-dot" style="background:#5b8dee"></div>
-        <div><div class="arch-name">Data &amp; Analytics Layer</div><div class="arch-desc">Pipeline health dashboards, funnel diagnostics, offer analytics, constraint analysis, and time-to-hire reporting to drive decisions at every stage.</div><div class="arch-tags"><span class="arch-tag">DreamTeam</span><span class="arch-tag">Funnel Metrics</span><span class="arch-tag">Pipeline Health</span><span class="arch-tag">Offer Analytics</span></div></div>
+        <div class="arch-layer-left"><span class="arch-layer-num">L4</span><div class="arch-layer-dot" style="background:#5b8dee;"></div></div>
+        <div class="arch-layer-body">
+          <div class="arch-layer-name">Data &amp; Analytics Layer</div>
+          <div class="arch-layer-desc">Pipeline health dashboards, funnel diagnostics, offer analytics, constraint analysis, and time-to-hire reporting.</div>
+          <div class="arch-tags"><span class="arch-tag">DreamTeam</span><span class="arch-tag">Funnel Metrics</span><span class="arch-tag">Pipeline Health</span><span class="arch-tag">Offer Analytics</span></div>
+        </div>
       </div>
       <div class="arch-layer">
-        <span class="arch-lnum">L3</span><div class="arch-dot" style="background:#38d9a9"></div>
-        <div><div class="arch-name">Hiring Cadence &amp; Offer Control</div><div class="arch-desc">Structured decision cycles, weekly funnel reviews, pre-close expectation-setting framework. Maintained 100% offer acceptance through narrative control.</div><div class="arch-tags"><span class="arch-tag">Decision Cadence</span><span class="arch-tag">Pre-Close Framework</span><span class="arch-tag">Offer Narrative</span></div></div>
+        <div class="arch-layer-left"><span class="arch-layer-num">L3</span><div class="arch-layer-dot" style="background:#38d9a9;"></div></div>
+        <div class="arch-layer-body">
+          <div class="arch-layer-name">Hiring Cadence &amp; Offer Control</div>
+          <div class="arch-layer-desc">Structured decision cycles, weekly funnel reviews, pre-close expectation-setting. Maintained 100% offer acceptance.</div>
+          <div class="arch-tags"><span class="arch-tag">Decision Cadence</span><span class="arch-tag">Pre-Close Framework</span><span class="arch-tag">Offer Narrative</span></div>
+        </div>
       </div>
       <div class="arch-layer">
-        <span class="arch-lnum">L2</span><div class="arch-dot" style="background:#5deac4"></div>
-        <div><div class="arch-name">Evaluation Framework &amp; Candidate Experience</div><div class="arch-desc">Role-specific interview rubrics, bar-raising assessment design, bias-mitigation protocols. Touchpoint framework for consistent candidate experience.</div><div class="arch-tags"><span class="arch-tag">Structured Interviews</span><span class="arch-tag">Bar-Raising</span><span class="arch-tag">Bias Mitigation</span><span class="arch-tag">Candidate NPS</span></div></div>
+        <div class="arch-layer-left"><span class="arch-layer-num">L2</span><div class="arch-layer-dot" style="background:#5deac4;"></div></div>
+        <div class="arch-layer-body">
+          <div class="arch-layer-name">Evaluation Framework &amp; Candidate Experience</div>
+          <div class="arch-layer-desc">Structured role-specific interview rubrics, bar-raising assessment, bias-mitigation protocols, candidate touchpoint framework.</div>
+          <div class="arch-tags"><span class="arch-tag">Structured Interviews</span><span class="arch-tag">Bar-Raising</span><span class="arch-tag">Bias Mitigation</span><span class="arch-tag">Candidate NPS</span></div>
+        </div>
       </div>
       <div class="arch-layer">
-        <span class="arch-lnum">L1</span><div class="arch-dot" style="background:#38d9a9"></div>
-        <div><div class="arch-name">Sourcing Engine &amp; Outreach</div><div class="arch-desc">Multi-channel sourcing strategy. Rewrote talent narratives and outbound sequences to double engagement rates.</div><div class="arch-tags"><span class="arch-tag">LinkedIn Recruiter</span><span class="arch-tag">Lemlist</span><span class="arch-tag">Entelo</span><span class="arch-tag">ContactOut</span><span class="arch-tag">SalesQL</span><span class="arch-tag">Teamable</span></div></div>
+        <div class="arch-layer-left"><span class="arch-layer-num">L1</span><div class="arch-layer-dot" style="background:#38d9a9;"></div></div>
+        <div class="arch-layer-body">
+          <div class="arch-layer-name">Sourcing Engine &amp; Outreach</div>
+          <div class="arch-layer-desc">Multi-channel sourcing strategy. Rewrote talent narratives and outbound sequences to double engagement rates.</div>
+          <div class="arch-tags"><span class="arch-tag">LinkedIn Recruiter</span><span class="arch-tag">Lemlist</span><span class="arch-tag">Entelo</span><span class="arch-tag">ContactOut</span><span class="arch-tag">SalesQL</span><span class="arch-tag">Teamable</span></div>
+        </div>
       </div>
     </div>
     <div class="proj-leverage">A self-sustaining talent engine built from zero &#8212; trusted enough by founders to generate inbound referrals, the strongest signal of operating credibility at the startup level.</div>
   </div>
-
   <!-- 03 GitLab Backlog -->
   <div class="proj-card reveal d3">
     <div class="proj-top">
-      <div class="proj-num">03</div>
       <div>
         <div class="proj-title">Hiring Operating System &#8212; On Deck</div>
         <div class="proj-ctx">Engineering &#183; Product &#183; Design &#183; ML &#183; Senior Talent Partner &#183; 2021&#8211;2022</div>
@@ -501,85 +548,134 @@ footer a:hover{color:var(--accent)}
   <!-- 02 StackShift 0-to-1 -->
   <div class="proj-card reveal d4">
     <div class="proj-top">
-      <div class="proj-num">04</div>
       <div>
-        <div class="proj-title">Engineering Backlog Elimination &amp; Scale &#8212; GitLab</div>
+        <div class="proj-title">Backend Engineering Hiring Build &#8212; GitLab</div>
         <div class="proj-ctx">Backend &amp; Infrastructure Engineering &#183; Technical Recruiter &#183; 2018&#8211;2020</div>
       </div>
     </div>
     <div class="proj-pva">
       <div>
         <div class="proj-blk-label">Problem</div>
-        <div class="proj-blk-text">Six-month hiring backlog across backend and infrastructure. Engineering velocity had stalled at a critical scale point, directly blocking roadmap execution.</div>
+        <div class="proj-blk-text">10 backend engineering teams running their own interviews with no shared process, no sourcing strategy, and no data. Engineering managers were scrambling to hire top talent individually &#8212; resulting in a 6-month hiring backlog that was directly stalling roadmap execution.</div>
       </div>
       <div>
         <div class="proj-blk-label">Action</div>
-        <div class="proj-blk-text">Rebuilt the sourcing pipeline from scratch. Partnered directly with the Director of Engineering to re-sequence all open roles by impact. Restructured interview loops for speed. Grew diversity from 0% to 30% without lowering the bar.</div>
+        <div class="proj-blk-text">Designed and rolled out a uniform hiring framework across all 10 teams. Trained interviewers, ran structured sourcing sprints with each hiring team, launched a targeted diversity campaign, and embedded candidate experience tracking alongside key recruiting metrics. Partnered directly with the Engineering Director and VP to sequence roles by impact and keep the pipeline moving.</div>
       </div>
     </div>
     <div class="proj-metrics-row">
-      <div class="proj-metric"><span class="proj-metric-val">&lt;90d</span><span class="proj-metric-lbl">Backlog cleared</span></div>
-      <div class="proj-metric"><span class="proj-metric-val">220%</span><span class="proj-metric-lbl">Headcount growth</span></div>
-      <div class="proj-metric"><span class="proj-metric-val">400&#8594;1,200</span><span class="proj-metric-lbl">Team size</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">&lt;3mo</span><span class="proj-metric-lbl">6-month backlog cleared</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">10&#8594;12</span><span class="proj-metric-lbl">Teams supported</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">~123%</span><span class="proj-metric-lbl">Backend team growth</span></div>
       <div class="proj-metric"><span class="proj-metric-val">92%</span><span class="proj-metric-lbl">Candidate NPS</span></div>
-      <div class="proj-metric"><span class="proj-metric-val">0&#8594;30%</span><span class="proj-metric-lbl">Diversity of hires</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">30%</span><span class="proj-metric-lbl">Diversity of hires</span></div>
     </div>
-    <div class="proj-viz-title">Engineering Team Growth &#8212; GitLab 2018&#8211;2019</div>
+    <div class="proj-viz-title">Growth &#8212; GitLab Overall vs. Backend Teams I Supported (% Growth)</div>
     <div class="chart-box">
-      <svg viewBox="0 0 560 185" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 580 205" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="glGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#5b8dee" stop-opacity=".18"/>
+            <stop offset="0%" stop-color="#5b8dee" stop-opacity=".15"/>
             <stop offset="100%" stop-color="#5b8dee" stop-opacity=".01"/>
           </linearGradient>
+          <linearGradient id="tealGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#38d9a9" stop-opacity=".15"/>
+            <stop offset="100%" stop-color="#38d9a9" stop-opacity=".01"/>
+          </linearGradient>
         </defs>
-        <line x1="48" y1="18" x2="545" y2="18" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-        <line x1="48" y1="50" x2="545" y2="50" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-        <line x1="48" y1="82" x2="545" y2="82" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-        <line x1="48" y1="114" x2="545" y2="114" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-        <line x1="48" y1="146" x2="545" y2="146" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-        <text x="42" y="22" text-anchor="end" font-size="9" fill="#64748b">1,300</text>
-        <text x="42" y="54" text-anchor="end" font-size="9" fill="#64748b">1,050</text>
-        <text x="42" y="86" text-anchor="end" font-size="9" fill="#64748b">800</text>
-        <text x="42" y="118" text-anchor="end" font-size="9" fill="#64748b">550</text>
-        <text x="42" y="150" text-anchor="end" font-size="9" fill="#64748b">300</text>
-        <rect x="190" y="18" width="355" height="128" fill="rgba(91,141,238,.04)" rx="3"/>
-        <text x="368" y="13" text-anchor="middle" font-size="9" fill="rgba(91,141,238,.5)" font-style="italic">Trust's active period</text>
-        <path d="M48,133 L120,131 L190,129 L261,118 L332,105 L403,89 L474,73 L545,61 L545,146 L48,146 Z" fill="url(#glGrad)"/>
-        <path d="M48,133 L120,131 L190,129 L261,118 L332,105 L403,89 L474,73 L545,61" fill="none" stroke="#5b8dee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="48"  cy="133" r="5" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
-        <circle cx="120" cy="131" r="5" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
-        <circle cx="190" cy="129" r="5" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
-        <circle cx="261" cy="118" r="5" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
-        <circle cx="332" cy="105" r="5" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
-        <circle cx="403" cy="89"  r="5" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
-        <circle cx="474" cy="73"  r="5" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
-        <circle cx="545" cy="61"  r="5" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
-        <text x="545" y="54" text-anchor="middle" font-size="9" fill="#5b8dee" font-weight="700">1,200</text>
-        <text x="48"  y="163" text-anchor="middle" font-size="9" fill="#64748b">Q1 '18</text>
-        <text x="120" y="163" text-anchor="middle" font-size="9" fill="#64748b">Q2 '18</text>
-        <text x="190" y="163" text-anchor="middle" font-size="9" fill="#5b8dee">Q3 '18</text>
-        <text x="261" y="163" text-anchor="middle" font-size="9" fill="#64748b">Q4 '18</text>
-        <text x="332" y="163" text-anchor="middle" font-size="9" fill="#64748b">Q1 '19</text>
-        <text x="403" y="163" text-anchor="middle" font-size="9" fill="#64748b">Q2 '19</text>
-        <text x="474" y="163" text-anchor="middle" font-size="9" fill="#64748b">Q3 '19</text>
-        <text x="545" y="163" text-anchor="middle" font-size="9" fill="#64748b">Q4 '19</text>
+
+        <!-- Grid lines — Y axis 0% to 220%, 5 lines at 0,55,110,165,220 -->
+        <!-- Y range: y=18 (220%) to y=148 (0%), 130px for 220 units, 1%=0.5909px -->
+        <line x1="52" y1="18"  x2="565" y2="18"  stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+        <line x1="52" y1="51"  x2="565" y2="51"  stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+        <line x1="52" y1="83"  x2="565" y2="83"  stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+        <line x1="52" y1="116" x2="565" y2="116" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+        <line x1="52" y1="148" x2="565" y2="148" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+
+        <!-- Y axis labels -->
+        <text x="46" y="22"  text-anchor="end" font-size="9" fill="#64748b">220%</text>
+        <text x="46" y="55"  text-anchor="end" font-size="9" fill="#64748b">165%</text>
+        <text x="46" y="87"  text-anchor="end" font-size="9" fill="#64748b">110%</text>
+        <text x="46" y="120" text-anchor="end" font-size="9" fill="#64748b">55%</text>
+        <text x="46" y="152" text-anchor="end" font-size="9" fill="#64748b">0%</text>
+
+        <!-- Y axis title -->
+        <text x="10" y="90" text-anchor="middle" font-size="8" fill="#64748b" transform="rotate(-90, 10, 90)">% Growth</text>
+
+        <!-- Highlight: Trust active period -->
+        <rect x="196" y="18" width="369" height="130" fill="rgba(91,141,238,.04)" rx="3"/>
+        <text x="380" y="13" text-anchor="middle" font-size="9" fill="rgba(91,141,238,.5)" font-style="italic">Trust&#x27;s active period</text>
+
+        <!-- GitLab overall % growth line (blue) -->
+        <!-- Q1'18=0%, Q2'18=10%, Q3'18=20%, Q4'18=55%, Q1'19=100%, Q2'19=150%, Q3'19=180%, Q4'19=200% -->
+        <!-- y = 148 - (pct * 0.5909) -->
+        <!-- 0%=148, 10%=142, 20%=136, 55%=115, 100%=89, 150%=59, 180%=42, 200%=30 -->
+        <path d="M52,148 L131,142 L196,136 L283,115 L370,89 L457,59 L522,42 L565,30 L565,148 L52,148 Z" fill="url(#glGrad)"/>
+        <path d="M52,148 L131,142 L196,136 L283,115 L370,89 L457,59 L522,42 L565,30" fill="none" stroke="#5b8dee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="52"  cy="148" r="4" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
+        <circle cx="131" cy="142" r="4" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
+        <circle cx="196" cy="136" r="4" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
+        <circle cx="283" cy="115" r="4" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
+        <circle cx="370" cy="89"  r="4" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
+        <circle cx="457" cy="59"  r="4" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
+        <circle cx="522" cy="42"  r="4" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
+        <circle cx="565" cy="30"  r="4" fill="#5b8dee" stroke="#080c14" stroke-width="2"/>
+        <text x="565" y="23" text-anchor="middle" font-size="9" fill="#5b8dee" font-weight="700">+200%</text>
+
+        <!-- Backend teams % growth line (teal, dashed) -->
+        <!-- Q1'18=0%, Q2'18=3%, Q3'18=8%, Q4'18=30%, Q1'19=60%, Q2'19=87%, Q3'19=108%, Q4'19=123% -->
+        <!-- 0%=148, 3%=146, 8%=143, 30%=130, 60%=113, 87%=97, 108%=84, 123%=75 -->
+        <path d="M52,148 L131,146 L196,143 L283,130 L370,113 L457,97 L522,84 L565,75 L565,148 L52,148 Z" fill="url(#tealGrad)"/>
+        <path d="M52,148 L131,146 L196,143 L283,130 L370,113 L457,97 L522,84 L565,75" fill="none" stroke="#38d9a9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,3"/>
+        <circle cx="52"  cy="148" r="4" fill="#38d9a9" stroke="#080c14" stroke-width="2"/>
+        <circle cx="131" cy="146" r="4" fill="#38d9a9" stroke="#080c14" stroke-width="2"/>
+        <circle cx="196" cy="143" r="4" fill="#38d9a9" stroke="#080c14" stroke-width="2"/>
+        <circle cx="283" cy="130" r="4" fill="#38d9a9" stroke="#080c14" stroke-width="2"/>
+        <circle cx="370" cy="113" r="4" fill="#38d9a9" stroke="#080c14" stroke-width="2"/>
+        <circle cx="457" cy="97"  r="4" fill="#38d9a9" stroke="#080c14" stroke-width="2"/>
+        <circle cx="522" cy="84"  r="4" fill="#38d9a9" stroke="#080c14" stroke-width="2"/>
+        <circle cx="565" cy="75"  r="4" fill="#38d9a9" stroke="#080c14" stroke-width="2"/>
+        <text x="565" y="68" text-anchor="middle" font-size="9" fill="#38d9a9" font-weight="700">+123%</text>
+
+        <!-- X axis labels -->
+        <text x="52"  y="167" text-anchor="middle" font-size="9" fill="#64748b">Q1 &#x27;18</text>
+        <text x="131" y="167" text-anchor="middle" font-size="9" fill="#64748b">Q2 &#x27;18</text>
+        <text x="196" y="167" text-anchor="middle" font-size="9" fill="#5b8dee">Q3 &#x27;18</text>
+        <text x="283" y="167" text-anchor="middle" font-size="9" fill="#64748b">Q4 &#x27;18</text>
+        <text x="370" y="167" text-anchor="middle" font-size="9" fill="#64748b">Q1 &#x27;19</text>
+        <text x="457" y="167" text-anchor="middle" font-size="9" fill="#64748b">Q2 &#x27;19</text>
+        <text x="522" y="167" text-anchor="middle" font-size="9" fill="#64748b">Q3 &#x27;19</text>
+        <text x="565" y="167" text-anchor="middle" font-size="9" fill="#64748b">Q4 &#x27;19</text>
+
+        <!-- Legend -->
+        <line x1="52" y1="185" x2="70" y2="185" stroke="#5b8dee" stroke-width="2"/>
+        <circle cx="61" cy="185" r="3" fill="#5b8dee"/>
+        <text x="74" y="189" font-size="9" fill="#94a3b8">GitLab overall headcount growth</text>
+        <line x1="230" y1="185" x2="248" y2="185" stroke="#38d9a9" stroke-width="2" stroke-dasharray="4,2"/>
+        <circle cx="239" cy="185" r="3" fill="#38d9a9"/>
+        <text x="252" y="189" font-size="9" fill="#94a3b8">Backend teams I supported</text>
       </svg>
     </div>
     <div class="collab-card">
       <span style="font-size:20px;flex-shrink:0;margin-top:2px">&#129309;</span>
       <div>
         <div class="collab-label">Leadership Collaboration</div>
-        <div class="collab-text">Operated as a strategic partner to the Director of Engineering &#8212; translating backlog into a prioritised hiring roadmap, running weekly constraint reviews, and maintaining direct alignment with VP-level on pace and quality. Recognised by the VP of Engineering for outsized impact during GitLab's defining growth phase.</div>
+        <div class="collab-text">Worked directly with the Engineering Director and VP of Engineering to sequence roles by business impact and maintain alignment on hiring pace and quality. Built strong working relationships with all 8 Engineering Managers, running regular syncs to calibrate on candidate quality, interview consistency, and funnel health across all 10 teams.</div>
       </div>
     </div>
-    <div class="proj-leverage">Restored engineering velocity at GitLab's most critical inflection point. A direct structural enabler of one of the most significant engineering scale-ups in the company's history.</div>
+    <div class="collab-card" style="margin-top:12px;background:rgba(56,217,169,0.05);border-color:rgba(56,217,169,0.2);">
+      <span style="font-size:20px;flex-shrink:0;margin-top:2px">&#11088;</span>
+      <div>
+        <div class="collab-label" style="color:var(--teal);">VP Recognition</div>
+        <div class="collab-text">Received a commendation from the VP of Engineering for getting the backend org back on track &#8212; acknowledged for rebuilding the hiring process, restoring team confidence in the recruiting function, and delivering consistent results across a complex, multi-team environment.</div>
+      </div>
+    </div>
+    <div class="proj-leverage">Built GitLab&#x27;s backend hiring infrastructure from the ground up &#8212; turning a fragmented, backlogged operation into a consistent, data-tracked recruiting engine across 10 teams. The 30% diversity rate was not incidental; it was by design.</div>
   </div>
-
-  <!-- 04 LocalLinked -->
+  4 LocalLinked -->
   
 
-</div>
+div>
 </section>
 
 <div class="divider"></div>
@@ -589,7 +685,45 @@ footer a:hover{color:var(--accent)}
 <div class="container">
   <div class="section-label reveal">Capabilities</div>
   <h2 class="reveal">Core Competencies</h2>
-  <div class="skills-grid" id="skillsGrid"></div>
+  <div class="comp-grid">
+
+    <div class="comp-card reveal reveal-delay-1">
+      <div class="comp-icon-wrap" style="background:rgba(91,141,238,0.12);">&#x1F3D7;</div>
+      <div class="comp-name">Talent Architecture &amp; Hiring Engine Design</div>
+      <div class="comp-desc">Building recruiting systems from 0&#x2192;1 and scaling them &#x2014; pipeline design, process infrastructure, ATS configuration, and the operating cadence that makes hiring repeatable and predictable.</div>
+    </div>
+
+    <div class="comp-card reveal reveal-delay-2">
+      <div class="comp-icon-wrap" style="background:rgba(56,217,169,0.12);">&#x1F916;</div>
+      <div class="comp-name">AI-Driven Recruiting &amp; Workflow Automation</div>
+      <div class="comp-desc">Applying generative AI and automation tools to sourcing, outreach, screening, and reporting workflows &#x2014; reducing friction, accelerating decisions, and keeping humans focused on what matters most.</div>
+    </div>
+
+    <div class="comp-card reveal reveal-delay-3">
+      <div class="comp-icon-wrap" style="background:rgba(168,126,255,0.12);">&#x1F91D;</div>
+      <div class="comp-name">Executive &amp; Founder Partnership</div>
+      <div class="comp-desc">Operating as a trusted strategic partner to founders, CTOs, and VPs &#x2014; translating business goals into hiring roadmaps, running executive reviews, and aligning talent strategy with product and GTM objectives.</div>
+    </div>
+
+    <div class="comp-card reveal reveal-delay-4">
+      <div class="comp-icon-wrap" style="background:rgba(251,189,35,0.12);">&#x1F310;</div>
+      <div class="comp-name">Global &amp; Distributed Hiring Strategy</div>
+      <div class="comp-desc">Designing and executing multi-market hiring across distributed teams &#x2014; from Africa and Europe to fully remote-first environments &#x2014; with deep understanding of sourcing dynamics, time zones, and cultural nuance.</div>
+    </div>
+
+    <div class="comp-card reveal reveal-delay-5">
+      <div class="comp-icon-wrap" style="background:rgba(238,91,91,0.12);">&#x2696;</div>
+      <div class="comp-name">Diversity, Equity &amp; Inclusive Hiring Systems</div>
+      <div class="comp-desc">Embedding DEI structurally into sourcing, evaluation, and decision-making &#x2014; not as a post-process correction, but as a foundational design principle that produces measurable, lasting representation outcomes.</div>
+    </div>
+
+    <div class="comp-card reveal reveal-delay-1">
+      <div class="comp-icon-wrap" style="background:rgba(56,217,169,0.08);">&#x2728;</div>
+      <div class="comp-name">Candidate Experience &amp; Employer Brand</div>
+      <div class="comp-desc">Designing the end-to-end candidate journey with intentionality &#x2014; from first outreach to offer close &#x2014; and shaping employer brand narratives that attract the right talent before a job post goes live.</div>
+    </div>
+
+  </div>
 </div>
 </section>
 
@@ -600,26 +734,56 @@ footer a:hover{color:var(--accent)}
 <div class="container">
   <div class="section-label reveal">Tools</div>
   <h2 class="reveal">Tech Stack</h2>
-  <div class="tech-mosaic reveal">
-    <div class="tech-tile reveal d1">
-      <div class="tech-tile-header"><div class="tech-tile-icon" style="background:rgba(91,141,238,.12)">&#128194;</div><span class="tech-tile-label">ATS</span></div>
-      <div class="tech-tags"><span class="tech-tag">Greenhouse</span><span class="tech-tag">Lever</span><span class="tech-tag">Ashby</span></div>
-      <span class="tech-tile-count">3</span>
+  <div class="stack-diagram reveal">
+    <div class="stack-layer">
+      <div class="stack-layer-accent" style="background:linear-gradient(90deg,#5b8dee,transparent);"></div>
+      <div class="stack-layer-inner">
+        <div class="stack-layer-label">
+          <span class="stack-layer-num">Layer 01</span>
+          <span class="stack-layer-name">Sourcing & Outreach</span>
+        </div>
+        <div class="stack-tools"><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#0A66C2"/><circle cx="5" cy="5" r="1.5" fill="#fff"/><rect x="3.5" y="7.5" width="3" height="7" rx="0.5" fill="#fff"/><rect x="8" y="7.5" width="3" height="7" rx="0.5" fill="#fff"/><path d="M11 9.5 Q11 7.5 13 7.5 Q15 7.5 15 10 L15 14.5 L12 14.5 L12 10.2 Q12 9.5 11 9.5 Z" fill="#fff"/></svg></div><span class="stack-tool-name">LinkedIn Recruiter</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#2563EB"/><text x="9" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="9" fill="#fff">EN</text></svg></div><span class="stack-tool-name">Entelo</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#E11D48"/><circle cx="9" cy="7" r="3" fill="#fff" opacity="0.9"/><path d="M3 15 Q3 11 9 11 Q15 11 15 15" fill="#fff" opacity="0.9"/></svg></div><span class="stack-tool-name">ContactOut</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#0EA5E9"/><text x="9" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="8" fill="#fff">SQL</text></svg></div><span class="stack-tool-name">SalesQL</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#7C3AED"/><circle cx="6" cy="8" r="2.2" fill="#fff" opacity="0.9"/><circle cx="12" cy="8" r="2.2" fill="#fff" opacity="0.7"/><path d="M2 15 Q2 12 6 12 Q9 11 12 12 Q16 12 16 15" fill="#fff" opacity="0.6"/></svg></div><span class="stack-tool-name">Teamable</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#FF5C00"/><path d="M3 6 L9 10 L15 6" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="6" width="12" height="8" rx="1" fill="none" stroke="#fff" stroke-width="1.2"/></svg></div><span class="stack-tool-name">Lemlist</span></div></div>
+      </div>
     </div>
-    <div class="tech-tile reveal d2">
-      <div class="tech-tile-header"><div class="tech-tile-icon" style="background:rgba(56,217,169,.12)">&#128269;</div><span class="tech-tile-label">Sourcing &amp; Outreach</span></div>
-      <div class="tech-tags"><span class="tech-tag">LinkedIn Recruiter</span><span class="tech-tag">Lemlist</span><span class="tech-tag">Entelo</span><span class="tech-tag">ContactOut</span><span class="tech-tag">SalesQL</span><span class="tech-tag">Teamable</span></div>
-      <span class="tech-tile-count">6</span>
+    <div class="stack-layer">
+      <div class="stack-layer-accent" style="background:linear-gradient(90deg,#38d9a9,transparent);"></div>
+      <div class="stack-layer-inner">
+        <div class="stack-layer-label">
+          <span class="stack-layer-num">Layer 02</span>
+          <span class="stack-layer-name">ATS & Pipeline</span>
+        </div>
+        <div class="stack-tools"><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#24A47F"/><path d="M9 3 Q13 3 14 7 L9 7 Z" fill="#fff" opacity="0.9"/><path d="M9 3 Q5 3 4 7 L9 7 Z" fill="#fff" opacity="0.7"/><rect x="8.2" y="7" width="1.6" height="8" rx="0.8" fill="#fff"/><path d="M5 10 Q9 9 9 12" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.8"/></svg></div><span class="stack-tool-name">Greenhouse</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#0055CC"/><text x="9" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="10" fill="#fff">Lv</text></svg></div><span class="stack-tool-name">Lever</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#1a1a2e"/><circle cx="9" cy="9" r="5" fill="none" stroke="#7b61ff" stroke-width="1.5"/><circle cx="9" cy="9" r="2" fill="#7b61ff"/></svg></div><span class="stack-tool-name">Ashby</span></div></div>
+      </div>
     </div>
-    <div class="tech-tile reveal d3">
-      <div class="tech-tile-header"><div class="tech-tile-icon" style="background:rgba(168,116,255,.12)">&#9889;</div><span class="tech-tile-label">Productivity</span></div>
-      <div class="tech-tags"><span class="tech-tag">G-Suite</span><span class="tech-tag">Slack</span><span class="tech-tag">Notion</span><span class="tech-tag">Zoom / Teams</span><span class="tech-tag">GitHub</span></div>
-      <span class="tech-tile-count">5</span>
+    <div class="stack-layer">
+      <div class="stack-layer-accent" style="background:linear-gradient(90deg,#a87eff,transparent);"></div>
+      <div class="stack-layer-inner">
+        <div class="stack-layer-label">
+          <span class="stack-layer-num">Layer 03</span>
+          <span class="stack-layer-name">Productivity & Comms</span>
+        </div>
+        <div class="stack-tools"><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#fff"/><text x="9" y="13" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="11" fill="#4285F4">G</text></svg></div><span class="stack-tool-name">G-Suite</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#4A154B"/><rect x="4" y="7" width="4" height="2" rx="1" fill="#E01E5A"/><rect x="4" y="5" width="2" height="2" rx="1" fill="#E01E5A"/><rect x="10" y="7" width="4" height="2" rx="1" fill="#2EB67D" transform="rotate(90 12 8)"/><rect x="10" y="9" width="2" height="2" rx="1" fill="#2EB67D" transform="rotate(90 11 10)"/><rect x="7" y="4" width="4" height="2" rx="1" fill="#ECB22E"/><rect x="7" y="10" width="4" height="2" rx="1" fill="#36C5F0"/></svg></div><span class="stack-tool-name">Slack</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#fff"/><path d="M5 4 L13 4 L13 5.5 L7 5.5 L7 8 L12 8 L12 9.5 L7 9.5 L7 14 L5 14 Z" fill="#1a1a1a"/></svg></div><span class="stack-tool-name">Notion</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#2D8CFF"/><rect x="3" y="6" width="8" height="6" rx="1.5" fill="#fff"/><path d="M11 8 L15 6 L15 12 L11 10 Z" fill="#fff"/></svg></div><span class="stack-tool-name">Zoom / Teams</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#24292e"/><path d="M9 2.5 C5.4 2.5 2.5 5.4 2.5 9 C2.5 11.9 4.4 14.3 7.1 15.2 C7.4 15.3 7.5 15.1 7.5 14.9 L7.5 13.8 C5.7 14.2 5.3 13 5.3 13 C5 12.2 4.6 12 4.6 12 C4.1 11.7 4.7 11.7 4.7 11.7 C5.2 11.8 5.5 12.2 5.5 12.2 C6 13.1 6.8 12.8 7.5 12.6 C7.6 12.3 7.7 12 7.9 11.9 C6.4 11.7 4.8 11.1 4.8 8.5 C4.8 7.7 5.1 7.1 5.5 6.6 C5.4 6.4 5.2 5.7 5.6 4.8 C5.6 4.8 6.1 4.6 7.5 5.5 C8.1 5.3 8.6 5.2 9 5.2 C9.4 5.2 9.9 5.3 10.5 5.5 C11.9 4.6 12.4 4.8 12.4 4.8 C12.8 5.7 12.6 6.4 12.5 6.6 C12.9 7.1 13.2 7.7 13.2 8.5 C13.2 11.1 11.6 11.7 10.1 11.9 C10.3 12.1 10.5 12.5 10.5 13.1 L10.5 14.9 C10.5 15.1 10.6 15.3 10.9 15.2 C13.6 14.3 15.5 11.9 15.5 9 C15.5 5.4 12.6 2.5 9 2.5 Z" fill="#fff"/></svg></div><span class="stack-tool-name">GitHub</span></div></div>
+      </div>
     </div>
-    <div class="tech-tile reveal d4">
-      <div class="tech-tile-header"><div class="tech-tile-icon" style="background:rgba(251,189,35,.12)">&#128202;</div><span class="tech-tile-label">Data &amp; Reporting</span></div>
-      <div class="tech-tags"><span class="tech-tag">DreamTeam</span><span class="tech-tag">Greenhouse Reporting</span><span class="tech-tag">Lever Analytics</span></div>
-      <span class="tech-tile-count">3</span>
+    <div class="stack-layer">
+      <div class="stack-layer-accent" style="background:linear-gradient(90deg,#fbbf24,transparent);"></div>
+      <div class="stack-layer-inner">
+        <div class="stack-layer-label">
+          <span class="stack-layer-num">Layer 04</span>
+          <span class="stack-layer-name">Data & Reporting</span>
+        </div>
+        <div class="stack-tools"><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#6366F1"/><rect x="3" y="9" width="6" height="6" rx="1" fill="#fff" opacity="0.9"/><polygon points="12,3 15.5,9 8.5,9" fill="#fff" opacity="0.7"/></svg></div><span class="stack-tool-name">Shapes</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#24A47F"/><rect x="3" y="12" width="2.5" height="4" rx="0.5" fill="#fff"/><rect x="7" y="8" width="2.5" height="8" rx="0.5" fill="#fff" opacity="0.8"/><rect x="11" y="5" width="2.5" height="11" rx="0.5" fill="#fff" opacity="0.6"/></svg></div><span class="stack-tool-name">Greenhouse Reporting</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#0055CC"/><path d="M3 13 L7 8 L10 10 L15 4" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="stack-tool-name">Lever Analytics</span></div></div>
+      </div>
+    </div>
+    <div class="stack-layer">
+      <div class="stack-layer-accent" style="background:linear-gradient(90deg,#10A37F,transparent);"></div>
+      <div class="stack-layer-inner">
+        <div class="stack-layer-label">
+          <span class="stack-layer-num">Layer 05</span>
+          <span class="stack-layer-name">AI Tools</span>
+        </div>
+        <div class="stack-tools"><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#10A37F"/><path d="M9 3.5 C6.5 3.5 4.5 5.2 4.5 7.3 C4.5 8 4.7 8.7 5.1 9.2 L4.5 11.5 L6.9 10.9 C7.5 11.2 8.2 11.4 9 11.4 C11.5 11.4 13.5 9.7 13.5 7.6 C13.5 5.5 11.5 3.5 9 3.5 Z" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="7" cy="7.5" r="0.8" fill="#fff"/><circle cx="9" cy="7.5" r="0.8" fill="#fff"/><circle cx="11" cy="7.5" r="0.8" fill="#fff"/></svg></div><span class="stack-tool-name">ChatGPT</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#CC785C"/><path d="M5 13 L9 5 L13 13" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="6.5" y1="10.5" x2="11.5" y2="10.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg></div><span class="stack-tool-name">Claude</span></div><div class="stack-tool"><div class="stack-tool-logo"><svg viewBox="0 0 18 18" width="18" height="18"><rect width="18" height="18" rx="3" fill="#24292e"/><path d="M9 2.5 C5.4 2.5 2.5 5.4 2.5 9 C2.5 11.9 4.4 14.3 7.1 15.2 C7.4 15.3 7.5 15.1 7.5 14.9 L7.5 13.8 C5.7 14.2 5.3 13 5.3 13 C5 12.2 4.6 12 4.6 12 C4.1 11.7 4.7 11.7 4.7 11.7 C5.2 11.8 5.5 12.2 5.5 12.2 C6 13.1 6.8 12.8 7.5 12.6 C7.6 12.3 7.7 12 7.9 11.9 C6.4 11.7 4.8 11.1 4.8 8.5 C4.8 7.7 5.1 7.1 5.5 6.6 C5.4 6.4 5.2 5.7 5.6 4.8 C5.6 4.8 6.1 4.6 7.5 5.5 C8.1 5.3 8.6 5.2 9 5.2 C9.4 5.2 9.9 5.3 10.5 5.5 C11.9 4.6 12.4 4.8 12.4 4.8 C12.8 5.7 12.6 6.4 12.5 6.6 C12.9 7.1 13.2 7.7 13.2 8.5 C13.2 11.1 11.6 11.7 10.1 11.9 C10.3 12.1 10.5 12.5 10.5 13.1 L10.5 14.9 C10.5 15.1 10.6 15.3 10.9 15.2 C13.6 14.3 15.5 11.9 15.5 9 C15.5 5.4 12.6 2.5 9 2.5 Z" fill="#fff"/></svg></div><span class="stack-tool-name">GitHub Copilot</span></div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -690,7 +854,7 @@ window.addEventListener('scroll', function() {
   nav.classList.toggle('scrolled', window.scrollY > 30);
 });
 
-var roles = ['Senior Talent Leader','Technical Recruiting Specialist','Talent Architecture Designer','Hiring Systems Builder'];
+var roles = ['Senior Talent Leader','Operations Lead','Technical Recruiting Specialist','Talent Architecture Designer','Hiring Systems Builder'];
 var ri = 0, ci = 0, del = false;
 var tw = document.getElementById('typewriter');
 function type() {
@@ -712,17 +876,7 @@ var obs = new IntersectionObserver(function(entries) {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
-
-var skills = ['Talent Architecture','Global Hiring Strategy','Executive Partnerships','Data-Led Recruiting','Interview Enablement','Recruiting Operations','Technical Fluency','People Management','Culture & Values Alignment','Pipeline Design','Diversity Hiring','Generative AI Tools'];
-var grid = document.getElementById('skillsGrid');
-skills.forEach(function(s, i) {
-  var el = document.createElement('div');
-  el.className = 'skill-item reveal';
-  el.style.transitionDelay = (i % 4) * 0.08 + 's';
-  el.innerHTML = '<div class="skill-name">' + s + '</div>';
-  grid.appendChild(el);
-  obs.observe(el);
-});
+  // skills rendered in HTML
 </script>
 </body>
 </html>
