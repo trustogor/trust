@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Ventures — Trust Ogor</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23080c14'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle' fill='%235b8dee' font-family='sans-serif' font-weight='800'>T</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#080c14;--surface:#0d1424;--border:rgba(255,255,255,.06);--accent:#5b8dee;--teal:#38d9a9;--text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;--orange:#f97316}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(91,141,238,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(91,141,238,.03) 1px,transparent 1px);background-size:60px 60px}
+
+/* Glow blob */
+.glow-blob{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(91,141,238,.09) 0%,transparent 70%);pointer-events:none;z-index:0;top:-200px;left:-200px;transition:transform .08s linear}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all .3s}
+nav.scrolled{background:rgba(8,12,20,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav .container{max-width:1100px;margin:0 auto;padding:0 28px}
+nav .inner{display:flex;align-items:center;justify-content:space-between}
+.home-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;color:var(--text);text-decoration:none;letter-spacing:-.3px}
+.home-btn span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted2);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--accent)}
+.nav-ventures-badge{background:rgba(249,115,22,.12);color:var(--orange);border:1px solid rgba(249,115,22,.25);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+
+/* Layout */
+.container{max-width:1100px;margin:0 auto;padding:0 28px}
+.divider{height:1px;background:var(--border);margin:0}
+
+/* Hero */
+.ventures-hero{padding:140px 0 80px;position:relative;z-index:1}
+.ventures-hero-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+.ventures-hero-heading{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(36px,5vw,58px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;color:var(--text);margin-bottom:20px}
+.ventures-hero-heading span{color:var(--accent)}
+.ventures-hero-sub{font-size:16px;color:var(--muted2);line-height:1.7;max-width:620px;margin-bottom:36px}
+.founder-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:30px;padding:8px 18px}
+.founder-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:pulse-orange 2s infinite}
+@keyframes pulse-orange{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.founder-badge-text{font-size:13px;font-weight:600;color:var(--orange)}
+
+/* Section labels */
+.section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+section{padding:80px 0;position:relative;z-index:1}
+
+/* Venture card */
+.venture-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:32px}
+.venture-card-header{padding:32px 32px 24px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.venture-logo-area{display:flex;align-items:center;gap:16px}
+.venture-logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,rgba(249,115,22,.2),rgba(249,115,22,.05));border:1px solid rgba(249,115,22,.2);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:var(--orange)}
+.venture-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.5px;color:var(--text)}
+.venture-tagline{font-size:13.5px;color:var(--muted2);margin-top:3px}
+.venture-status{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.status-badge{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:5px 13px;font-size:11.5px;font-weight:700;letter-spacing:.3px}
+.status-building{background:rgba(56,217,169,.1);border:1px solid rgba(56,217,169,.25);color:var(--teal)}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse-teal 2s infinite}
+@keyframes pulse-teal{0%,100%{opacity:1}50%{opacity:.4}}
+.venture-role{font-size:12px;color:var(--muted);font-weight:500}
+
+/* Venture body */
+.venture-body{padding:32px}
+.venture-section{margin-bottom:28px}
+.venture-section:last-child{margin-bottom:0}
+.venture-section-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.venture-section-text{font-size:14px;color:var(--muted2);line-height:1.75}
+
+/* Problem/Solution split */
+.ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.ps-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:20px}
+.ps-card-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.ps-card.problem .ps-card-label{color:#f87171}
+.ps-card.solution .ps-card-label{color:var(--teal)}
+.ps-card-text{font-size:13.5px;color:var(--muted2);line-height:1.7}
+
+/* Three features */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.feature-card{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:18px;transition:border-color .2s}
+.feature-card:hover{border-color:rgba(249,115,22,.25)}
+.feature-icon{font-size:22px;margin-bottom:10px}
+.feature-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px}
+.feature-desc{font-size:12.5px;color:var(--muted2);line-height:1.6}
+
+/* Tech stack chips */
+.tech-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tech-chip{background:rgba(91,141,238,.08);border:1px solid rgba(91,141,238,.18);border-radius:6px;padding:4px 11px;font-size:11.5px;color:var(--muted2);font-weight:500}
+
+/* Metrics row */
+.venture-metrics{display:flex;flex-wrap:wrap;gap:12px;padding:24px 32px;background:rgba(249,115,22,.03);border-top:1px solid var(--border)}
+.v-metric{display:flex;flex-direction:column;gap:3px;min-width:100px}
+.v-metric-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:var(--orange)}
+.v-metric-lbl{font-size:11px;color:var(--muted);font-weight:500}
+
+/* Role breakdown */
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.role-card{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;padding:16px}
+.role-card-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.role-card-icon{font-size:14px}
+.role-bullets{list-style:none;display:flex;flex-direction:column;gap:5px}
+.role-bullets li{font-size:12.5px;color:var(--muted2);line-height:1.5;padding-left:12px;position:relative}
+.role-bullets li::before{content:"·";position:absolute;left:0;color:var(--orange)}
+
+/* Why Now */
+.why-now-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.why-now-item{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;padding:14px}
+.why-now-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.why-now-text{font-size:13px;color:var(--muted2);line-height:1.6}
+
+/* Founder note */
+.founder-note{background:rgba(91,141,238,.04);border:1px solid rgba(91,141,238,.15);border-radius:14px;padding:28px 32px;margin-top:48px}
+.founder-note-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.founder-note-text{font-size:15px;color:var(--muted2);line-height:1.8;font-style:italic}
+.founder-note-sig{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-top:16px}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+/* Footer */
+footer{padding:32px 0;border-top:1px solid var(--border)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:var(--muted)}
+.footer-back{font-size:13px;color:var(--accent);text-decoration:none;font-weight:600;transition:opacity .2s}
+.footer-back:hover{opacity:.7}
+
+@media(max-width:768px){
+  .ps-grid,.features-grid,.role-grid,.why-now-grid{grid-template-columns:1fr}
+  .venture-card-header{flex-direction:column}
+  .venture-status{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="glow-blob" id="glowBlob"></div>
+
+<nav id="mainNav">
+  <div class="container">
+    <div class="inner">
+      <a href="https://trustogor.github.io/" class="home-btn">Trust Ogor<span>.</span></a>
+      <div class="nav-links">
+        <a href="https://trustogor.github.io/">Portfolio</a>
+        <a href="#" class="active nav-ventures-badge">Ventures</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="ventures-hero">
+  <div class="container">
+    <div class="ventures-hero-label">Beyond the hire</div>
+    <h1 class="ventures-hero-heading">Building things<br>from <span>scratch</span>.</h1>
+    <p class="ventures-hero-sub">Alongside my work in talent, I build. This page documents my entrepreneurial projects — the problems I've chosen to solve, the systems I've designed, and the companies I'm bringing to life.</p>
+    <div class="founder-badge">
+      <div class="founder-badge-dot"></div>
+      <span class="founder-badge-text">Currently building — uSwitch</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- USWITCH -->
+<section id="ventures">
+  <div class="container">
+    <div class="section-label reveal">Active Venture</div>
+    <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:700;letter-spacing:-.6px;margin-bottom:36px" class="reveal">uSwitch</h2>
+
+    <div class="venture-card reveal d1">
+
+      <!-- Header -->
+      <div class="venture-card-header">
+        <div class="venture-logo-area">
+          <div class="venture-logo">uS</div>
+          <div>
+            <div class="venture-name">uSwitch</div>
+            <div class="venture-tagline">Electricity access, reimagined for Nigeria</div>
+          </div>
+        </div>
+        <div class="venture-status">
+          <div class="status-badge status-building"><div class="status-dot"></div>Building — MVP Stage</div>
+          <div class="venture-role">Founder &amp; CTO</div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="venture-body">
+
+        <!-- Problem / Solution -->
+        <div class="venture-section-title">The Opportunity</div>
+        <div class="ps-grid">
+          <div class="ps-card problem">
+            <div class="ps-card-label">Problem</div>
+            <div class="ps-card-text">Millions of Nigerians with prepaid electricity meters go dark when they run out of credit — due to irregular income, salary delays, or emergencies. No immediate cash means no power, and expensive alternatives like generators fill the gap.</div>
+          </div>
+          <div class="ps-card solution">
+            <div class="ps-card-label">Solution</div>
+            <div class="ps-card-text">uSwitch is a fintech platform that modernises how Nigerians access prepaid electricity — combining instant token purchase, a Buy Now Pay Later credit facility, and automated recurring top-ups so users never go dark again.</div>
+          </div>
+        </div>
+
+        <!-- 3 Core Features -->
+        <div class="venture-section-title">Core Product</div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-name">Instant Token Purchase</div>
+            <div class="feature-desc">Buy electricity tokens immediately via card, bank transfer, or wallet — any time, any amount.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💳</div>
+            <div class="feature-name">Buy Now, Pay Later</div>
+            <div class="feature-desc">Access ₦3,000–₦20,000 in electricity credit repayable in 7–14 days at a flat service fee. Mandatory auto-debit ensures repayment and manages default risk.</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔁</div>
+            <div class="feature-name">Auto Top-Up</div>
+            <div class="feature-desc">Set weekly or monthly auto-purchase schedules. Predictable power with zero manual effort.</div>
+          </div>
+        </div>
+
+        <!-- Why Now -->
+        <div class="venture-section-title">Why Now</div>
+        <div class="why-now-grid">
+          <div class="why-now-item">
+            <div class="why-now-icon">📈</div>
+            <div class="why-now-text">Prepaid meter adoption is high and growing across Nigeria — the infrastructure base is already there.</div>
+          </div>
+          <div class="why-now-item">
+            <div class="why-now-icon">🥇</div>
+            <div class="why-now-text">BNPL is proven in retail but untested in utilities — uSwitch has a first-mover advantage in this space.</div>
+          </div>
+          <div class="why-now-item">
+            <div class="why-now-icon">🏗️</div>
+            <div class="why-now-text">Payment gateways, KYC providers, and aggregators now exist to support rapid scaling in Nigeria.</div>
+          </div>
+          <div class="why-now-item">
+            <div class="why-now-icon">🎯</div>
+            <div class="why-now-text">Users are price-aware and actively seeking solutions to power reliability — demand is latent and immediate.</div>
+          </div>
+        </div>
+
+        <!-- My Role -->
+        <div class="venture-section-title" style="margin-top:28px;">My Role — Founder &amp; CTO</div>
+        <div class="role-grid">
+          <div class="role-card">
+            <div class="role-card-title"><span class="role-card-icon">🏗️</span>Technical Architecture</div>
+            <ul class="role-bullets">
+              <li>Defined core stack: Go (Fiber) + PostgreSQL + Redis, React + TypeScript frontend, Kubernetes</li>
+              <li>Architected separation between Java payments/vending layer and Go + React ops layer</li>
+              <li>Integrated licensed aggregators, payment providers, and KYC services</li>
+              <li>Designed compliance, security, and scalability requirements from day one</li>
+            </ul>
+          </div>
+          <div class="role-card">
+            <div class="role-card-title"><span class="role-card-icon">👥</span>Engineering Leadership</div>
+            <ul class="role-bullets">
+              <li>Recruited and managed a senior engineer to lead the MVP build</li>
+              <li>Structured contracts with IP assignment and knowledge transfer requirements</li>
+              <li>Built engineer offboarding and access control systems</li>
+              <li>Planning hire of 2 mid-level engineers post-launch</li>
+            </ul>
+          </div>
+          <div class="role-card">
+            <div class="role-card-title"><span class="role-card-icon">⚖️</span>Product &amp; Risk</div>
+            <ul class="role-bullets">
+              <li>Designed BNPL with KYC verification, meter-level blacklisting, and hard default blocks</li>
+              <li>Created full MVP product specification with clear acceptance criteria</li>
+              <li>Managed compliance and licensing strategy for fintech operations</li>
+              <li>Built financial models for unit economics and break-even targets</li>
+            </ul>
+          </div>
+          <div class="role-card">
+            <div class="role-card-title"><span class="role-card-icon">🚀</span>Go-to-Market</div>
+            <ul class="role-bullets">
+              <li>Designing MVP validation strategy focused on manual acquisition and retention</li>
+              <li>Positioning against BuyPower and iRecharge with BNPL as key differentiator</li>
+              <li>Established NDAs, IP protection, and compliance framework for investor readiness</li>
+              <li>Set clear metrics for moving beyond MVP: retention, repeat usage, activation</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="venture-section" style="margin-top:28px;">
+          <div class="venture-section-title">Tech Stack</div>
+          <div class="tech-chips">
+            <span class="tech-chip">Go (Fiber)</span>
+            <span class="tech-chip">Java</span>
+            <span class="tech-chip">React + TypeScript</span>
+            <span class="tech-chip">PostgreSQL</span>
+            <span class="tech-chip">Redis</span>
+            <span class="tech-chip">Kubernetes</span>
+            <span class="tech-chip">Payment Gateway APIs</span>
+            <span class="tech-chip">KYC Integration</span>
+            <span class="tech-chip">Licensed Aggregators</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Metrics -->
+      <div class="venture-metrics">
+        <div class="v-metric"><span class="v-metric-val">~3mo</span><span class="v-metric-lbl">Concept to staging-ready MVP</span></div>
+        <div class="v-metric"><span class="v-metric-val">3</span><span class="v-metric-lbl">Core product features built</span></div>
+        <div class="v-metric"><span class="v-metric-val">BNPL</span><span class="v-metric-lbl">First in Nigerian utilities market</span></div>
+        <div class="v-metric"><span class="v-metric-val">0→1</span><span class="v-metric-lbl">Full technical &amp; legal foundation</span></div>
+      </div>
+
+    </div><!-- end venture-card -->
+
+    <!-- Founder Note -->
+    <div class="founder-note reveal d2">
+      <div class="founder-note-label">Founder's Note</div>
+      <div class="founder-note-text">"uSwitch started as a question: why should anyone have to sit in darkness because of a timing problem? The electricity is there. The infrastructure is there. The gap is purely financial and structural — and that's exactly the kind of problem I know how to solve. Building uSwitch has meant operating across every function simultaneously: product, engineering, compliance, GTM, and team design. It's the most complete expression of everything I've learned about building systems that actually work."</div>
+      <div class="founder-note-sig">— Trust Ogor, Founder &amp; CTO</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2025 Trust Ogor</span>
+      <a href="https://trustogor.github.io/" class="footer-back">← Back to Portfolio</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const blob = document.getElementById('glowBlob');
+document.addEventListener('mousemove', function(e) {
+  blob.style.transform = 'translate(' + (e.clientX - 300) + 'px, ' + (e.clientY - 300) + 'px)';
+});
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 30);
+});
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+</script>
+</body>
+</html>
