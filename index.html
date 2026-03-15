@@ -52,7 +52,7 @@ h1 .accent{color:var(--accent)}
 section{padding:40px 0}
 .section-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:700;letter-spacing:-.6px;margin-bottom:24px}
-.divider{height:1px;background:var(--border)}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12) 20%,rgba(255,255,255,.12) 80%,transparent);margin:0;}
 
 /* CARDS */
 .grid{display:grid;gap:12px}
@@ -213,8 +213,10 @@ footer a:hover{color:var(--accent)}
 .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
 .work-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px 24px;position:relative;overflow:hidden;transition:all .3s ease}
 .work-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(91,141,238,.05) 0%,transparent 60%);opacity:0;transition:opacity .3s}
-.work-card:hover{transform:translateY(-4px);border-color:rgba(91,141,238,.3);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.work-card:hover{transform:translateY(-4px);border-color:rgba(91,141,238,.45);box-shadow:0 20px 50px rgba(0,0,0,.4),inset 0 1px 0 rgba(91,141,238,.15)}
 .work-card:hover::before{opacity:1}
+.work-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);border-radius:16px 16px 0 0;opacity:0.6;}
+.work-card:hover::before{opacity:1;}
 .work-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
 .work-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:10px;line-height:1.35}
 .work-body{font-size:13px;color:var(--muted2);line-height:1.7;word-break:break-word}
@@ -223,7 +225,9 @@ footer a:hover{color:var(--accent)}
 /* PHILOSOPHY */
 .phil-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
 .phil-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px 24px;position:relative;overflow:hidden;transition:all .3s ease}
-.phil-card:hover{transform:translateY(-4px);border-color:rgba(91,141,238,.3);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.phil-card:hover{transform:translateY(-4px);border-color:rgba(168,126,255,.45);box-shadow:0 20px 50px rgba(0,0,0,.4),inset 0 1px 0 rgba(168,126,255,.12)}
+.phil-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#a87eff,transparent);border-radius:16px 16px 0 0;opacity:0.5;}
+.phil-card:hover::before{opacity:1;}
 .phil-num{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--accent);opacity:.5;margin-bottom:10px}
 .phil-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:10px;line-height:1.35}
 .phil-body{font-size:13px;color:var(--muted2);line-height:1.7;word-break:break-word}
@@ -233,9 +237,9 @@ footer a:hover{color:var(--accent)}
 .ai-flow{display:flex;align-items:flex-start;gap:0;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
 .ai-flow::-webkit-scrollbar{display:none}
 .ai-node{display:flex;flex-direction:column;align-items:center;min-width:110px;max-width:110px;position:relative}
-.ai-node-inner{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;transition:all .3s ease;position:relative;overflow:hidden}
+.ai-node-inner{background:linear-gradient(160deg,rgba(255,255,255,.03) 0%,var(--surface) 60%);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;transition:all .3s ease;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.06)}
 .ai-node-inner::before{content:'';position:absolute;inset:0;border-radius:14px;opacity:0;transition:opacity .3s}
-.ai-node:hover .ai-node-inner{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
+.ai-node:hover .ai-node-inner{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(91,141,238,.15);border-color:rgba(91,141,238,.4)}
 .ai-node-logo{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ai-node-stage{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-align:center}
 .ai-node-label{font-size:11px;font-weight:700;color:var(--text);text-align:center;line-height:1.3;font-family:'Plus Jakarta Sans',sans-serif}
@@ -258,16 +262,20 @@ footer a:hover{color:var(--accent)}
 
 /* WHERE I DO MY BEST WORK */
 .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
-.work-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px 24px;position:relative;overflow:hidden;transition:all .3s ease;word-break:break-word}
-.work-card:hover{transform:translateY(-4px);border-color:rgba(91,141,238,.3);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.work-card{background:linear-gradient(160deg,rgba(255,255,255,.03) 0%,var(--surface) 60%);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:26px 24px;position:relative;overflow:hidden;transition:all .3s ease;word-break:break-word;box-shadow:0 2px 12px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.06)}
+.work-card:hover{transform:translateY(-4px);border-color:rgba(91,141,238,.45);box-shadow:0 20px 50px rgba(0,0,0,.4),inset 0 1px 0 rgba(91,141,238,.15)}
+.work-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);border-radius:16px 16px 0 0;opacity:0.6;}
+.work-card:hover::before{opacity:1;}
 .work-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
 .work-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:10px;line-height:1.35}
 .work-body{font-size:13px;color:var(--muted2);line-height:1.7}
 .work-proof{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--teal);font-weight:600}
 /* PHILOSOPHY */
 .phil-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
-.phil-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px 24px;transition:all .3s ease;word-break:break-word}
-.phil-card:hover{transform:translateY(-4px);border-color:rgba(91,141,238,.3);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.phil-card{background:linear-gradient(160deg,rgba(255,255,255,.03) 0%,var(--surface) 60%);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:26px 24px;position:relative;overflow:hidden;transition:all .3s ease;word-break:break-word;box-shadow:0 2px 12px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.06)}
+.phil-card:hover{transform:translateY(-4px);border-color:rgba(168,126,255,.45);box-shadow:0 20px 50px rgba(0,0,0,.4),inset 0 1px 0 rgba(168,126,255,.12)}
+.phil-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#a87eff,transparent);border-radius:16px 16px 0 0;opacity:0.5;}
+.phil-card:hover::before{opacity:1;}
 .phil-num{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--accent);opacity:.5;margin-bottom:10px}
 .phil-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:10px;line-height:1.35}
 .phil-body{font-size:13px;color:var(--muted2);line-height:1.7}
@@ -276,7 +284,7 @@ footer a:hover{color:var(--accent)}
 .ai-flow{display:flex;align-items:flex-start;gap:0;overflow-x:auto;padding-bottom:16px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
 .ai-node{display:flex;flex-direction:column;align-items:center;min-width:120px;max-width:120px}
 .ai-node-inner{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;transition:all .3s ease}
-.ai-node:hover .ai-node-inner{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
+.ai-node:hover .ai-node-inner{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(91,141,238,.15);border-color:rgba(91,141,238,.4)}
 .ai-node-logo{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;gap:2px}
 .ai-node-stage{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-align:center}
 .ai-node-label{font-size:11px;font-weight:700;color:var(--text);text-align:center;line-height:1.3;font-family:'Plus Jakarta Sans',sans-serif}
@@ -305,6 +313,19 @@ footer a:hover{color:var(--accent)}
 .nav-dropdown-menu a{display:block;padding:8px 14px;font-size:12px;color:var(--muted2);text-decoration:none;border-radius:8px;transition:all .15s;white-space:nowrap;}
 .nav-dropdown-menu a:hover{background:rgba(91,141,238,.08);color:var(--accent);}
 .nav-dropdown-menu .dropdown-divider{height:1px;background:var(--border);margin:6px 0;}
+
+/* Section visual bands */
+#work{background:linear-gradient(180deg,rgba(91,141,238,.06) 0%,transparent 80%);border-top:2px solid rgba(91,141,238,.2);}
+#philosophy{background:linear-gradient(180deg,rgba(168,126,255,.06) 0%,transparent 80%);border-top:2px solid rgba(168,126,255,.2);}
+#ai-hiring{background:linear-gradient(180deg,rgba(56,217,169,.06) 0%,transparent 80%);border-top:2px solid rgba(56,217,169,.2);}
+#experience{border-top:2px solid rgba(255,255,255,.2);}
+#projects{border-top:2px solid rgba(255,255,255,.2);}
+#skills{border-top:2px solid rgba(255,255,255,.2);}
+#stack{border-top:2px solid rgba(255,255,255,.2);}
+#education{border-top:2px solid rgba(255,255,255,.2);}
+#contact{border-top:2px solid rgba(255,255,255,.2);}
+/* Section label pill enhancement */
+.section-label{display:inline-block;background:rgba(91,141,238,.08);border:1px solid rgba(91,141,238,.15);border-radius:20px;padding:3px 12px;}
 </style>
 </head>
 <body>
@@ -341,7 +362,7 @@ footer a:hover{color:var(--accent)}
       <span class="ticker-text" id="typewriter"></span>
     </div>
     <p class="description">
-      I didn&#x2019;t plan to build a career in talent. I fell into it, found I was good at it, and never stopped finding better ways to do it. Now 7.5 years in &#8212; having built hiring engines at GitLab, On Deck, Andela, and StackShift &#8212; I design the systems, train the teams, and still get in the weeds when it matters. The kind of Head of Talent that AI and high-growth companies actually need: strategic enough to set the direction, hands-on enough to own the pipeline. Outside the work, you&#x2019;ll find me deep in music, spending time with family, or chasing the next business idea &#8212; usually all three.
+      Over 7.5 years, I&#x2019;ve built and run talent functions at GitLab, On Deck, Andela, and StackShift &#8212; designing the systems, training the teams, and personally driving critical hires. I operate at both altitude and ground level: setting the strategy while staying close enough to the work to own the outcomes.<br><br>I love working inside high-growth tech companies and startups where hiring is complex, the bar is high, and building something that lasts actually matters. If that&#x2019;s where you are &#8212; let&#x2019;s talk.
     </p>
     <div class="buttons">
       <a href="https://www.linkedin.com/in/togor/" target="_blank" class="btn btn-linkedin">
@@ -537,109 +558,6 @@ footer a:hover{color:var(--accent)}
   <div class="proj-card reveal d1">
     <div class="proj-top">
       <div>
-        <div class="proj-title">Operations Lead &#8212; LocalLinked</div>
-        <div class="proj-ctx">Pre-Launch Startup &#183; MBA Project &#183; Operations Lead</div>
-      </div>
-    </div>
-    <div class="proj-pva">
-      <div>
-        <div class="proj-blk-label">Problem</div>
-        <div class="proj-blk-text">A student discount and rewards platform preparing to launch with no route to students, no local business network, no revenue model, no hiring plan, and no GTM strategy. Founders needed someone to build the entire launch architecture across every function simultaneously.</div>
-      </div>
-      <div>
-        <div class="proj-blk-label">Action</div>
-        <div class="proj-blk-text">Led a 4-person team working directly with the founders &#8212; secured an exclusive university partnership to reach students through official channels, signed 36 local businesses on a commission-only model, designed the revenue framework, built AI-powered in-app recommendation logic to personalise student offers, created the full hiring blueprint for all founding roles, and launched a structured Student Ambassador Programme as a career-entry internship pathway. Activated a branded LocalLinked booth during orientation week, deploying brand ambassadors to onboard students directly on the ground.</div>
-      </div>
-    </div>
-    <div class="proj-viz-title">Launch Architecture &#8212; Four Pillars</div>
-    <div class="pillar-grid" style="grid-template-columns:repeat(4,1fr);">
-      <div class="pillar-card p1">
-        <div class="pillar-icon">&#127891;</div>
-        <div class="pillar-name">University Partnerships</div>
-        <div class="pillar-stat" style="color:var(--accent);font-size:20px;">1,700</div>
-        <div class="pillar-detail">Students onboarded in week one via exclusive university comms and residence hall placements, backed by a branded orientation booth with ambassadors onboarding students on the ground. The institutional credibility of official university channels replaced what would have cost thousands in ads, social media, and paid campaigns.</div>
-      </div>
-      <div class="pillar-card p2">
-        <div class="pillar-icon">&#129309;</div>
-        <div class="pillar-name">Business Network</div>
-        <div class="pillar-stat" style="color:var(--teal);font-size:22px;">36</div>
-        <div class="pillar-detail">Local businesses onboarded pre-launch on a commission-only model, eliminating upfront cost as a barrier to adoption.</div>
-      </div>
-      <div class="pillar-card p3">
-        <div class="pillar-icon">&#129302;</div>
-        <div class="pillar-name">AI &amp; Product</div>
-        <div class="pillar-stat" style="color:#a87eff;font-size:20px;">In-App</div>
-        <div class="pillar-detail">Designed AI-powered recommendation logic personalising student offers by location, category, and browsing behaviour.</div>
-      </div>
-      <div class="pillar-card p1">
-        <div class="pillar-icon">&#9881;&#65039;</div>
-        <div class="pillar-name">Team Architecture</div>
-        <div class="pillar-stat" style="color:var(--teal);font-size:22px;">0&#8594;1</div>
-        <div class="pillar-detail">Full hiring blueprint for all founding roles + Ambassador Programme structured as a real career-entry internship.</div>
-      </div>
-    </div>
-
-    <div class="proj-leverage">Delivered a fully operational launch blueprint across GTM, revenue, product, and talent &#8212; not a slide deck. Every component was adopted by the founding team, demonstrating the ability to operate at founder level across multiple functions simultaneously.</div>
-  </div><div class="proj-card reveal d2">
-    <div class="proj-top">
-      <div>
-        <div class="proj-title">0&#8594;1 Hiring Engine &#8212; On Deck</div>
-        <div class="proj-ctx">Engineering &#183; Product &#183; Design &#183; ML &#183; Senior Talent Partner</div>
-      </div>
-    </div>
-    <div class="proj-pva">
-      <div>
-        <div class="proj-blk-label">Problem</div>
-        <div class="proj-blk-text">On Deck was scaling fast with no recruiting infrastructure. Hiring was reactive and random &#8212; no sourcing strategy, no outreach playbook, no interview framework, and response rates so low the pipeline was constantly dry. Every hire was a one-off effort with no repeatable process behind it.</div>
-      </div>
-      <div>
-        <div class="proj-blk-label">Action</div>
-        <div class="proj-blk-text">Joined as the first recruiter and built the entire hiring framework from scratch across Engineering, Product, Design, and ML. Designed and deployed a sourcing strategy, ran personalised outreach campaigns using tools like Synthesia to test video messaging that significantly improved response rates, launched a diversity hiring programme, trained interviewers, and embedded a structured hiring cadence with weekly CTO reviews to keep decisions moving.</div>
-      </div>
-    </div>
-    <div class="proj-metrics-row">
-      <div class="proj-metric"><span class="proj-metric-val">60&#8594;30d</span><span class="proj-metric-lbl">Time-to-hire</span></div>
-      <div class="proj-metric"><span class="proj-metric-val">100%</span><span class="proj-metric-lbl">Offer acceptance</span></div>
-      <div class="proj-metric"><span class="proj-metric-val">25</span><span class="proj-metric-lbl">Hires in 9 months</span></div>
-      <div class="proj-metric"><span class="proj-metric-val">+30%</span><span class="proj-metric-lbl">Diversity representation</span></div>
-    </div>
-    <div class="proj-viz-title">Outreach Engine &#8212; Before vs. After</div>
-    <div class="chart-box">
-      <svg viewBox="0 0 500 195" xmlns="http://www.w3.org/2000/svg">
-        <line x1="50" y1="20" x2="480" y2="20" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-        <line x1="50" y1="55" x2="480" y2="55" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-        <line x1="50" y1="90" x2="480" y2="90" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-        <line x1="50" y1="125" x2="480" y2="125" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-        <line x1="50" y1="155" x2="480" y2="155" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-        <text x="44" y="24"  text-anchor="end" font-size="10" fill="#64748b">80%</text>
-        <text x="44" y="59"  text-anchor="end" font-size="10" fill="#64748b">60%</text>
-        <text x="44" y="94"  text-anchor="end" font-size="10" fill="#64748b">40%</text>
-        <text x="44" y="129" text-anchor="end" font-size="10" fill="#64748b">20%</text>
-        <text x="44" y="158" text-anchor="end" font-size="10" fill="#64748b">0%</text>
-        <!-- Open Rate bars -->
-        <rect x="75"  y="109" width="55" height="46" rx="4" fill="rgba(100,116,139,0.35)" stroke="rgba(100,116,139,0.6)" stroke-width="1"/>
-        <text x="102" y="104" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="600">25%</text>
-        <rect x="138" y="37"  width="55" height="118" rx="4" fill="rgba(91,141,238,0.75)" stroke="#5b8dee" stroke-width="1"/>
-        <text x="165" y="32"  text-anchor="middle" font-size="11" fill="#5b8dee" font-weight="700">60%</text>
-        <text x="134" y="175" text-anchor="middle" font-size="12" fill="#94a3b8">Open Rate</text>
-        <!-- Response Rate bars -->
-        <rect x="258" y="128" width="55" height="27" rx="4" fill="rgba(100,116,139,0.35)" stroke="rgba(100,116,139,0.6)" stroke-width="1"/>
-        <text x="285" y="123" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="600">15%</text>
-        <rect x="321" y="96"  width="55" height="59" rx="4" fill="rgba(91,141,238,0.75)" stroke="#5b8dee" stroke-width="1"/>
-        <text x="348" y="91"  text-anchor="middle" font-size="11" fill="#5b8dee" font-weight="700">30%</text>
-        <text x="317" y="175" text-anchor="middle" font-size="12" fill="#94a3b8">Response Rate</text>
-        <!-- Legend -->
-        <rect x="50"  y="184" width="10" height="10" rx="2" fill="rgba(100,116,139,0.35)" stroke="rgba(100,116,139,0.6)" stroke-width="1"/>
-        <text x="64"  y="193" font-size="10" fill="#64748b">Before</text>
-        <rect x="110" y="184" width="10" height="10" rx="2" fill="rgba(91,141,238,0.75)"/>
-        <text x="124" y="193" font-size="10" fill="#64748b">After</text>
-      </svg>
-    </div>
-    <div class="proj-leverage">Built On Deck&#x27;s hiring infrastructure from the ground up as its first recruiter &#8212; transforming a reactive, ad-hoc process into a scalable engine that kept producing results well beyond the initial build. The combination of personalised outreach innovation, structured frameworks, and consistent delivery across 25 hires in 9 months set the standard for how On Deck hired.</div>
-  </div>
-  <div class="proj-card reveal d3">
-    <div class="proj-top">
-      <div>
         <div class="proj-title">Backend Engineering Hiring Build &#8212; GitLab</div>
         <div class="proj-ctx">Backend &amp; Infrastructure Engineering &#183; Technical Recruiter</div>
       </div>
@@ -766,7 +684,110 @@ footer a:hover{color:var(--accent)}
   </div>
 
 </div>
-</section>
+</section><div class="proj-card reveal d2">
+    <div class="proj-top">
+      <div>
+        <div class="proj-title">0&#8594;1 Hiring Engine &#8212; On Deck</div>
+        <div class="proj-ctx">Engineering &#183; Product &#183; Design &#183; ML &#183; Senior Talent Partner</div>
+      </div>
+    </div>
+    <div class="proj-pva">
+      <div>
+        <div class="proj-blk-label">Problem</div>
+        <div class="proj-blk-text">On Deck was scaling fast with no recruiting infrastructure. Hiring was reactive and random &#8212; no sourcing strategy, no outreach playbook, no interview framework, and response rates so low the pipeline was constantly dry. Every hire was a one-off effort with no repeatable process behind it.</div>
+      </div>
+      <div>
+        <div class="proj-blk-label">Action</div>
+        <div class="proj-blk-text">Joined as the first recruiter and built the entire hiring framework from scratch across Engineering, Product, Design, and ML. Designed and deployed a sourcing strategy, ran personalised outreach campaigns using tools like Synthesia to test video messaging that significantly improved response rates, launched a diversity hiring programme, trained interviewers, and embedded a structured hiring cadence with weekly CTO reviews to keep decisions moving.</div>
+      </div>
+    </div>
+    <div class="proj-metrics-row">
+      <div class="proj-metric"><span class="proj-metric-val">60&#8594;30d</span><span class="proj-metric-lbl">Time-to-hire</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">100%</span><span class="proj-metric-lbl">Offer acceptance</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">25</span><span class="proj-metric-lbl">Hires in 9 months</span></div>
+      <div class="proj-metric"><span class="proj-metric-val">+30%</span><span class="proj-metric-lbl">Diversity representation</span></div>
+    </div>
+    <div class="proj-viz-title">Outreach Engine &#8212; Before vs. After</div>
+    <div class="chart-box">
+      <svg viewBox="0 0 500 195" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="20" x2="480" y2="20" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="50" y1="55" x2="480" y2="55" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="50" y1="90" x2="480" y2="90" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="50" y1="125" x2="480" y2="125" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="50" y1="155" x2="480" y2="155" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <text x="44" y="24"  text-anchor="end" font-size="10" fill="#64748b">80%</text>
+        <text x="44" y="59"  text-anchor="end" font-size="10" fill="#64748b">60%</text>
+        <text x="44" y="94"  text-anchor="end" font-size="10" fill="#64748b">40%</text>
+        <text x="44" y="129" text-anchor="end" font-size="10" fill="#64748b">20%</text>
+        <text x="44" y="158" text-anchor="end" font-size="10" fill="#64748b">0%</text>
+        <!-- Open Rate bars -->
+        <rect x="75"  y="109" width="55" height="46" rx="4" fill="rgba(100,116,139,0.35)" stroke="rgba(100,116,139,0.6)" stroke-width="1"/>
+        <text x="102" y="104" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="600">25%</text>
+        <rect x="138" y="37"  width="55" height="118" rx="4" fill="rgba(91,141,238,0.75)" stroke="#5b8dee" stroke-width="1"/>
+        <text x="165" y="32"  text-anchor="middle" font-size="11" fill="#5b8dee" font-weight="700">60%</text>
+        <text x="134" y="175" text-anchor="middle" font-size="12" fill="#94a3b8">Open Rate</text>
+        <!-- Response Rate bars -->
+        <rect x="258" y="128" width="55" height="27" rx="4" fill="rgba(100,116,139,0.35)" stroke="rgba(100,116,139,0.6)" stroke-width="1"/>
+        <text x="285" y="123" text-anchor="middle" font-size="11" fill="#94a3b8" font-weight="600">15%</text>
+        <rect x="321" y="96"  width="55" height="59" rx="4" fill="rgba(91,141,238,0.75)" stroke="#5b8dee" stroke-width="1"/>
+        <text x="348" y="91"  text-anchor="middle" font-size="11" fill="#5b8dee" font-weight="700">30%</text>
+        <text x="317" y="175" text-anchor="middle" font-size="12" fill="#94a3b8">Response Rate</text>
+        <!-- Legend -->
+        <rect x="50"  y="184" width="10" height="10" rx="2" fill="rgba(100,116,139,0.35)" stroke="rgba(100,116,139,0.6)" stroke-width="1"/>
+        <text x="64"  y="193" font-size="10" fill="#64748b">Before</text>
+        <rect x="110" y="184" width="10" height="10" rx="2" fill="rgba(91,141,238,0.75)"/>
+        <text x="124" y="193" font-size="10" fill="#64748b">After</text>
+      </svg>
+    </div>
+    <div class="proj-leverage">Built On Deck&#x27;s hiring infrastructure from the ground up as its first recruiter &#8212; transforming a reactive, ad-hoc process into a scalable engine that kept producing results well beyond the initial build. The combination of personalised outreach innovation, structured frameworks, and consistent delivery across 25 hires in 9 months set the standard for how On Deck hired.</div>
+  </div>
+  <div class="proj-card reveal d3">
+    <div class="proj-top">
+      <div>
+        <div class="proj-title">Operations Lead &#8212; LocalLinked</div>
+        <div class="proj-ctx">Pre-Launch Startup &#183; MBA Project &#183; Operations Lead</div>
+      </div>
+    </div>
+    <div class="proj-pva">
+      <div>
+        <div class="proj-blk-label">Problem</div>
+        <div class="proj-blk-text">A student discount and rewards platform preparing to launch with no route to students, no local business network, no revenue model, no hiring plan, and no GTM strategy. Founders needed someone to build the entire launch architecture across every function simultaneously.</div>
+      </div>
+      <div>
+        <div class="proj-blk-label">Action</div>
+        <div class="proj-blk-text">Led a 4-person team working directly with the founders &#8212; secured an exclusive university partnership to reach students through official channels, signed 36 local businesses on a commission-only model, designed the revenue framework, built AI-powered in-app recommendation logic to personalise student offers, created the full hiring blueprint for all founding roles, and launched a structured Student Ambassador Programme as a career-entry internship pathway. Activated a branded LocalLinked booth during orientation week, deploying brand ambassadors to onboard students directly on the ground.</div>
+      </div>
+    </div>
+    <div class="proj-viz-title">Launch Architecture &#8212; Four Pillars</div>
+    <div class="pillar-grid" style="grid-template-columns:repeat(4,1fr);">
+      <div class="pillar-card p1">
+        <div class="pillar-icon">&#127891;</div>
+        <div class="pillar-name">University Partnerships</div>
+        <div class="pillar-stat" style="color:var(--accent);font-size:20px;">1,700</div>
+        <div class="pillar-detail">Students onboarded in week one via exclusive university comms and residence hall placements, backed by a branded orientation booth with ambassadors onboarding students on the ground. The institutional credibility of official university channels replaced what would have cost thousands in ads, social media, and paid campaigns.</div>
+      </div>
+      <div class="pillar-card p2">
+        <div class="pillar-icon">&#129309;</div>
+        <div class="pillar-name">Business Network</div>
+        <div class="pillar-stat" style="color:var(--teal);font-size:22px;">36</div>
+        <div class="pillar-detail">Local businesses onboarded pre-launch on a commission-only model, eliminating upfront cost as a barrier to adoption.</div>
+      </div>
+      <div class="pillar-card p3">
+        <div class="pillar-icon">&#129302;</div>
+        <div class="pillar-name">AI &amp; Product</div>
+        <div class="pillar-stat" style="color:#a87eff;font-size:20px;">In-App</div>
+        <div class="pillar-detail">Designed AI-powered recommendation logic personalising student offers by location, category, and browsing behaviour.</div>
+      </div>
+      <div class="pillar-card p1">
+        <div class="pillar-icon">&#9881;&#65039;</div>
+        <div class="pillar-name">Team Architecture</div>
+        <div class="pillar-stat" style="color:var(--teal);font-size:22px;">0&#8594;1</div>
+        <div class="pillar-detail">Full hiring blueprint for all founding roles + Ambassador Programme structured as a real career-entry internship.</div>
+      </div>
+    </div>
+
+    <div class="proj-leverage">Delivered a fully operational launch blueprint across GTM, revenue, product, and talent &#8212; not a slide deck. Every component was adopted by the founding team, demonstrating the ability to operate at founder level across multiple functions simultaneously.</div>
+  </div>
 
 <div class="divider"></div>
 
