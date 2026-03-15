@@ -1,41 +1,51 @@
 # Trust Ogor — Portfolio
 
-Modern startup-style personal site built for GitHub Pages.
-
-This repository contains the source for my professional landing page highlighting experience, projects, and areas of focus across talent strategy, technology, and AI-driven business thinking.
+Personal site built for GitHub Pages. Designed to go beyond a resume — communicating how I think about talent, hiring systems, and building functions that actually last.
 
 ---
 
 ## Live Site
 
-Once GitHub Pages is enabled, the site is available at:
+```
+https://trustogor.github.io/
+```
+
+Ventures page:
 
 ```
-https://trustogor.github.io/trust/
+https://trustogor.github.io/ventures.html
 ```
 
 ---
 
 ## Site Overview
 
-The landing page is designed with a clean, minimal, tech-startup aesthetic and includes:
+Built with a dark navy startup aesthetic. No frameworks, no dependencies — pure HTML, CSS, and vanilla JavaScript.
 
-* Sticky glassmorphic navigation bar
-* Responsive mobile layout with hamburger menu
-* Dark mode toggle with persistence
-* Scroll-triggered animations
-* Structured sections for About, Projects, Experience, and Thinking
+**Main site sections:**
+
+- Hero with typewriter effect and animated glow
+- Where I Do My Best Work — three scenario cards
+- Philosophy — four belief cards
+- AI-Augmented Hiring — animated tool workflow pipeline
+- Experience — vertical dotted timeline
+- Projects — case study cards with charts and metrics
+- Tech Stack — layered tool diagram
+- Education & Certifications
+- CTA — availability and contact
+
+**Ventures page (`ventures.html`):**
+
+- Full breakdown of uSwitch — a fintech platform for prepaid electricity in Nigeria
+- Problem, solution, features, tech stack, metrics, and role overview
 
 ---
 
 ## Repository Structure
 
-Typical layout:
-
 ```
-index.html
-assets/
-    resume.pdf
+index.html        — Main portfolio site
+ventures.html     — uSwitch venture page
 README.md
 ```
 
@@ -43,77 +53,40 @@ README.md
 
 ## Updating Content
 
-All site content lives inside `index.html`.
+All content lives inside `index.html` and `ventures.html`.
 
-To update the site:
+To update:
 
-1. Open `index.html`
-2. Edit text within sections (About, Projects, etc.)
-3. Commit changes to the repository
-4. GitHub Pages will automatically redeploy
+1. Open the file on GitHub
+2. Click the pencil (edit) icon
+3. Make changes
+4. Click **Commit changes**
 
----
-
-## Adding / Updating Resume
-
-Upload your resume PDF into the `assets` folder:
-
-```
-assets/resume.pdf
-```
-
-If using a different filename, update the link inside `index.html`:
-
-```html
-<a href="/assets/Your_File_Name.pdf" target="_blank">View Resume</a>
-```
+GitHub Pages redeploys automatically within ~1 minute.
 
 ---
 
 ## Enabling GitHub Pages
 
-In repository settings:
-
-1. Navigate to **Settings → Pages**
+1. Go to **Settings → Pages**
 2. Source → Deploy from branch
 3. Branch → `main` (root)
 4. Save
 
-Deployment usually completes within ~1 minute.
-
 ---
 
-## Customization Ideas
+## Technology
 
-You can easily extend this site by adding:
-
-* Dedicated project / case study pages
-* Writing / ideas section
-* Blog or long-form content
-* Analytics or tracking scripts
-* Additional visual components
-
----
-
-## Technology Stack
-
-* HTML5
-* Modern CSS (variables, responsive layout)
-* Vanilla JavaScript (no heavy frameworks)
-* IntersectionObserver for animations
-* GitHub Pages for hosting
+- HTML5, CSS3, Vanilla JavaScript
+- Google Fonts — DM Sans, Plus Jakarta Sans, Syne
+- IntersectionObserver for scroll animations
+- Inline SVG — zero image dependencies
+- GitHub Pages for hosting
 
 ---
 
 ## Contact
 
-For professional inquiries:
-
-* LinkedIn: [https://linkedin.com/in/togor](https://linkedin.com/in/your-link)
-* Email: [ogor@uswitch.com](mailto:your-email@example.com)
-
----
-
-## License
-
-This project is provided for personal and professional presentation purposes.
+- LinkedIn: [linkedin.com/in/togor](https://linkedin.com/in/togor)
+- Email: trustogor@gmail.com
+- Ventures: [uswitch.ng](https://uswitch.ng)
