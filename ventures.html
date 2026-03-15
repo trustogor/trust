@@ -36,7 +36,7 @@ nav .inner{display:flex;align-items:center;justify-content:space-between}
 .divider{height:1px;background:var(--border);margin:0}
 
 /* Hero */
-.ventures-hero{padding:140px 0 80px;position:relative;z-index:1}
+.ventures-hero{padding:140px 0 32px;position:relative;z-index:1}
 .ventures-hero-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
 .ventures-hero-heading{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(36px,5vw,58px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;color:var(--text);margin-bottom:20px}
 .ventures-hero-heading span{color:var(--accent)}
@@ -48,7 +48,7 @@ nav .inner{display:flex;align-items:center;justify-content:space-between}
 
 /* Section labels */
 .section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-section{padding:80px 0;position:relative;z-index:1}
+section{padding:40px 0 80px;position:relative;z-index:1}
 
 /* Venture card */
 .venture-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:32px}
@@ -135,6 +135,18 @@ footer{padding:32px 0;border-top:1px solid var(--border)}
   .venture-card-header{flex-direction:column}
   .venture-status{align-items:flex-start}
 }
+
+/* DROPDOWN NAV */
+.nav-dropdown{position:relative;}
+.nav-dropdown-toggle{cursor:pointer;display:flex;align-items:center;gap:4px;color:var(--muted2);font-size:13.5px;font-weight:500;transition:color .2s;}
+.nav-dropdown-toggle:hover{color:var(--text);}
+.nav-dropdown-toggle::after{content:'';display:inline-block;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid var(--muted);transition:transform .2s;margin-top:1px;}
+.nav-dropdown:hover .nav-dropdown-toggle::after{transform:rotate(180deg);}
+.nav-dropdown-menu{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#0d1830;border:1px solid var(--border);border-radius:12px;padding:8px;min-width:180px;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;transform:translateX(-50%) translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.5);z-index:100;}
+.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+.nav-dropdown-menu a{display:block;padding:8px 14px;font-size:12px;color:var(--muted2);text-decoration:none;border-radius:8px;transition:all .15s;white-space:nowrap;}
+.nav-dropdown-menu a:hover{background:rgba(91,141,238,.08);color:var(--accent);}
+.nav-dropdown-menu .dropdown-divider{height:1px;background:var(--border);margin:6px 0;}
 </style>
 </head>
 <body>
@@ -146,7 +158,19 @@ footer{padding:32px 0;border-top:1px solid var(--border)}
     <div class="inner">
       <a href="https://trustogor.github.io/" class="home-btn">Trust Ogor<span>.</span></a>
       <div class="nav-links">
-        <a href="https://trustogor.github.io/">Portfolio</a>
+        <div class="nav-dropdown">
+          <span class="nav-dropdown-toggle">Work</span>
+          <div class="nav-dropdown-menu">
+            <a href="https://trustogor.github.io/#work">Where I Do My Best Work</a>
+            <a href="https://trustogor.github.io/#philosophy">Philosophy</a>
+            <a href="https://trustogor.github.io/#ai-hiring">AI-Augmented Hiring</a>
+            <div class="dropdown-divider"></div>
+            <a href="https://trustogor.github.io/#experience">Experience</a>
+            <a href="https://trustogor.github.io/#projects">Projects</a>
+            <a href="https://trustogor.github.io/#stack">Stack</a>
+            <a href="https://trustogor.github.io/#education">Education</a>
+          </div>
+        </div>
         <a href="#" class="active nav-ventures-badge">Ventures</a>
       </div>
     </div>
@@ -169,7 +193,7 @@ footer{padding:32px 0;border-top:1px solid var(--border)}
 <div class="divider"></div>
 
 <!-- USWITCH -->
-<section id="ventures">
+<section id="ventures" style="padding:28px 0 80px;">
   <div class="container">
     <div class="section-label reveal">Active Venture</div>
     <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:700;letter-spacing:-.6px;margin-bottom:36px" class="reveal">uSwitch</h2>
@@ -183,11 +207,15 @@ footer{padding:32px 0;border-top:1px solid var(--border)}
           <div>
             <div class="venture-name">uSwitch</div>
             <div class="venture-tagline">Electricity access, reimagined for Nigeria</div>
+            <a href="https://uswitch.ng/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--orange);text-decoration:none;margin-top:6px;opacity:0.85;transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              uswitch.ng
+            </a>
           </div>
         </div>
         <div class="venture-status">
           <div class="status-badge status-building"><div class="status-dot"></div>Building — MVP Stage</div>
-          <div class="venture-role">Founder &amp; CTO</div>
+          <div class="venture-role">Co-Founder &amp; CTO</div>
         </div>
       </div>
 
@@ -249,7 +277,7 @@ footer{padding:32px 0;border-top:1px solid var(--border)}
         </div>
 
         <!-- My Role -->
-        <div class="venture-section-title" style="margin-top:28px;">My Role — Founder &amp; CTO</div>
+        <div class="venture-section-title" style="margin-top:28px;">My Role — Co-Founder &amp; CTO</div>
         <div class="role-grid">
           <div class="role-card">
             <div class="role-card-title"><span class="role-card-icon">🏗️</span>Technical Architecture</div>
@@ -293,15 +321,17 @@ footer{padding:32px 0;border-top:1px solid var(--border)}
         <div class="venture-section" style="margin-top:28px;">
           <div class="venture-section-title">Tech Stack</div>
           <div class="tech-chips">
-            <span class="tech-chip">Go (Fiber)</span>
-            <span class="tech-chip">Java</span>
-            <span class="tech-chip">React + TypeScript</span>
+            <span class="tech-chip">Java · Spring Boot</span>
+            <span class="tech-chip">Go</span>
+            <span class="tech-chip">Next.js · TypeScript</span>
+            <span class="tech-chip">Tailwind CSS</span>
             <span class="tech-chip">PostgreSQL</span>
             <span class="tech-chip">Redis</span>
             <span class="tech-chip">Kubernetes</span>
-            <span class="tech-chip">Payment Gateway APIs</span>
-            <span class="tech-chip">KYC Integration</span>
-            <span class="tech-chip">Licensed Aggregators</span>
+            <span class="tech-chip">Docker</span>
+            <span class="tech-chip">Hetzner</span>
+            <span class="tech-chip">ArgoCD</span>
+            <span class="tech-chip">S3</span>
           </div>
         </div>
 
@@ -316,12 +346,6 @@ footer{padding:32px 0;border-top:1px solid var(--border)}
       </div>
 
     </div><!-- end venture-card -->
-
-    <!-- Founder Note -->
-    <div class="founder-note reveal d2">
-      <div class="founder-note-label">Founder's Note</div>
-      <div class="founder-note-text">"uSwitch started as a question: why should anyone have to sit in darkness because of a timing problem? The electricity is there. The infrastructure is there. The gap is purely financial and structural — and that's exactly the kind of problem I know how to solve. Building uSwitch has meant operating across every function simultaneously: product, engineering, compliance, GTM, and team design. It's the most complete expression of everything I've learned about building systems that actually work."</div>
-      <div class="founder-note-sig">— Trust Ogor, Founder &amp; CTO</div>
     </div>
 
   </div>
@@ -332,8 +356,8 @@ footer{padding:32px 0;border-top:1px solid var(--border)}
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span class="footer-copy">© 2025 Trust Ogor</span>
-      <a href="https://trustogor.github.io/" class="footer-back">← Back to Portfolio</a>
+      <span class="footer-copy">© 2026 Trust Ogor</span>
+      <a href="https://trustogor.github.io/" class="footer-back">← Back to trustogor.github.io</a>
     </div>
   </div>
 </footer>
